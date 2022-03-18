@@ -1,0 +1,18 @@
+program Financeiro;
+
+uses
+  Vcl.Forms,
+  U_Principal in 'U_Principal.pas' {Frm_Principal},
+  U_Login in 'U_Login.pas' {F_Login},
+  U_DM in 'U_DM.pas' {DM_Financeiro: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TF_Login, F_Login);
+  Application.CreateForm(TFrm_Principal, Frm_Principal);
+  Application.CreateForm(TDM_Financeiro, DM_Financeiro);
+  Application.Run;
+end.

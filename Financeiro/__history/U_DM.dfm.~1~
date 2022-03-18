@@ -1,0 +1,10 @@
+object DM_Financeiro: TDM_Financeiro
+  OldCreateOrder = False
+  Height = 519
+  Width = 722
+  object Q_Login: TSQLQuery
+    Params = <>
+    Left = 48
+    Top = 8
+  end
+end

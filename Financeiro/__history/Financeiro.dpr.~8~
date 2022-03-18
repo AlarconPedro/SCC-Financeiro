@@ -1,0 +1,21 @@
+program Financeiro;
+
+uses
+  Vcl.Forms,
+  U_Principal in 'U_Principal.pas' {Form3},
+  U_Login in 'U_Login.pas' {F_Login},
+  Vcl.Themes,
+  Vcl.Styles,
+  Unit1 in 'Unit1.pas' {DataModule1: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Amethyst Kamri');
+  Application.CreateForm(TF_Login, F_Login);
+  Application.CreateForm(TForm3, Form3);
+  Application.CreateForm(TDataModule1, DataModule1);
+  Application.Run;
+end.

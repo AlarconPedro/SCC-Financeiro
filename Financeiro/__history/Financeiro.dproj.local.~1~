@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/03/11 08:15:55.000.215,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/11 09:26:27.000.517,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/11 11:44:29.000.625,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/11 14:53:44.000.439,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/11 16:25:10.000.902,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/11 16:30:34.000.256,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/11 17:34:19.000.956,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/16 09:53:02.000.169,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/16 14:04:18.000.580,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/16 14:08:20.000.880,C:\UniAlfa\Financeiro\U_Principal.dfm=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.dfm</Transaction>
+    <Transaction>2022/03/16 14:08:20.000.880,C:\UniAlfa\Financeiro\U_Principal.pas=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/03/16 14:58:31.000.557,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2022/03/16 15:00:11.000.579,C:\UniAlfa\Financeiro\U_Login.dfm=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit4.dfm</Transaction>
+    <Transaction>2022/03/16 15:00:11.000.579,C:\UniAlfa\Financeiro\U_Login.pas=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2022/03/16 15:24:46.000.560,C:\UniAlfa\Financeiro\Financeiro.dproj=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>2022/03/16 16:45:12.000.721,=C:\UniAlfa\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/17 10:55:43.000.511,C:\UniAlfa\Financeiro\U_DM.dfm=C:\UniAlfa\Financeiro\Unit1.dfm</Transaction>
+    <Transaction>2022/03/17 10:55:43.000.511,C:\UniAlfa\Financeiro\U_DM.pas=C:\UniAlfa\Financeiro\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
