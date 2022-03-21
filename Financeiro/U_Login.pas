@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, JvExExtCtrls,
   JvExtComponent, JvPanel, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Data.FMTBcd,
-  Data.DB, Data.SqlExpr;
+  Data.DB, Data.SqlExpr, MD5;
 
 type
   TF_Login = class(TForm)
@@ -23,11 +23,13 @@ type
     EdSenha: TMaskEdit;
     sbCancelar: TSpeedButton;
     sbConfirmar: TSpeedButton;
+    sbCadastrar: TSpeedButton;
     procedure sbCancelarClick(Sender: TObject);
     procedure sbConfirmarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure EdUsuarioKeyPress(Sender: TObject; var Key: Char);
     procedure EdSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure sbCadastrarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,6 +71,11 @@ begin
     Application.Terminate;
 end;
 
+procedure TF_Login.sbCadastrarClick(Sender: TObject);
+  begin
+    Application.CreateForm(TFrm_Principal, Frm_Principal);
+  end;
+
 procedure TF_Login.sbCancelarClick(Sender: TObject);
   begin
     F_Login.Close;
@@ -76,19 +83,20 @@ procedure TF_Login.sbCancelarClick(Sender: TObject);
 
 procedure TF_Login.sbConfirmarClick(Sender: TObject);
 begin
+
   DM_Financeiro.Q_Usuario.Close;
   DM_Financeiro.Q_Usuario.ParamByName('userLogin').AsString := EdUsuario.Text;
-  DM_Financeiro.Q_Usuario.ParamByName('senhaLogin').AsString := EdSenha.Text;
+  DM_Financeiro.Q_Usuario.ParamByName('senhaLogin').AsString := MD5Print(MD5String(EdSenha.Text));
   DM_Financeiro.Q_Usuario.Open;
 
   if DM_Financeiro.Q_Usuario.IsEmpty then
   begin
     showmessage('Usuário ou senha inválida!');
   end else
-  begin
-    Logado := true;
-    F_Login.CloseModal;
-  end;
+    begin
+      Logado := true;
+      F_Login.CloseModal;
+    end;
 end;
 
 end.

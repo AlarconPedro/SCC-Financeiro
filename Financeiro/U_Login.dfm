@@ -20,7 +20,7 @@ object F_Login: TF_Login
   PixelsPerInch = 96
   TextHeight = 17
   object pnl_Fundo: TPanel
-    Left = 40
+    Left = 32
     Top = 0
     Width = 625
     Height = 417
@@ -52,14 +52,14 @@ object F_Login: TF_Login
     end
     object Label7: TLabel
       Left = 272
-      Top = 240
+      Top = 224
       Width = 45
       Height = 17
       Caption = 'Senha :'
     end
     object sbCancelar: TSpeedButton
       Left = 345
-      Top = 359
+      Top = 321
       Width = 183
       Height = 39
       Caption = 'Cancelar'
@@ -67,11 +67,19 @@ object F_Login: TF_Login
     end
     object sbConfirmar: TSpeedButton
       Left = 345
-      Top = 306
+      Top = 276
       Width = 183
       Height = 39
       Caption = 'Confirmar'
       OnClick = sbConfirmarClick
+    end
+    object sbCadastrar: TSpeedButton
+      Left = 345
+      Top = 366
+      Width = 183
+      Height = 39
+      Caption = 'Cadastrar'
+      OnClick = sbCadastrarClick
     end
     object Panel1: TPanel
       Left = 0
@@ -143,8 +151,8 @@ object F_Login: TF_Login
       OnKeyPress = EdUsuarioKeyPress
     end
     object EdSenha: TMaskEdit
-      Left = 273
-      Top = 258
+      Left = 272
+      Top = 242
       Width = 320
       Height = 25
       BevelInner = bvNone

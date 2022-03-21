@@ -5,7 +5,7 @@ object DM_Financeiro: TDM_Financeiro
   Width = 722
   object DB_Financeiro: TIBDatabase
     Connected = True
-    DatabaseName = 'C:\UniAlfa\SCCDB.FDB'
+    DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -50,7 +50,7 @@ object DM_Financeiro: TDM_Financeiro
       FieldName = 'SENHA'
       Origin = '"TB_USUARIOS"."SENHA"'
       Required = True
-      Size = 25
+      Size = 32
     end
   end
   object Trans_Financeiro: TIBTransaction

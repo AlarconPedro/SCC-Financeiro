@@ -8,31 +8,44 @@ uses
   JvExtComponent, JvPanel, JvOfficeColorPanel, ShellApi, Vcl.StdCtrls,
   Vcl.Buttons, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
   dxRibbonSkins, dxSkinsCore, dxSkinsDefaultPainters, dxRibbonCustomizationForm,
-  cxClasses, dxRibbon, dxBar;
+  cxClasses, dxRibbon, dxBar, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  dxStatusBar, dxRibbonStatusBar;
 
 type
   TFrm_Principal = class(TForm)
     navBarRibbon: TdxBarManager;
-    navBarNovo: TdxRibbonTab;
+    NavBarCadastro: TdxRibbonTab;
     NavBar: TdxRibbon;
     itensRibbon: TdxRibbonPopupMenu;
-    navBarAbrir: TdxRibbonTab;
-    NavBarTab3: TdxRibbonTab;
-    NavBarTab4: TdxRibbonTab;
-    NavBarTab5: TdxRibbonTab;
-    CPagarNav: TdxBar;
-    AbrirNavBar: TdxBar;
-    navBarRibbonBar3: TdxBar;
-    navBarRibbonBar4: TdxBar;
+    NavBarEditar: TdxRibbonTab;
+    NavBarLogin: TdxRibbonTab;
+    NavBarContas: TdxRibbonTab;
+    navCpagar: TdxBar;
+    navFluxoCaixa: TdxBar;
     btnCPagar: TdxBarLargeButton;
-    dxBarLargeButton4: TdxBarLargeButton;
+    btnContasReceber: TdxBarLargeButton;
+    navNovaCategoria: TdxBar;
+    navNovaContaFixa: TdxBar;
+    navEditar: TdxBar;
+    navUsuário: TdxBar;
+    btnNovaCategoria: TdxBarLargeButton;
+    btnAlterarConta: TdxBarLargeButton;
+    btnSairConta: TdxBarLargeButton;
+    btnContaFixa: TdxBarLargeButton;
+    btnFluxoCaixa: TdxBarLargeButton;
+    navContas: TdxBar;
+    btnListarContas: TdxBarLargeButton;
     btnCalendario: TdxBarLargeButton;
-    btnContas: TdxBarLargeButton;
-    navBarRibbonBar1: TdxBar;
-    navBarRibbonBar2: TdxBar;
+    btnContasFixas: TdxBarLargeButton;
+    dxBarLargeButton1: TdxBarLargeButton;
+    dxBarLargeButton2: TdxBarLargeButton;
+    dxBarLargeButton3: TdxBarLargeButton;
+    dxBarLargeButton4: TdxBarLargeButton;
+    dxRibbonStatusBar1: TdxRibbonStatusBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Sair1Click(Sender: TObject);
     procedure btnAlterarContaClick(Sender: TObject);
+    procedure btnSairContaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -46,7 +59,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_Login;
+uses U_Login, U_Contas;
 
 procedure TFrm_Principal.btnAlterarContaClick(Sender: TObject);
   begin
@@ -54,14 +67,23 @@ procedure TFrm_Principal.btnAlterarContaClick(Sender: TObject);
     Application.Terminate;
   end;
 
+procedure TFrm_Principal.btnSairContaClick(Sender: TObject);
+begin
+       Close;
+end;
+
 procedure TFrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
     Application.Terminate;
   end;
 
-procedure TFrm_Principal.Sair1Click(Sender: TObject);
-  begin
-        Close;
-  end;
+procedure TFrm_Principal.FormShow(Sender: TObject);
+begin
+if not Assigned(Frm_Contas)then
+    begin
+        Frm_Contas := TFrm_Contas.Create(Self);
+    end;
+    Frm_Contas.Show;
+end;
 
 end.

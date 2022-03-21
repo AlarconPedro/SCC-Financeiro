@@ -1,0 +1,67 @@
+object Frm_Contas: TFrm_Contas
+  AlignWithMargins = True
+  Left = 0
+  Top = 0
+  Align = alClient
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  Caption = 'Contas'
+  ClientHeight = 361
+  ClientWidth = 578
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Visible = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object cxGrid1: TcxGrid
+    Left = 0
+    Top = 0
+    Width = 578
+    Height = 361
+    Cursor = crHandPoint
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Align = alClient
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    BorderStyle = cxcbsNone
+    TabOrder = 0
+    ExplicitLeft = 8
+    ExplicitWidth = 699
+    ExplicitHeight = 467
+    object cxGrid1DBTableView1: TcxGridDBTableView
+      Navigator.Buttons.CustomButtons = <>
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+    end
+    object cxGrid1Level1: TcxGridLevel
+      GridView = cxGrid1DBTableView1
+    end
+  end
+  object DS_Contas: TDataSource
+    DataSet = DM_Financeiro.Q_Usuario
+    Left = 528
+    Top = 232
+  end
+  object IBQuery1: TIBQuery
+    Database = DM_Financeiro.DB_Financeiro
+    Transaction = DM_Financeiro.Trans_Financeiro
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = DS_Contas
+    ParamCheck = True
+    SQL.Strings = (
+      'select * from TB_USUARIOS')
+    Left = 528
+    Top = 192
+  end
+end
