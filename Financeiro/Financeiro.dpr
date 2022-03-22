@@ -8,8 +8,7 @@ uses
   U_Login in 'U_Login.pas' {F_Login},
   U_Principal in 'U_Principal.pas' {Frm_Principal},
   U_Contas in 'U_Contas.pas' {Frm_Contas},
-  U_CadastroUsuario in 'U_CadastroUsuario.pas' {Frm_CadastroUsuario},
-  U_CadastroUsuarios in 'U_CadastroUsuarios.pas' {Frm_CadastroUsuarios};
+  U_CadastroUsuario in 'U_CadastroUsuario.pas' {Frm_CadastroUsuario};
 
 {$R *.res}
 
@@ -18,8 +17,6 @@ begin
   Application.MainFormOnTaskbar := True;
   F_Login := TF_Login.Create(Application);
   Application.CreateForm(TDM_Financeiro, DM_Financeiro);
-  Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
-  Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
   F_Login.ShowModal;
 
   Application.Run;

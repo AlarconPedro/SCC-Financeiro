@@ -44,7 +44,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM, U_Principal;
+uses U_DM, U_Principal, U_CadastroUsuario;
 
 procedure TF_Login.EdSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -73,7 +73,8 @@ end;
 
 procedure TF_Login.sbCadastrarClick(Sender: TObject);
   begin
-    Application.CreateForm(TFrm_Principal, Frm_Principal);
+    Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
+    Frm_CadastroUsuarios.ShowModal;
   end;
 
 procedure TF_Login.sbCancelarClick(Sender: TObject);

@@ -4,6 +4,7 @@ object DM_Financeiro: TDM_Financeiro
   Height = 519
   Width = 722
   object DB_Financeiro: TIBDatabase
+    Connected = True
     DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
@@ -17,6 +18,7 @@ object DM_Financeiro: TDM_Financeiro
   object Q_Usuario: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -53,8 +55,52 @@ object DM_Financeiro: TDM_Financeiro
     end
   end
   object Trans_Financeiro: TIBTransaction
+    Active = True
     DefaultDatabase = DB_Financeiro
     Left = 136
     Top = 24
+  end
+  object Q_CadUsuario: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'select *  from TB_USUARIOS')
+    Left = 224
+    Top = 80
+  end
+  object Q_InsertUsuario: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'INSERT'
+      'INTO '
+      'TB_USUARIOS (LOGIN, NOME, SENHA) '
+      'VALUES'
+      '(:userLogin, :userNome, :userSenha)')
+    Left = 224
+    Top = 136
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userLogin'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'userNome'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'userSenha'
+        ParamType = ptUnknown
+      end>
   end
 end

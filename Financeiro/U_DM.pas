@@ -13,6 +13,8 @@ type
     Trans_Financeiro: TIBTransaction;
     Q_UsuarioLOGIN: TIBStringField;
     Q_UsuarioSENHA: TIBStringField;
+    Q_CadUsuario: TIBQuery;
+    Q_InsertUsuario: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

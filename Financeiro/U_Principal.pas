@@ -46,6 +46,7 @@ type
     procedure btnAlterarContaClick(Sender: TObject);
     procedure btnSairContaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure dxBarLargeButton3Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -59,7 +60,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_Login, U_Contas;
+uses U_Login, U_Contas, U_CadastroUsuario;
 
 procedure TFrm_Principal.btnAlterarContaClick(Sender: TObject);
   begin
@@ -71,6 +72,12 @@ procedure TFrm_Principal.btnSairContaClick(Sender: TObject);
 begin
        Close;
 end;
+
+procedure TFrm_Principal.dxBarLargeButton3Click(Sender: TObject);
+  begin
+     Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
+     Frm_CadastroUsuarios.ShowModal
+  end;
 
 procedure TFrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
