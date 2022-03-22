@@ -32,6 +32,8 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
+    ExplicitLeft = 24
+    ExplicitTop = 8
     object NavBarContas: TdxRibbonTab
       Active = True
       Caption = 'Contas'

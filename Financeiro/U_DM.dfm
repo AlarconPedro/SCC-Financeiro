@@ -4,7 +4,6 @@ object DM_Financeiro: TDM_Financeiro
   Height = 519
   Width = 722
   object DB_Financeiro: TIBDatabase
-    Connected = True
     DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
@@ -54,7 +53,6 @@ object DM_Financeiro: TDM_Financeiro
     end
   end
   object Trans_Financeiro: TIBTransaction
-    Active = True
     DefaultDatabase = DB_Financeiro
     Left = 136
     Top = 24
