@@ -11,16 +11,9 @@ uses
 type
   TFrm_CadastroUsuarios = class(TForm)
     NavBar: TdxRibbon;
-    NavBarContas: TdxRibbonTab;
     NavBarCadastro: TdxRibbonTab;
-    NavBarEditar: TdxRibbonTab;
-    NavBarLogin: TdxRibbonTab;
     navCadastroUsuario: TdxBarManager;
     navCpagar: TdxBar;
-    navNovaCategoria: TdxBar;
-    navNovaContaFixa: TdxBar;
-    navEditar: TdxBar;
-    navUsuário: TdxBar;
     btnCPagar: TdxBarLargeButton;
     btnContasReceber: TdxBarLargeButton;
     btnNovaCategoria: TdxBarLargeButton;

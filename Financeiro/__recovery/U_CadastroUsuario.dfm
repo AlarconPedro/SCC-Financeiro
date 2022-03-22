@@ -1,4 +1,4 @@
-﻿object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
+object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
   Left = 0
   Top = 0
   Caption = 'Cadastro de Usu'#225'rio'
@@ -25,42 +25,15 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    object NavBarContas: TdxRibbonTab
-      Active = True
-      Caption = 'Contas'
-      Groups = <>
-      Index = 0
-    end
     object NavBarCadastro: TdxRibbonTab
+      Active = True
       Caption = 'Cadastro'
       Groups = <
         item
           Caption = 'Lan'#231'amentos'
           ToolbarName = 'navCpagar'
-        end
-        item
-          ToolbarName = 'navNovaCategoria'
-        end
-        item
-          ToolbarName = 'navNovaContaFixa'
         end>
-      Index = 1
-    end
-    object NavBarEditar: TdxRibbonTab
-      Caption = 'Editar'
-      Groups = <
-        item
-          ToolbarName = 'navEditar'
-        end>
-      Index = 2
-    end
-    object NavBarLogin: TdxRibbonTab
-      Caption = 'Login'
-      Groups = <
-        item
-          ToolbarName = 'navUsu'#225'rio'
-        end>
-      Index = 3
+      Index = 0
     end
   end
   object navCadastroUsuario: TdxBarManager
@@ -98,104 +71,6 @@
           BeginGroup = True
           Visible = True
           ItemName = 'btnContasReceber'
-        end>
-      OneOnRow = False
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object navNovaCategoria: TdxBar
-      Caption = 'Categoria'
-      CaptionButtons = <>
-      DockedLeft = 134
-      DockedTop = 0
-      FloatLeft = 729
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'btnNovaCategoria'
-        end>
-      OneOnRow = False
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object navNovaContaFixa: TdxBar
-      Caption = 'Conta Fixa'
-      CaptionButtons = <>
-      DockedLeft = 210
-      DockedTop = 0
-      FloatLeft = 729
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'btnContaFixa'
-        end>
-      OneOnRow = False
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object navEditar: TdxBar
-      Caption = 'Editar'
-      CaptionButtons = <>
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 729
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton2'
-        end
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton1'
-        end
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton4'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'dxBarLargeButton3'
-        end>
-      OneOnRow = True
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object navUsuário: TdxBar
-      Caption = 'Usu'#225'rio'
-      CaptionButtons = <>
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 729
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'btnAlterarConta'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'btnSairConta'
         end>
       OneOnRow = True
       Row = 0
