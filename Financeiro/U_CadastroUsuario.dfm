@@ -118,13 +118,25 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Margins.Top = 0
     Margins.Right = 0
     Margins.Bottom = 0
-    Panels = <>
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Text = 'Nome do Usu'#225'rio :'
+        Width = 120
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
     Ribbon = NavBar
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clDefault
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = itensCadastro
+    ExplicitLeft = 5
   end
   object DBGrid1: TDBGrid
     Left = 0
