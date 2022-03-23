@@ -15,6 +15,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
   FormStyle = fsMDIForm
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object NavBar: TdxRibbon
@@ -29,8 +30,6 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitLeft = 8
-    ExplicitTop = -6
     object NavBarCadastro: TdxRibbonTab
       Active = True
       Caption = 'Cadastro de Usu'#225'rio'
@@ -58,9 +57,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Height = 85
     Align = alClient
     Caption = 'Dados do Usu'#225'rio'
-    TabOrder = 5
-    ExplicitWidth = 602
-    ExplicitHeight = 116
+    TabOrder = 1
     object edtNomeUsuario: TLabel
       Left = 8
       Top = 24
@@ -82,39 +79,45 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       Height = 13
       Caption = 'Senha:'
     end
-    object edtNomeCadastro: TEdit
-      Left = 45
-      Top = 23
-      Width = 551
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      TabOrder = 0
-    end
-    object edtLoginUsuario: TEdit
-      Left = 50
+    object dbeditLogin: TDBEdit
+      Left = 48
       Top = 48
-      Width = 247
+      Width = 252
       Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
+      DataField = 'LOGIN'
+      DataSource = ds_Usuarios
       TabOrder = 1
     end
-    object edtSenhaUsuario: TEdit
-      Left = 340
-      Top = 48
-      Width = 256
+    object dbeditNome: TDBEdit
+      Left = 40
+      Top = 21
+      Width = 551
       Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
+      DataField = 'NOME'
+      DataSource = ds_Usuarios
+      TabOrder = 0
+    end
+    object dbeditSenha: TDBEdit
+      Left = 338
+      Top = 48
+      Width = 253
+      Height = 21
+      DataField = 'SENHA'
+      DataSource = ds_Usuarios
+      PasswordChar = '*'
       TabOrder = 2
     end
   end
   object dxRibbonStatusBar1: TdxRibbonStatusBar
+    AlignWithMargins = True
     Left = 0
     Top = 396
     Width = 612
     Height = 23
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
     Panels = <>
     Ribbon = NavBar
     Font.Charset = DEFAULT_CHARSET
@@ -122,8 +125,6 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitTop = 32000
-    ExplicitWidth = 602
   end
   object DBGrid1: TDBGrid
     Left = 0
@@ -132,12 +133,27 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Height = 186
     Align = alBottom
     DataSource = ds_Usuarios
-    TabOrder = 7
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Title.Caption = 'Nome'
+        Width = 422
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LOGIN'
+        Title.Caption = 'Usu'#225'rio'
+        Visible = True
+      end>
   end
   object navCadastroUsuario: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -151,6 +167,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       2)
     Categories.Visibles = (
       True)
+    MenuAnimations = maSlide
     PopupMenuLinks = <>
     UseSystemFont = True
     Left = 529
@@ -168,15 +185,15 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton6'
+          ItemName = 'btnAddUser'
         end
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'dxBarLargeButton5'
+          ItemName = 'btnSalvarUser'
         end>
-      OneOnRow = True
-      Row = 2
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -193,20 +210,20 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton7'
+          ItemName = 'btnEditUser'
         end
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'dxBarLargeButton8'
+          ItemName = 'btnExcluirUser'
         end
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'dxBarLargeButton9'
+          ItemName = 'btnCancelarCad'
         end>
-      OneOnRow = True
-      Row = 1
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -223,9 +240,9 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton11'
+          ItemName = 'btnSairCad'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -2472,7 +2489,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         80F3519CC14B75DE33F7FBDF10FF0C00A4FD058A60139D340000000049454E44
         AE426082}
     end
-    object dxBarLargeButton5: TdxBarLargeButton
+    object btnSalvarUser: TdxBarLargeButton
       Caption = 'Gravar'
       Category = 0
       Hint = 'Gravar'
@@ -2618,13 +2635,13 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         8A4AD9B45FBC6FE02F9DC7CF1EEDF8EECB4703CDAD63C062F1ECEE3BCDA84781
         D78A73916D9B99613C3BFB3A88DFA035EE42BA0D68299E3D7ACB8CFAFDBCFE3B
         00ED83AA3C409E05160000000049454E44AE426082}
-      OnClick = dxBarLargeButton5Click
+      OnClick = btnSalvarUserClick
     end
-    object dxBarLargeButton6: TdxBarLargeButton
+    object btnAddUser: TdxBarLargeButton
       Caption = 'Novo'
       Category = 0
       Hint = 'Novo'
-      Visible = ivAlways
+      Visible = ivNever
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {
         89504E470D0A1A0A0000000D49484452000000280000002808060000008CFEB8
@@ -2763,8 +2780,9 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         279F7CAFEF4BDF78D7B3CA245FFEFE2573796E787B42807F28A51EDFEF0A9680
         BF039D0705744B8577405C43299CE2E6F0B62304FE3DF6BFEFAFE04739FE3700
         DB47B7B19CA10B080000000049454E44AE426082}
+      OnClick = btnAddUserClick
     end
-    object dxBarLargeButton7: TdxBarLargeButton
+    object btnEditUser: TdxBarLargeButton
       Caption = 'Alterar'
       Category = 0
       Hint = 'Alterar'
@@ -2899,8 +2917,9 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         EF3B7D61458C1D112F2CB9E95E538F2BC07B914BFE0AE00CF05704D4C588F35F
         80F3519CC14B75DE33F7FBDF10FF0C00A4FD058A60139D340000000049454E44
         AE426082}
+      OnClick = btnEditUserClick
     end
-    object dxBarLargeButton8: TdxBarLargeButton
+    object btnExcluirUser: TdxBarLargeButton
       Caption = 'Excluir'
       Category = 0
       Hint = 'Excluir'
@@ -3022,8 +3041,9 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         F4EE6B971EEBEF9BFFF9F77F8E7F7EF9A777803C7011F8945849388D1AF51A70
         0D781A2845C08D4C68CB40DD0943FDAD25C48C946A1A380C8C477324AE578BBD
         FE37C4FD01005A8F664026A9BF410000000049454E44AE426082}
+      OnClick = btnExcluirUserClick
     end
-    object dxBarLargeButton9: TdxBarLargeButton
+    object btnCancelarCad: TdxBarLargeButton
       Caption = 'Cancelar Cadastro'
       Category = 0
       Hint = 'Cancelar Cadastro'
@@ -3193,6 +3213,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         CCE6CB3DC01CE48C9C61CF2C60063019B8C271C2CAB16F67807AC795FC1DF81B
         60FCBF66D406F091332C3FEFDD4603B94E9F14034E01479D7D75170BD72F8BBF
         C9EB7F0300AEB746B192C0A3730000000049454E44AE426082}
+      OnClick = btnCancelarCadClick
     end
     object dxBarLargeButton10: TdxBarLargeButton
       Caption = 'Cancelar Edi'#231#227'o'
@@ -3365,7 +3386,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         60FCBF66D406F091332C3FEFDD4603B94E9F14034E01479D7D75170BD72F8BBF
         C9EB7F0300AEB746B192C0A3730000000049454E44AE426082}
     end
-    object dxBarLargeButton11: TdxBarLargeButton
+    object btnSairCad: TdxBarLargeButton
       Caption = 'Sair'
       Category = 0
       Hint = 'Sair'
@@ -3520,7 +3541,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         860D28B78FAE5DA54EAD5BF5D2CC8987527A7DAC9DBEC75236F73E4DA931C7F6
         C41DF505E0EF40B0A13152096A1F4270BB390A90091C6FA7EFF1FB6CA3FAD498
         173A0CD287FD6F88FF0C00AEEE5AE92D5AA0B30000000049454E44AE426082}
-      OnClick = dxBarLargeButton11Click
+      OnClick = btnSairCadClick
     end
   end
   object itensCadastro: TdxRibbonPopupMenu
@@ -3533,7 +3554,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     PixelsPerInch = 96
   end
   object ds_Usuarios: TDataSource
-    DataSet = DM_Financeiro.Q_CadUsuario
+    DataSet = DM_Financeiro.Q_Usuario
     Left = 568
     Top = 349
   end

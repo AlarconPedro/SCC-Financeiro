@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, dxRibbonSkins, dxSkinsCore, dxSkinsDefaultPainters,
   dxRibbonCustomizationForm, dxBar, dxRibbon, cxClasses, Data.DB, Vcl.Grids,
-  Vcl.DBGrids, dxStatusBar, dxRibbonStatusBar, Vcl.StdCtrls;
+  Vcl.DBGrids, dxStatusBar, dxRibbonStatusBar, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, MD5;
 
 type
   TFrm_CadastroUsuarios = class(TForm)
@@ -30,27 +31,32 @@ type
     dxBarLargeButton4: TdxBarLargeButton;
     itensCadastro: TdxRibbonPopupMenu;
     navCadastroUsuarioBar1: TdxBar;
-    dxBarLargeButton5: TdxBarLargeButton;
-    dxBarLargeButton6: TdxBarLargeButton;
+    btnSalvarUser: TdxBarLargeButton;
+    btnAddUser: TdxBarLargeButton;
     GroupBox1: TGroupBox;
-    edtNomeCadastro: TEdit;
     edtNomeUsuario: TLabel;
     Label1: TLabel;
     Label2: TLabel;
-    edtLoginUsuario: TEdit;
-    edtSenhaUsuario: TEdit;
     dxRibbonStatusBar1: TdxRibbonStatusBar;
     navCadastroUsuarioBar2: TdxBar;
-    dxBarLargeButton7: TdxBarLargeButton;
-    dxBarLargeButton8: TdxBarLargeButton;
-    dxBarLargeButton9: TdxBarLargeButton;
+    btnEditUser: TdxBarLargeButton;
+    btnExcluirUser: TdxBarLargeButton;
+    btnCancelarCad: TdxBarLargeButton;
     dxBarLargeButton10: TdxBarLargeButton;
     ds_Usuarios: TDataSource;
     DBGrid1: TDBGrid;
     navCadastroUsuarioBar3: TdxBar;
-    dxBarLargeButton11: TdxBarLargeButton;
-    procedure dxBarLargeButton11Click(Sender: TObject);
-    procedure dxBarLargeButton5Click(Sender: TObject);
+    btnSairCad: TdxBarLargeButton;
+    dbeditLogin: TDBEdit;
+    dbeditNome: TDBEdit;
+    dbeditSenha: TDBEdit;
+    procedure btnSairCadClick(Sender: TObject);
+    procedure btnSalvarUserClick(Sender: TObject);
+    procedure btnAddUserClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnEditUserClick(Sender: TObject);
+    procedure btnExcluirUserClick(Sender: TObject);
+    procedure btnCancelarCadClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -66,18 +72,43 @@ uses U_DM, U_Login;
 
 {$R *.dfm}
 
-procedure TFrm_CadastroUsuarios.dxBarLargeButton11Click(Sender: TObject);
+procedure TFrm_CadastroUsuarios.btnCancelarCadClick(Sender: TObject);
+begin
+  DM_Financeiro.Q_Usuario.Cancel;
+end;
+
+procedure TFrm_CadastroUsuarios.btnEditUserClick(Sender: TObject);
+begin
+  DM_Financeiro.SenhaAtual := DM_Financeiro.Q_UsuarioSENHA.AsString;
+  DM_Financeiro.Q_Usuario.Edit;
+end;
+
+procedure TFrm_CadastroUsuarios.btnExcluirUserClick(Sender: TObject);
+begin
+  if (Application.MessageBox(PChar('Deseja realmente excluir este usuário?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+    DM_Financeiro.Q_Usuario.Delete;
+end;
+
+procedure TFrm_CadastroUsuarios.btnSairCadClick(Sender: TObject);
   begin
     close;
   end;
 
-procedure TFrm_CadastroUsuarios.dxBarLargeButton5Click(Sender: TObject);
+procedure TFrm_CadastroUsuarios.btnSalvarUserClick(Sender: TObject);
   begin
-    {DM_Financeiro.Q_InsertUsuario.Close;
-    DM_Financeiro.Q_InsertUsuario.ParamByName('userLogin').AsString := edtLoginUsuario.Text;
-    DM_Financeiro.Q_InsertUsuario.ParamByName('userNome').AsString := edtNomeUsuario.Text;
-    DM_Financeiro.Q_InsertUsuario.ParamByName('userSenha').AsString := edtSenhaUsuario.Text;
-    DM_Financeiro.Q_InsertUsuario.Open;}
+    DM_Financeiro.Q_Usuario.Post;
   end;
+
+procedure TFrm_CadastroUsuarios.btnAddUserClick(Sender: TObject);
+  begin
+    DM_Financeiro.Q_Usuario.Append;
+    dbeditNome.SetFocus;
+  end;
+
+procedure TFrm_CadastroUsuarios.FormShow(Sender: TObject);
+begin
+  DM_Financeiro.Q_Usuario.Close;
+  DM_Financeiro.Q_Usuario.Open;
+end;
 
 end.

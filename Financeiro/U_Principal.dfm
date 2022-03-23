@@ -7,11 +7,10 @@
   Margins.Right = 0
   Margins.Bottom = 0
   Align = alClient
-  AutoSize = True
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Financeiro'
-  ClientHeight = 488
+  ClientHeight = 435
   ClientWidth = 711
   Color = clBtnFace
   DefaultMonitor = dmDesktop
@@ -254,7 +253,6 @@
     0000FFFF0000FFFF0000FFFF0000FFFFFFFFFFFF0000FFFFFFFFFFFF0000}
   OldCreateOrder = False
   Position = poScreenCenter
-  ShowHint = False
   WindowState = wsMaximized
   OnClose = FormClose
   OnShow = FormShow
@@ -269,6 +267,7 @@
     BarManager = navBarRibbon
     Style = rs2016
     ColorSchemeName = 'UserSkin'
+    DragCursor = crHandPoint
     Contexts = <>
     TabOrder = 0
     TabStop = False
@@ -294,9 +293,6 @@
         end
         item
           ToolbarName = 'navNovaCategoria'
-        end
-        item
-          ToolbarName = 'navNovaContaFixa'
         end>
       Index = 1
     end
@@ -318,17 +314,35 @@
     end
   end
   object dxRibbonStatusBar1: TdxRibbonStatusBar
+    AlignWithMargins = True
     Left = 0
-    Top = 465
+    Top = 412
     Width = 711
     Height = 23
-    Panels = <>
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Text = 'Nome do Usu'#225'rio :'
+        Width = 120
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
     Ribbon = NavBar
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clDefault
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = itensRibbon
+    ExplicitLeft = 5
+    ExplicitTop = 407
   end
   object navBarRibbon: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -393,7 +407,7 @@
       WholeRow = False
     end
     object navNovaCategoria: TdxBar
-      Caption = 'Categoria'
+      Caption = 'Cadastro'
       CaptionButtons = <>
       DockedLeft = 134
       DockedTop = 0
@@ -405,26 +419,16 @@
         item
           Visible = True
           ItemName = 'btnNovaCategoria'
-        end>
-      OneOnRow = False
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object navNovaContaFixa: TdxBar
-      Caption = 'Conta Fixa'
-      CaptionButtons = <>
-      DockedLeft = 210
-      DockedTop = 0
-      FloatLeft = 729
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
+        end
         item
+          BeginGroup = True
           Visible = True
           ItemName = 'btnContaFixa'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarLargeButton3'
         end>
       OneOnRow = False
       Row = 0
@@ -447,17 +451,14 @@
           ItemName = 'dxBarLargeButton2'
         end
         item
+          BeginGroup = True
           Visible = True
           ItemName = 'dxBarLargeButton1'
         end
         item
-          Visible = True
-          ItemName = 'dxBarLargeButton4'
-        end
-        item
           BeginGroup = True
           Visible = True
-          ItemName = 'dxBarLargeButton3'
+          ItemName = 'dxBarLargeButton4'
         end>
       OneOnRow = True
       Row = 0
@@ -850,9 +851,9 @@
         F331730000000049454E44AE426082}
     end
     object btnNovaCategoria: TdxBarLargeButton
-      Caption = 'Nova Categoria'
+      Caption = 'Categorias'
       Category = 0
-      Hint = 'Nova Categoria'
+      Hint = 'Categorias'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {
@@ -1284,9 +1285,9 @@
       OnClick = btnSairContaClick
     end
     object btnContaFixa: TdxBarLargeButton
-      Caption = 'Nova Conta Fixa'
+      Caption = 'Contas Fixas'
       Category = 0
-      Hint = 'Nova Conta Fixa'
+      Hint = 'Contas Fixas'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {
@@ -2161,9 +2162,9 @@
         FF86F87F00FC5DD2B1FCFE5A190000000049454E44AE426082}
     end
     object dxBarLargeButton1: TdxBarLargeButton
-      Caption = 'Editar Categoria'
+      Caption = 'Categorias'
       Category = 0
-      Hint = 'Editar Categoria'
+      Hint = 'Categorias'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {
@@ -2317,9 +2318,9 @@
         6082}
     end
     object dxBarLargeButton2: TdxBarLargeButton
-      Caption = 'Editar Lan'#231'amentos'
+      Caption = 'Lan'#231'amentos'
       Category = 0
-      Hint = 'Editar Lan'#231'amentos'
+      Hint = 'Lan'#231'amentos'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {
@@ -2479,9 +2480,9 @@
         82}
     end
     object dxBarLargeButton3: TdxBarLargeButton
-      Caption = 'Editar Usu'#225'rio'
+      Caption = 'Usu'#225'rios'
       Category = 0
-      Hint = 'Editar Usu'#225'rio'
+      Hint = 'Usu'#225'rios'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {
@@ -2624,9 +2625,9 @@
       OnClick = dxBarLargeButton3Click
     end
     object dxBarLargeButton4: TdxBarLargeButton
-      Caption = 'Editar Contas Fixas'
+      Caption = 'Contas Fixas'
       Category = 0
-      Hint = 'Editar Contas Fixas'
+      Hint = 'Contas Fixas'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {

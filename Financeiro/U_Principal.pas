@@ -12,6 +12,8 @@ uses
   dxStatusBar, dxRibbonStatusBar;
 
 type
+  TdxMyBarControl = class (TdxBarControl);
+
   TFrm_Principal = class(TForm)
     navBarRibbon: TdxBarManager;
     NavBarCadastro: TdxRibbonTab;
@@ -25,7 +27,6 @@ type
     btnCPagar: TdxBarLargeButton;
     btnContasReceber: TdxBarLargeButton;
     navNovaCategoria: TdxBar;
-    navNovaContaFixa: TdxBar;
     navEditar: TdxBar;
     navUsuário: TdxBar;
     btnNovaCategoria: TdxBarLargeButton;
@@ -49,6 +50,8 @@ type
     procedure dxBarLargeButton3Click(Sender: TObject);
 
   private
+    procedure DoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure SetarCursor;
     { Private declarations }
   public
   end;
@@ -91,6 +94,30 @@ if not Assigned(Frm_Contas)then
         Frm_Contas := TFrm_Contas.Create(Self);
     end;
     Frm_Contas.Show;
+end;
+
+
+procedure TFrm_Principal.SetarCursor;
+var
+  iCont: Integer;
+begin
+  for iCont := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[iCont] is TdxBar then
+      TdxMyBarControl(TdxBar(Self.Components[iCont]).Control).OnMouseMove := DoMouseMove;
+  end;
+end;
+
+procedure TFrm_Principal.DoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+begin
+  if TdxMyBarControl(Sender).ItemAtPos(Point(X, Y)) <> nil then
+  begin
+    if TdxMyBarControl(Sender).ItemAtPos(Point(X, Y)).Enabled then
+    begin
+      if (TdxMyBarControl(Sender).ItemAtPos(Point(X, Y)) is TdxBarLargeButtonControl) or (TdxMyBarControl(Sender).ItemAtPos(Point(X, Y)) is TdxBarItemControl) then
+        SetCursor(Screen.Cursors[crHandPoint]);
+    end;
+  end;
 end;
 
 end.

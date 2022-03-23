@@ -4,22 +4,29 @@ interface
 
 uses
   System.SysUtils, Vcl.Dialogs, Vcl.Forms, System.Inifiles, System.Classes, Data.DB, Data.FMTBcd, Data.SqlExpr,
-  IBX.IBCustomDataSet, IBX.IBDatabase, IBX.IBQuery;
+  IBX.IBCustomDataSet, IBX.IBDatabase, IBX.IBQuery, IBX.IBUpdateSQL, MD5;
 
 type
   TDM_Financeiro = class(TDataModule)
     DB_Financeiro: TIBDatabase;
-    Q_Usuario: TIBQuery;
+    Q_Login: TIBQuery;
     Trans_Financeiro: TIBTransaction;
+    Q_LoginLOGIN: TIBStringField;
+    Q_LoginSENHA: TIBStringField;
+    Up_Usuario: TIBUpdateSQL;
+    Q_Usuario: TIBQuery;
+    Q_UsuarioUSU_CODIGO: TIntegerField;
+    Q_UsuarioNOME: TIBStringField;
     Q_UsuarioLOGIN: TIBStringField;
     Q_UsuarioSENHA: TIBStringField;
-    Q_CadUsuario: TIBQuery;
-    Q_InsertUsuario: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
+    procedure Q_UsuarioAfterPost(DataSet: TDataSet);
+    procedure Q_UsuarioBeforePost(DataSet: TDataSet);
+    procedure Q_UsuarioAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
   public
-    { Public declarations }
+    SenhaAtual: String;
   end;
 
 var
@@ -30,6 +37,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
 
 procedure TDM_Financeiro.DataModuleCreate(Sender: TObject);
 var
@@ -54,6 +62,28 @@ begin
     end;
   end;
 
+end;
+
+procedure TDM_Financeiro.Q_UsuarioAfterDelete(DataSet: TDataSet);
+begin
+  Q_Usuario.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+
+end;
+
+procedure TDM_Financeiro.Q_UsuarioAfterPost(DataSet: TDataSet);
+begin
+  Q_Usuario.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+end;
+
+procedure TDM_Financeiro.Q_UsuarioBeforePost(DataSet: TDataSet);
+begin
+    if Q_UsuarioSENHA.AsString <> SenhaAtual then
+    begin
+        Q_Usuario.Edit;
+        Q_UsuarioSENHA.AsString := MD5Print(MD5String(DM_Financeiro.Q_UsuarioSENHA.AsString));
+    end;
 end;
 
 end.

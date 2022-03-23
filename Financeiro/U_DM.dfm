@@ -4,7 +4,6 @@ object DM_Financeiro: TDM_Financeiro
   Height = 519
   Width = 722
   object DB_Financeiro: TIBDatabase
-    Connected = True
     DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
@@ -15,10 +14,9 @@ object DM_Financeiro: TDM_Financeiro
     Left = 48
     Top = 24
   end
-  object Q_Usuario: TIBQuery
+  object Q_Login: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -32,15 +30,90 @@ object DM_Financeiro: TDM_Financeiro
     Top = 24
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'userLogin'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'senhaLogin'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end>
+    object Q_LoginLOGIN: TIBStringField
+      FieldName = 'LOGIN'
+      Origin = '"TB_USUARIOS"."LOGIN"'
+      Required = True
+      Size = 25
+    end
+    object Q_LoginSENHA: TIBStringField
+      FieldName = 'SENHA'
+      Origin = '"TB_USUARIOS"."SENHA"'
+      Required = True
+      Size = 32
+    end
+  end
+  object Trans_Financeiro: TIBTransaction
+    DefaultDatabase = DB_Financeiro
+    Left = 136
+    Top = 24
+  end
+  object Up_Usuario: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  USU_CODIGO,'
+      '  NOME,'
+      '  LOGIN,'
+      '  SENHA'
+      'from TB_USUARIOS '
+      'where'
+      '  USU_CODIGO = :USU_CODIGO')
+    ModifySQL.Strings = (
+      'update TB_USUARIOS'
+      'set'
+      '  USU_CODIGO = :USU_CODIGO,'
+      '  NOME = :NOME,'
+      '  LOGIN = :LOGIN,'
+      '  SENHA = :SENHA'
+      'where'
+      '  USU_CODIGO = :OLD_USU_CODIGO')
+    InsertSQL.Strings = (
+      'insert into TB_USUARIOS'
+      '  (USU_CODIGO, NOME, LOGIN, SENHA)'
+      'values'
+      '  (:USU_CODIGO, :NOME, :LOGIN, :SENHA)')
+    DeleteSQL.Strings = (
+      'delete from TB_USUARIOS'
+      'where'
+      '  USU_CODIGO = :OLD_USU_CODIGO')
+    Left = 288
+    Top = 80
+  end
+  object Q_Usuario: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    AfterDelete = Q_UsuarioAfterDelete
+    AfterPost = Q_UsuarioAfterPost
+    BeforePost = Q_UsuarioBeforePost
+    BufferChunks = 1000
+    CachedUpdates = True
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      'TB_USUARIOS')
+    UpdateObject = Up_Usuario
+    GeneratorField.Field = 'USU_CODIGO'
+    GeneratorField.Generator = 'GEN_TB_USUARIOS_ID'
+    Left = 224
+    Top = 80
+    object Q_UsuarioUSU_CODIGO: TIntegerField
+      FieldName = 'USU_CODIGO'
+    end
+    object Q_UsuarioNOME: TIBStringField
+      FieldName = 'NOME'
+      Origin = '"TB_USUARIOS"."NOME"'
+      Size = 50
+    end
     object Q_UsuarioLOGIN: TIBStringField
       FieldName = 'LOGIN'
       Origin = '"TB_USUARIOS"."LOGIN"'
@@ -53,54 +126,5 @@ object DM_Financeiro: TDM_Financeiro
       Required = True
       Size = 32
     end
-  end
-  object Trans_Financeiro: TIBTransaction
-    Active = True
-    DefaultDatabase = DB_Financeiro
-    Left = 136
-    Top = 24
-  end
-  object Q_CadUsuario: TIBQuery
-    Database = DB_Financeiro
-    Transaction = Trans_Financeiro
-    Active = True
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'select *  from TB_USUARIOS')
-    Left = 224
-    Top = 80
-  end
-  object Q_InsertUsuario: TIBQuery
-    Database = DB_Financeiro
-    Transaction = Trans_Financeiro
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'INSERT'
-      'INTO '
-      'TB_USUARIOS (LOGIN, NOME, SENHA) '
-      'VALUES'
-      '(:userLogin, :userNome, :userSenha)')
-    Left = 224
-    Top = 136
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'userLogin'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'userNome'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'userSenha'
-        ParamType = ptUnknown
-      end>
   end
 end

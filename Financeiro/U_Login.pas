@@ -85,12 +85,12 @@ procedure TF_Login.sbCancelarClick(Sender: TObject);
 procedure TF_Login.sbConfirmarClick(Sender: TObject);
 begin
 
-  DM_Financeiro.Q_Usuario.Close;
-  DM_Financeiro.Q_Usuario.ParamByName('userLogin').AsString := EdUsuario.Text;
-  DM_Financeiro.Q_Usuario.ParamByName('senhaLogin').AsString := MD5Print(MD5String(EdSenha.Text));
-  DM_Financeiro.Q_Usuario.Open;
+  DM_Financeiro.Q_Login.Close;
+  DM_Financeiro.Q_Login.ParamByName('userLogin').AsString := EdUsuario.Text;
+  DM_Financeiro.Q_Login.ParamByName('senhaLogin').AsString := MD5Print(MD5String(EdSenha.Text));
+  DM_Financeiro.Q_Login.Open;
 
-  if DM_Financeiro.Q_Usuario.IsEmpty then
+  if DM_Financeiro.Q_Login.IsEmpty then
   begin
     showmessage('Usuário ou senha inválida!');
   end else
