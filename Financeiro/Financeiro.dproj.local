@@ -10,15 +10,15 @@
     <Transaction>2022/03/11 17:34:19.000.956,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
     <Transaction>2022/03/16 09:53:02.000.169,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
     <Transaction>2022/03/16 14:04:18.000.580,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
-    <Transaction>2022/03/16 14:08:20.000.880,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.dfm=C:\UniAlfa\Financeiro\U_Principal.dfm</Transaction>
     <Transaction>2022/03/16 14:08:20.000.880,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.pas=C:\UniAlfa\Financeiro\U_Principal.pas</Transaction>
+    <Transaction>2022/03/16 14:08:20.000.880,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit3.dfm=C:\UniAlfa\Financeiro\U_Principal.dfm</Transaction>
     <Transaction>2022/03/16 14:58:31.000.557,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
-    <Transaction>2022/03/16 15:00:11.000.579,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit4.dfm=C:\UniAlfa\Financeiro\U_Login.dfm</Transaction>
     <Transaction>2022/03/16 15:00:11.000.579,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit4.pas=C:\UniAlfa\Financeiro\U_Login.pas</Transaction>
+    <Transaction>2022/03/16 15:00:11.000.579,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit4.dfm=C:\UniAlfa\Financeiro\U_Login.dfm</Transaction>
     <Transaction>2022/03/16 15:24:46.000.560,C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\UniAlfa\Financeiro\Financeiro.dproj</Transaction>
     <Transaction>2022/03/16 16:45:12.000.721,=C:\UniAlfa\Financeiro\Unit1.pas</Transaction>
-    <Transaction>2022/03/17 10:55:43.000.511,C:\UniAlfa\Financeiro\Unit1.dfm=C:\UniAlfa\Financeiro\U_DM.dfm</Transaction>
     <Transaction>2022/03/17 10:55:43.000.511,C:\UniAlfa\Financeiro\Unit1.pas=C:\UniAlfa\Financeiro\U_DM.pas</Transaction>
+    <Transaction>2022/03/17 10:55:43.000.511,C:\UniAlfa\Financeiro\Unit1.dfm=C:\UniAlfa\Financeiro\U_DM.dfm</Transaction>
     <Transaction>2022/03/21 14:27:28.000.614,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
     <Transaction>2022/03/21 14:55:37.000.093,C:\UniAlfa\SCC\Financeiro\Unit1.pas=C:\UniAlfa\SCC\Financeiro\U_Contas.pas</Transaction>
     <Transaction>2022/03/21 14:55:37.000.093,C:\UniAlfa\SCC\Financeiro\Unit1.dfm=C:\UniAlfa\SCC\Financeiro\U_Contas.dfm</Transaction>
@@ -26,7 +26,26 @@
     <Transaction>2022/03/21 17:35:22.000.331,C:\UniAlfa\SCC\Financeiro\U_CadastroUsuario.pas=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
     <Transaction>2022/03/21 17:35:22.000.331,C:\UniAlfa\SCC\Financeiro\U_CadastroUsuario.dfm=C:\UniAlfa\SCC\Financeiro\Unit1.dfm</Transaction>
     <Transaction>2022/03/21 17:50:51.000.267,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
-    <Transaction>2022/03/21 17:56:07.000.063,C:\UniAlfa\SCC\Financeiro\U_CadastroUsuarios.dfm=C:\UniAlfa\SCC\Financeiro\Unit1.dfm</Transaction>
     <Transaction>2022/03/21 17:56:07.000.063,C:\UniAlfa\SCC\Financeiro\U_CadastroUsuarios.pas=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/21 17:56:07.000.063,C:\UniAlfa\SCC\Financeiro\U_CadastroUsuarios.dfm=C:\UniAlfa\SCC\Financeiro\Unit1.dfm</Transaction>
+    <Transaction>2022/03/24 10:10:54.000.808,C:\UniAlfa\SCC\Financeiro\U_Contas.pas=</Transaction>
+    <Transaction>2022/03/24 10:12:17.000.577,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 10:15:47.000.219,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 10:58:35.000.569,C:\UniAlfa\SCC\Financeiro\Unit1.dfm=C:\UniAlfa\SCC\Financeiro\U_CadastroContas.dfm</Transaction>
+    <Transaction>2022/03/24 10:58:35.000.569,C:\UniAlfa\SCC\Financeiro\Unit1.pas=C:\UniAlfa\SCC\Financeiro\U_CadastroContas.pas</Transaction>
+    <Transaction>2022/03/24 11:26:13.000.986,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 11:27:14.000.497,C:\UniAlfa\SCC\Financeiro\Unit1.dfm=C:\UniAlfa\SCC\Financeiro\U_ContasReceber.dfm</Transaction>
+    <Transaction>2022/03/24 11:27:14.000.497,C:\UniAlfa\SCC\Financeiro\Unit1.pas=C:\UniAlfa\SCC\Financeiro\U_ContasReceber.pas</Transaction>
+    <Transaction>2022/03/24 15:57:50.465,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 16:09:02.363,C:\UniAlfa\SCC\Financeiro\U_CadastroCategorias.pas=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 16:09:02.363,C:\UniAlfa\SCC\Financeiro\U_CadastroCategorias.dfm=C:\UniAlfa\SCC\Financeiro\Unit1.dfm</Transaction>
+    <Transaction>2022/03/24 16:18:25.495,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 16:19:17.549,C:\UniAlfa\SCC\Financeiro\U_ContasPagar.dfm=C:\UniAlfa\SCC\Financeiro\Unit1.dfm</Transaction>
+    <Transaction>2022/03/24 16:19:17.549,C:\UniAlfa\SCC\Financeiro\U_ContasPagar.pas=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 16:35:30.333,=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
+    <Transaction>2022/03/24 17:22:04.701,C:\UniAlfa\SCC\Financeiro\U_ContasReceber.pas=</Transaction>
+    <Transaction>2022/03/24 17:22:15.655,C:\UniAlfa\SCC\Financeiro\U_ContasPagar.pas=</Transaction>
+    <Transaction>2022/03/24 17:28:33.616,C:\UniAlfa\SCC\Financeiro\U_CadastroContasFixas.dfm=C:\UniAlfa\SCC\Financeiro\Unit1.dfm</Transaction>
+    <Transaction>2022/03/24 17:28:33.616,C:\UniAlfa\SCC\Financeiro\U_CadastroContasFixas.pas=C:\UniAlfa\SCC\Financeiro\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

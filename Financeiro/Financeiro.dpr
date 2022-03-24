@@ -7,8 +7,10 @@ uses
   U_DM in 'U_DM.pas' {DM_Financeiro: TDataModule},
   U_Login in 'U_Login.pas' {F_Login},
   U_Principal in 'U_Principal.pas' {Frm_Principal},
-  U_Contas in 'U_Contas.pas' {Frm_Contas},
-  U_CadastroUsuario in 'U_CadastroUsuario.pas' {Frm_CadastroUsuario};
+  U_CadastroUsuario in 'U_CadastroUsuario.pas' {Frm_CadastroUsuario},
+  U_CadastroContas in 'U_CadastroContas.pas' {Frm_CadastroContas},
+  U_CadastroCategorias in 'U_CadastroCategorias.pas' {Frm_CadastroCategoria},
+  U_CadastroContasFixas in 'U_CadastroContasFixas.pas' {Frm_ContasFixas};
 
 {$R *.res}
 

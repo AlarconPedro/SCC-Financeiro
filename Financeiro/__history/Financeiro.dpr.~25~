@@ -1,0 +1,26 @@
+program Financeiro;
+
+uses
+  Vcl.Forms,
+  Vcl.Themes,
+  Vcl.Styles,
+  U_DM in 'U_DM.pas' {DM_Financeiro: TDataModule},
+  U_Login in 'U_Login.pas' {F_Login},
+  U_Principal in 'U_Principal.pas' {Frm_Principal},
+  U_CadastroUsuario in 'U_CadastroUsuario.pas' {Frm_CadastroUsuario},
+  U_CadastroContas in 'U_CadastroContas.pas' {Frm_CadastroContas},
+  U_ContasReceber in 'U_ContasReceber.pas' {Frm_CadContasReceber};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  F_Login := TF_Login.Create(Application);
+  Application.CreateForm(TDM_Financeiro, DM_Financeiro);
+  Application.CreateForm(TFrm_CadastroContas, Frm_CadastroContas);
+  Application.CreateForm(TFrm_CadContasReceber, Frm_CadContasReceber);
+  F_Login.ShowModal;
+
+  Application.Run;
+end.

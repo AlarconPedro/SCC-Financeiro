@@ -10,31 +10,7 @@ uses
 
 type
   TFrm_CadastroContas = class(TForm)
-    navContasBar: TdxRibbon;
-    NavBarContas: TdxRibbonTab;
-    itensContas: TdxRibbonPopupMenu;
-    navContas: TdxBarManager;
-    btnCPagar: TdxBarLargeButton;
-    btnContasReceber: TdxBarLargeButton;
-    btnNovaCategoria: TdxBarLargeButton;
-    btnAlterarConta: TdxBarLargeButton;
-    btnSairConta: TdxBarLargeButton;
-    btnContaFixa: TdxBarLargeButton;
-    btnFluxoCaixa: TdxBarLargeButton;
-    btnListarContas: TdxBarLargeButton;
-    btnCalendario: TdxBarLargeButton;
-    btnContasFixas: TdxBarLargeButton;
-    dxBarLargeButton1: TdxBarLargeButton;
-    dxBarLargeButton2: TdxBarLargeButton;
-    dxBarLargeButton3: TdxBarLargeButton;
-    dxBarLargeButton4: TdxBarLargeButton;
-    btnSalvarUser: TdxBarLargeButton;
-    btnAddUser: TdxBarLargeButton;
-    btnEditUser: TdxBarLargeButton;
-    btnExcluirUser: TdxBarLargeButton;
-    btnCancelarCad: TdxBarLargeButton;
-    dxBarLargeButton10: TdxBarLargeButton;
-    btnSairCad: TdxBarLargeButton;
+    navContasCadastro: TdxBarManager;
     navContasBar1: TdxBar;
     navContasBar2: TdxBar;
     navContasBar3: TdxBar;
@@ -45,6 +21,10 @@ type
     btnDeleteContas: TdxBarLargeButton;
     btnCancelarContas: TdxBarLargeButton;
     btnSalvarContas: TdxBarLargeButton;
+    navContasBar: TdxRibbon;
+    NavBarContas: TdxRibbonTab;
+    itensCadastro: TdxRibbonPopupMenu;
+    procedure btnSairContasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,5 +37,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFrm_CadastroContas.btnSairContasClick(Sender: TObject);
+begin
+ Close;
+end;
 
 end.

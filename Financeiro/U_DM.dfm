@@ -4,6 +4,7 @@ object DM_Financeiro: TDM_Financeiro
   Height = 519
   Width = 722
   object DB_Financeiro: TIBDatabase
+    Connected = True
     DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
@@ -17,6 +18,7 @@ object DM_Financeiro: TDM_Financeiro
   object Q_Login: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -53,6 +55,7 @@ object DM_Financeiro: TDM_Financeiro
     end
   end
   object Trans_Financeiro: TIBTransaction
+    Active = True
     DefaultDatabase = DB_Financeiro
     Left = 136
     Top = 24
@@ -94,6 +97,7 @@ object DM_Financeiro: TDM_Financeiro
     AfterDelete = Q_UsuarioAfterDelete
     AfterPost = Q_UsuarioAfterPost
     BeforePost = Q_UsuarioBeforePost
+    Active = True
     BufferChunks = 1000
     CachedUpdates = True
     ParamCheck = True
@@ -126,5 +130,16 @@ object DM_Financeiro: TDM_Financeiro
       Required = True
       Size = 32
     end
+  end
+  object Q_Contas: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      '')
+    Left = 224
+    Top = 136
   end
 end

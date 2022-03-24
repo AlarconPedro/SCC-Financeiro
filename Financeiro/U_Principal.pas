@@ -46,8 +46,14 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnAlterarContaClick(Sender: TObject);
     procedure btnSairContaClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
+    procedure btnCPagarClick(Sender: TObject);
+    procedure btnContasReceberClick(Sender: TObject);
+    procedure btnNovaCategoriaClick(Sender: TObject);
+    procedure btnContaFixaClick(Sender: TObject);
+    procedure dxBarLargeButton4Click(Sender: TObject);
+    procedure dxBarLargeButton1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     procedure DoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -63,7 +69,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_Login, U_Contas, U_CadastroUsuario;
+uses U_Login, U_CadastroUsuario, U_CadastroContas, U_CadastroCategorias, U_CadastroContasFixas;
 
 procedure TFrm_Principal.btnAlterarContaClick(Sender: TObject);
   begin
@@ -71,31 +77,62 @@ procedure TFrm_Principal.btnAlterarContaClick(Sender: TObject);
     Application.Terminate;
   end;
 
+procedure TFrm_Principal.btnContaFixaClick(Sender: TObject);
+begin
+ Application.CreateForm(TFrm_ContasFixas, Frm_ContasFixas);
+ Frm_ContasFixas.ShowModal;
+end;
+
+procedure TFrm_Principal.btnContasReceberClick(Sender: TObject);
+begin
+ Application.CreateForm(TFrm_CadastroContas, Frm_CadastroContas);
+ Frm_CadastroContas.ShowModal;
+end;
+
+procedure TFrm_Principal.btnCPagarClick(Sender: TObject);
+begin
+ Application.CreateForm(TFrm_CadastroContas, Frm_CadastroContas);
+ Frm_CadastroContas.ShowModal;
+end;
+
+procedure TFrm_Principal.btnNovaCategoriaClick(Sender: TObject);
+begin
+ Application.CreateForm(TFrm_CadastroCategoria, Frm_CadastroCategoria);
+ Frm_CadastroCategoria.ShowModal;
+end;
+
 procedure TFrm_Principal.btnSairContaClick(Sender: TObject);
 begin
-       Close;
+  Close;
+end;
+
+procedure TFrm_Principal.dxBarLargeButton1Click(Sender: TObject);
+begin
+ Application.CreateForm(TFrm_CadastroCategoria, Frm_CadastroCategoria);
+ Frm_CadastroCategoria.ShowModal;
 end;
 
 procedure TFrm_Principal.dxBarLargeButton3Click(Sender: TObject);
-  begin
-     Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
-     Frm_CadastroUsuarios.ShowModal
-  end;
+begin
+ Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
+ Frm_CadastroUsuarios.ShowModal;
+end;
+
+procedure TFrm_Principal.dxBarLargeButton4Click(Sender: TObject);
+begin
+ Application.CreateForm(TFrm_ContasFixas, Frm_ContasFixas);
+ Frm_ContasFixas.ShowModal;
+end;
 
 procedure TFrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
-  begin
-    Application.Terminate;
-  end;
+begin
+  Application.Terminate;
+end;
 
 procedure TFrm_Principal.FormShow(Sender: TObject);
 begin
-if not Assigned(Frm_Contas)then
-    begin
-        Frm_Contas := TFrm_Contas.Create(Self);
-    end;
-    Frm_Contas.Show;
+ Self.WindowState := wsMaximized;
 end;
-
 
 procedure TFrm_Principal.SetarCursor;
 var

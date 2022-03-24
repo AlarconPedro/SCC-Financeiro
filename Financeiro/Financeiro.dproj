@@ -87,7 +87,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <UWP_DelphiLogo44>C:\Users\Desenvolvimento\Pictures\Camera Roll\dinheiro2.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>C:\Users\Desenvolvimento\Pictures\Camera Roll\dinheiro.png</UWP_DelphiLogo150>
-        <Icon_MainIcon>Financeiro_Icon1.ico</Icon_MainIcon>
+        <Icon_MainIcon>Financeiro_Icon2.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -118,12 +118,20 @@
         <DCCReference Include="U_Principal.pas">
             <Form>Frm_Principal</Form>
         </DCCReference>
-        <DCCReference Include="U_Contas.pas">
-            <Form>Frm_Contas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="U_CadastroUsuario.pas">
             <Form>Frm_CadastroUsuario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="U_CadastroContas.pas">
+            <Form>Frm_CadastroContas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="U_CadastroCategorias.pas">
+            <Form>Frm_CadastroCategoria</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="U_CadastroContasFixas.pas">
+            <Form>Frm_ContasFixas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

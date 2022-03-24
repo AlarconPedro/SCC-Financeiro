@@ -15,20 +15,6 @@ type
     NavBar: TdxRibbon;
     NavBarCadastro: TdxRibbonTab;
     navCadastroUsuario: TdxBarManager;
-    btnCPagar: TdxBarLargeButton;
-    btnContasReceber: TdxBarLargeButton;
-    btnNovaCategoria: TdxBarLargeButton;
-    btnAlterarConta: TdxBarLargeButton;
-    btnSairConta: TdxBarLargeButton;
-    btnContaFixa: TdxBarLargeButton;
-    btnFluxoCaixa: TdxBarLargeButton;
-    btnListarContas: TdxBarLargeButton;
-    btnCalendario: TdxBarLargeButton;
-    btnContasFixas: TdxBarLargeButton;
-    dxBarLargeButton1: TdxBarLargeButton;
-    dxBarLargeButton2: TdxBarLargeButton;
-    dxBarLargeButton3: TdxBarLargeButton;
-    dxBarLargeButton4: TdxBarLargeButton;
     itensCadastro: TdxRibbonPopupMenu;
     navCadastroUsuarioBar: TdxBar;
     btnSalvarUser: TdxBarLargeButton;
@@ -42,7 +28,6 @@ type
     btnEditUser: TdxBarLargeButton;
     btnExcluirUser: TdxBarLargeButton;
     btnCancelarCad: TdxBarLargeButton;
-    dxBarLargeButton10: TdxBarLargeButton;
     ds_Usuarios: TDataSource;
     DBGrid1: TDBGrid;
     navCadastroSair: TdxBar;
@@ -123,6 +108,5 @@ begin
   DM_Financeiro.Q_Usuario.Close;
   DM_Financeiro.Q_Usuario.Open;
 end;
-
 
 end.
