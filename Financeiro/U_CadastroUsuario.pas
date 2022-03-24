@@ -30,7 +30,7 @@ type
     dxBarLargeButton3: TdxBarLargeButton;
     dxBarLargeButton4: TdxBarLargeButton;
     itensCadastro: TdxRibbonPopupMenu;
-    navCadastroUsuarioBar1: TdxBar;
+    navCadastroUsuarioBar: TdxBar;
     btnSalvarUser: TdxBarLargeButton;
     btnAddUser: TdxBarLargeButton;
     GroupBox1: TGroupBox;
@@ -38,14 +38,14 @@ type
     Label1: TLabel;
     Label2: TLabel;
     dxRibbonStatusBar1: TdxRibbonStatusBar;
-    navCadastroUsuarioBar2: TdxBar;
+    navEditarCadastro: TdxBar;
     btnEditUser: TdxBarLargeButton;
     btnExcluirUser: TdxBarLargeButton;
     btnCancelarCad: TdxBarLargeButton;
     dxBarLargeButton10: TdxBarLargeButton;
     ds_Usuarios: TDataSource;
     DBGrid1: TDBGrid;
-    navCadastroUsuarioBar3: TdxBar;
+    navCadastroSair: TdxBar;
     btnSairCad: TdxBarLargeButton;
     dbeditLogin: TDBEdit;
     dbeditNome: TDBEdit;
@@ -57,10 +57,11 @@ type
     procedure btnEditUserClick(Sender: TObject);
     procedure btnExcluirUserClick(Sender: TObject);
     procedure btnCancelarCadClick(Sender: TObject);
+    procedure ds_UsuariosStateChange(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+
   end;
 
 var
@@ -99,6 +100,18 @@ procedure TFrm_CadastroUsuarios.btnSalvarUserClick(Sender: TObject);
     DM_Financeiro.Q_Usuario.Post;
   end;
 
+procedure TFrm_CadastroUsuarios.ds_UsuariosStateChange(Sender: TObject);
+begin
+    with ds_Usuarios.Dataset do
+    begin
+      btnAddUser.Enabled := (State = dsBrowse);
+      btnEditUser.Enabled := (State = dsBrowse) and (not IsEmpty);
+      btnExcluirUser.Enabled := (State = dsBrowse) and (not IsEmpty);
+      btnCancelarCad.Enabled := (State <> dsBrowse);
+      btnSalvarUser.Enabled := (State <> dsBrowse);
+    end;
+end;
+
 procedure TFrm_CadastroUsuarios.btnAddUserClick(Sender: TObject);
   begin
     DM_Financeiro.Q_Usuario.Append;
@@ -110,5 +123,6 @@ begin
   DM_Financeiro.Q_Usuario.Close;
   DM_Financeiro.Q_Usuario.Open;
 end;
+
 
 end.

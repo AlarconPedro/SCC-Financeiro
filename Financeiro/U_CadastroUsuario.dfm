@@ -36,16 +36,16 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       Groups = <
         item
           Caption = 'Cadastro de Usu'#225'rio'
-          ToolbarName = 'navCadastroUsuarioBar1'
+          ToolbarName = 'navCadastroUsuarioBar'
         end
         item
           Caption = 'Editar Cadastro'
-          ToolbarName = 'navCadastroUsuarioBar2'
+          ToolbarName = 'navEditarCadastro'
         end
         item
         end
         item
-          ToolbarName = 'navCadastroUsuarioBar3'
+          ToolbarName = 'navCadastroSair'
         end>
       Index = 0
     end
@@ -136,7 +136,6 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     ShowHint = False
     ParentShowHint = False
     PopupMenu = itensCadastro
-    ExplicitLeft = 5
   end
   object DBGrid1: TDBGrid
     Left = 0
@@ -185,7 +184,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Left = 529
     Top = 32
     PixelsPerInch = 96
-    object navCadastroUsuarioBar1: TdxBar
+    object navCadastroUsuarioBar: TdxBar
       Caption = 'Cadastro de Usu'#225'rio'
       CaptionButtons = <>
       DockedLeft = 0
@@ -210,7 +209,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       Visible = True
       WholeRow = False
     end
-    object navCadastroUsuarioBar2: TdxBar
+    object navEditarCadastro: TdxBar
       Caption = 'Editar Usu'#225'rio'
       CaptionButtons = <>
       DockedLeft = 117
@@ -240,7 +239,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       Visible = True
       WholeRow = False
     end
-    object navCadastroUsuarioBar3: TdxBar
+    object navCadastroSair: TdxBar
       Caption = 'Sair'
       CaptionButtons = <>
       DockedLeft = 307
@@ -2653,7 +2652,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       Caption = 'Novo'
       Category = 0
       Hint = 'Novo'
-      Visible = ivNever
+      Visible = ivAlways
       LargeGlyph.SourceDPI = 96
       LargeGlyph.Data = {
         89504E470D0A1A0A0000000D49484452000000280000002808060000008CFEB8
@@ -3567,6 +3566,7 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
   end
   object ds_Usuarios: TDataSource
     DataSet = DM_Financeiro.Q_Usuario
+    OnStateChange = ds_UsuariosStateChange
     Left = 568
     Top = 349
   end
