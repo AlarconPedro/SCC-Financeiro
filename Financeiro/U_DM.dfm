@@ -133,6 +133,7 @@ object DM_Financeiro: TDM_Financeiro
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
     AfterDelete = Q_ContasPagarAfterDelete
+    AfterInsert = Q_ContasPagarAfterInsert
     AfterPost = Q_ContasPagarAfterPost
     BufferChunks = 1000
     CachedUpdates = True

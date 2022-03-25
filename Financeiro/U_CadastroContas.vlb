@@ -26,7 +26,7 @@ Coordinates=736,111,110,36
 Coordinates=736,166,110,36
 
 []
-Coordinates=162,129,91,36
+Coordinates=732,1,140,58
 Visible=True
 
 [navContasBar]
@@ -87,9 +87,6 @@ Coordinates=89,416,154,102
 
 [edtVencimentoPagar]
 Coordinates=955,166,134,36
-
-[rg_FPagamentoPagar]
-Coordinates=732,1,140,58
 
 [DBLookupComboBox1]
 Coordinates=415,129,144,36

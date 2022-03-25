@@ -262,7 +262,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     TabStop = False
     object NavBarContas: TdxRibbonTab
       Active = True
-      Caption = ' '
+      Caption = ' Cadastro de Contas'
       Groups = <
         item
           Caption = 'Cadastro de Contas'
@@ -316,6 +316,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+    Visible = False
     object GroupBox1: TGroupBox
       Left = 0
       Top = 0
@@ -400,7 +401,19 @@ object Frm_CadastroContas: TFrm_CadastroContas
         DataField = 'PARCELAS'
         DataSource = ds_ContasPagar
         Enabled = False
-        TabOrder = 5
+        TabOrder = 4
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 340
+        Top = 51
+        Width = 133
+        Height = 21
+        DataField = 'CAT_CODIGO'
+        DataSource = ds_ContasPagar
+        KeyField = 'CAT_CODIGO'
+        ListField = 'NOME'
+        ListSource = ds_Categorias
+        TabOrder = 3
       end
       object rg_FPagamentoPagar: TDBRadioGroup
         Left = 477
@@ -418,23 +431,11 @@ object Frm_CadastroContas: TFrm_CadastroContas
         Items.Strings = (
           'A vista'
           'Parcelado')
-        TabOrder = 4
+        TabOrder = 5
         Values.Strings = (
           '0'
           '1')
         OnChange = rg_FPagamentoPagarChange
-      end
-      object DBLookupComboBox1: TDBLookupComboBox
-        Left = 340
-        Top = 51
-        Width = 133
-        Height = 21
-        DataField = 'CAT_CODIGO'
-        DataSource = ds_ContasPagar
-        KeyField = 'CAT_CODIGO'
-        ListField = 'NOME'
-        ListSource = ds_Categorias
-        TabOrder = 3
       end
     end
     object gridContasPagar: TDBGrid

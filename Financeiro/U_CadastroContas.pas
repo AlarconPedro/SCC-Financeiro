@@ -38,10 +38,10 @@ type
     edtParcelasPagar: TDBEdit;
     gridContasPagar: TDBGrid;
     ds_ContasPagar: TDataSource;
-    rg_FPagamentoPagar: TDBRadioGroup;
     ds_Categorias: TDataSource;
     DBLookupComboBox1: TDBLookupComboBox;
     Label2: TLabel;
+    rg_FPagamentoPagar: TDBRadioGroup;
     procedure btnSairContasClick(Sender: TObject);
     procedure btnSalvarContasClick(Sender: TObject);
     procedure btnCancelarContasClick(Sender: TObject);
@@ -73,8 +73,8 @@ end;
 
 procedure TFrm_CadastroContas.btnCPagarCadClick(Sender: TObject);
 begin
+ pnlContasPagar.Visible := true;
  DM_Financeiro.Q_ContasPagar.Append;
- rg_FPagamentoPagar.Value := '0';
 end;
 
 procedure TFrm_CadastroContas.btnDeleteContasClick(Sender: TObject);

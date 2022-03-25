@@ -38,6 +38,7 @@ type
     procedure Q_UsuarioAfterDelete(DataSet: TDataSet);
     procedure Q_ContasPagarAfterPost(DataSet: TDataSet);
     procedure Q_ContasPagarAfterDelete(DataSet: TDataSet);
+    procedure Q_ContasPagarAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -83,6 +84,11 @@ procedure TDM_Financeiro.Q_ContasPagarAfterDelete(DataSet: TDataSet);
 begin
   Q_ContasPagar.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
+end;
+
+procedure TDM_Financeiro.Q_ContasPagarAfterInsert(DataSet: TDataSet);
+begin
+  Q_ContasPagarF_PAGAMENTO.AsInteger := 0;
 end;
 
 procedure TDM_Financeiro.Q_ContasPagarAfterPost(DataSet: TDataSet);
