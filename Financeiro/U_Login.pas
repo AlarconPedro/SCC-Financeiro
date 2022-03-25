@@ -4,8 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, JvExExtCtrls,
-  JvExtComponent, JvPanel, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Data.FMTBcd,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Data.FMTBcd,
   Data.DB, Data.SqlExpr, MD5;
 
 type

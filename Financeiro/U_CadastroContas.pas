@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, dxRibbonSkins, dxSkinsCore, dxSkinsDefaultPainters,
-  dxRibbonCustomizationForm, dxBar, cxClasses, dxRibbon;
+  dxRibbonCustomizationForm, dxBar, cxClasses, dxRibbon, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, dxStatusBar, dxRibbonStatusBar;
 
 type
   TFrm_CadastroContas = class(TForm)
@@ -24,6 +25,9 @@ type
     navContasBar: TdxRibbon;
     NavBarContas: TdxRibbonTab;
     itensCadastro: TdxRibbonPopupMenu;
+    DBGrid1: TDBGrid;
+    dxRibbonStatusBar1: TdxRibbonStatusBar;
+    ds_Contas: TDataSource;
     procedure btnSairContasClick(Sender: TObject);
   private
     { Private declarations }
@@ -35,6 +39,8 @@ var
   Frm_CadastroContas: TFrm_CadastroContas;
 
 implementation
+
+uses U_DM;
 
 {$R *.dfm}
 

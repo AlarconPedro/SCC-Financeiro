@@ -20,6 +20,7 @@ type
     Q_UsuarioLOGIN: TIBStringField;
     Q_UsuarioSENHA: TIBStringField;
     Q_Contas: TIBQuery;
+    Up_Contas: TIBUpdateSQL;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);

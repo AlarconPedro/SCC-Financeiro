@@ -259,7 +259,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 666
     object NavBarContas: TdxRibbonTab
       Active = True
       Caption = 'Cadastro de Contas'
@@ -278,6 +277,50 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end>
       Index = 0
     end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 125
+    Width = 644
+    Height = 273
+    Align = alClient
+    DataSource = ds_Contas
+    TabOrder = 5
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object dxRibbonStatusBar1: TdxRibbonStatusBar
+    AlignWithMargins = True
+    Left = 0
+    Top = 398
+    Width = 644
+    Height = 23
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Text = 'Nome do Usu'#225'rio :'
+        Width = 120
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
+    Ribbon = navContasBar
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clDefault
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = itensCadastro
+    ExplicitWidth = 614
   end
   object navContasCadastro: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1517,5 +1560,10 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Left = 560
     Top = 80
     PixelsPerInch = 96
+  end
+  object ds_Contas: TDataSource
+    DataSet = DM_Financeiro.Q_Contas
+    Left = 608
+    Top = 360
   end
 end

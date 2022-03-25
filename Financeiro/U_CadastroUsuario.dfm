@@ -261,7 +261,6 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 650
     object NavBarCadastro: TdxRibbonTab
       Active = True
       Caption = 'Cadastro de Usu'#225'rios'
@@ -290,8 +289,6 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     Align = alClient
     Caption = 'Dados do Usu'#225'rio'
     TabOrder = 1
-    ExplicitWidth = 612
-    ExplicitHeight = 85
     object edtNomeUsuario: TLabel
       Left = 8
       Top = 24
@@ -370,8 +367,6 @@ object Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     ShowHint = False
     ParentShowHint = False
     PopupMenu = itensCadastro
-    ExplicitTop = 396
-    ExplicitWidth = 612
   end
   object DBGrid1: TDBGrid
     Left = 0

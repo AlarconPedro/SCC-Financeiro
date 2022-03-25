@@ -71,7 +71,7 @@ end;
 
 procedure TFrm_CadastroUsuarios.btnExcluirUserClick(Sender: TObject);
 begin
-  if (Application.MessageBox(PChar('Deseja realmente excluir este usuário?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+  if (Application.MessageBox(PChar('Deseja realmente excluir este usuário?'), 'Atenção !', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
     DM_Financeiro.Q_Usuario.Delete;
 end;
 

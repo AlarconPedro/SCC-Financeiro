@@ -5,7 +5,7 @@ object DM_Financeiro: TDM_Financeiro
   Width = 722
   object DB_Financeiro: TIBDatabase
     Connected = True
-    DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
+    DatabaseName = 'D:\Desenvolvimento\Delphi\SCC-Financeiro\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -18,7 +18,6 @@ object DM_Financeiro: TDM_Financeiro
   object Q_Login: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -97,7 +96,6 @@ object DM_Financeiro: TDM_Financeiro
     AfterDelete = Q_UsuarioAfterDelete
     AfterPost = Q_UsuarioAfterPost
     BeforePost = Q_UsuarioBeforePost
-    Active = True
     BufferChunks = 1000
     CachedUpdates = True
     ParamCheck = True
@@ -134,12 +132,77 @@ object DM_Financeiro: TDM_Financeiro
   object Q_Contas: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
     SQL.Strings = (
+      'SELECT * FROM TB_CPAGAR'
       '')
+    UpdateObject = Up_Contas
+    GeneratorField.Field = 'CP_CODIGO'
+    GeneratorField.Generator = 'GEN_TB_CPAGAR_ID'
     Left = 224
+    Top = 136
+  end
+  object Up_Contas: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  CP_CODIGO,'
+      '  DESCRICAO,'
+      '  VALOR,'
+      '  F_PAGAMENTO,'
+      '  PARCELAS,'
+      '  VENCIMENTO,'
+      '  CAT_CODIGO'
+      'from TB_CPAGAR '
+      'where'
+      '  CP_CODIGO = :CP_CODIGO and'
+      '  DESCRICAO = :DESCRICAO and'
+      '  VALOR = :VALOR and'
+      '  F_PAGAMENTO = :F_PAGAMENTO and'
+      '  PARCELAS = :PARCELAS and'
+      '  VENCIMENTO = :VENCIMENTO and'
+      '  CAT_CODIGO = :CAT_CODIGO')
+    ModifySQL.Strings = (
+      'update TB_CPAGAR'
+      'set'
+      '  CP_CODIGO = :CP_CODIGO,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  VALOR = :VALOR,'
+      '  F_PAGAMENTO = :F_PAGAMENTO,'
+      '  PARCELAS = :PARCELAS,'
+      '  VENCIMENTO = :VENCIMENTO,'
+      '  CAT_CODIGO = :CAT_CODIGO'
+      'where'
+      '  CP_CODIGO = :OLD_CP_CODIGO and'
+      '  DESCRICAO = :OLD_DESCRICAO and'
+      '  VALOR = :OLD_VALOR and'
+      '  F_PAGAMENTO = :OLD_F_PAGAMENTO and'
+      '  PARCELAS = :OLD_PARCELAS and'
+      '  VENCIMENTO = :OLD_VENCIMENTO and'
+      '  CAT_CODIGO = :OLD_CAT_CODIGO')
+    InsertSQL.Strings = (
+      'insert into TB_CPAGAR'
+      
+        '  (CP_CODIGO, DESCRICAO, VALOR, F_PAGAMENTO, PARCELAS, VENCIMENT' +
+        'O, CAT_CODIGO)'
+      'values'
+      
+        '  (:CP_CODIGO, :DESCRICAO, :VALOR, :F_PAGAMENTO, :PARCELAS, :VEN' +
+        'CIMENTO, '
+      '   :CAT_CODIGO)')
+    DeleteSQL.Strings = (
+      'delete from TB_CPAGAR'
+      'where'
+      '  CP_CODIGO = :OLD_CP_CODIGO and'
+      '  DESCRICAO = :OLD_DESCRICAO and'
+      '  VALOR = :OLD_VALOR and'
+      '  F_PAGAMENTO = :OLD_F_PAGAMENTO and'
+      '  PARCELAS = :OLD_PARCELAS and'
+      '  VENCIMENTO = :OLD_VENCIMENTO and'
+      '  CAT_CODIGO = :OLD_CAT_CODIGO')
+    Left = 288
     Top = 136
   end
 end

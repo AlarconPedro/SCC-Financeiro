@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxSkinsCore, dxSkinsDefaultPainters,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
-  dxRibbonCustomizationForm, dxBar, cxClasses, dxRibbon;
+  dxRibbonCustomizationForm, dxBar, cxClasses, dxRibbon, dxStatusBar,
+  dxRibbonStatusBar;
 
 type
   TFrm_CadastroCategoria = class(TForm)
@@ -23,6 +24,7 @@ type
     btnCancelar: TdxBarLargeButton;
     navCadastroCategoriasBar3: TdxBar;
     btnSair: TdxBarLargeButton;
+    dxRibbonStatusBar1: TdxRibbonStatusBar;
     procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
