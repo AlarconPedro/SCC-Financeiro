@@ -245,6 +245,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     0000FFFF0000FFFF0000FFFF0000FFFFFFFFFFFF0000FFFFFFFFFFFF0000}
   OldCreateOrder = False
   Position = poScreenCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object navContasBar: TdxRibbon
@@ -259,10 +260,9 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 666
     object NavBarContas: TdxRibbonTab
       Active = True
-      Caption = 'Cadastro de Contas'
+      Caption = ' '
       Groups = <
         item
           Caption = 'Cadastro de Contas'
@@ -273,10 +273,215 @@ object Frm_CadastroContas: TFrm_CadastroContas
           ToolbarName = 'navContasBar2'
         end
         item
-          Caption = 'Sair'
+          Caption = 'Outros'
           ToolbarName = 'navContasBar3'
         end>
       Index = 0
+    end
+  end
+  object dxRibbonStatusBar1: TdxRibbonStatusBar
+    AlignWithMargins = True
+    Left = 0
+    Top = 398
+    Width = 644
+    Height = 23
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Text = 'Total: '
+        Width = 40
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
+    Ribbon = navContasBar
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clDefault
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = navItens
+  end
+  object pnlContasPagar: TPanel
+    Left = 0
+    Top = 125
+    Width = 644
+    Height = 273
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 2
+    object GroupBox1: TGroupBox
+      Left = 0
+      Top = 0
+      Width = 644
+      Height = 81
+      Align = alTop
+      Caption = 'Dados Contas a Pagar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 6
+        Top = 29
+        Width = 50
+        Height = 13
+        Caption = 'Descri'#231#227'o:'
+      end
+      object TLabel
+        Left = 6
+        Top = 54
+        Width = 59
+        Height = 13
+        Caption = 'Vencimento:'
+      end
+      object Label3: TLabel
+        Left = 308
+        Top = 28
+        Width = 31
+        Height = 13
+        Caption = 'Valor: '
+      end
+      object Label4: TLabel
+        Left = 480
+        Top = 57
+        Width = 44
+        Height = 13
+        Caption = 'Parcelas:'
+      end
+      object Label2: TLabel
+        Left = 287
+        Top = 54
+        Width = 54
+        Height = 13
+        Caption = 'Categoria: '
+      end
+      object edtDescricaoPagar: TDBEdit
+        Left = 58
+        Top = 24
+        Width = 214
+        Height = 21
+        DataField = 'DESCRICAO'
+        DataSource = ds_ContasPagar
+        TabOrder = 0
+      end
+      object edtVencimentoPagar: TDBEdit
+        Left = 67
+        Top = 51
+        Width = 205
+        Height = 21
+        DataField = 'VENCIMENTO'
+        DataSource = ds_ContasPagar
+        TabOrder = 1
+      end
+      object edtValorPagar: TDBEdit
+        Left = 340
+        Top = 24
+        Width = 133
+        Height = 21
+        DataField = 'VALOR'
+        DataSource = ds_ContasPagar
+        TabOrder = 2
+      end
+      object edtParcelasPagar: TDBEdit
+        Left = 530
+        Top = 54
+        Width = 89
+        Height = 21
+        DataField = 'PARCELAS'
+        DataSource = ds_ContasPagar
+        Enabled = False
+        TabOrder = 5
+      end
+      object rg_FPagamentoPagar: TDBRadioGroup
+        Left = 477
+        Top = 12
+        Width = 142
+        Height = 33
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Caption = 'Forma de Pagamento:'
+        Columns = 2
+        DataField = 'F_PAGAMENTO'
+        DataSource = ds_ContasPagar
+        Items.Strings = (
+          'A vista'
+          'Parcelado')
+        TabOrder = 4
+        Values.Strings = (
+          '0'
+          '1')
+        OnChange = rg_FPagamentoPagarChange
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 340
+        Top = 51
+        Width = 133
+        Height = 21
+        DataField = 'CAT_CODIGO'
+        DataSource = ds_ContasPagar
+        KeyField = 'CAT_CODIGO'
+        ListField = 'NOME'
+        ListSource = ds_Categorias
+        TabOrder = 3
+      end
+    end
+    object gridContasPagar: TDBGrid
+      Left = 0
+      Top = 81
+      Width = 644
+      Height = 192
+      Align = alClient
+      DataSource = ds_ContasPagar
+      FixedColor = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'DESCRICAO'
+          Width = 382
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR'
+          Width = 68
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VENCIMENTO'
+          Width = 88
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PARCELAS'
+          Visible = True
+        end>
     end
   end
   object navContasCadastro: TdxBarManager
@@ -295,7 +500,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     PopupMenuLinks = <>
     UseSystemFont = True
     Left = 561
-    Top = 32
+    Top = 24
     PixelsPerInch = 96
     object navContasBar1: TdxBar
       Caption = 'Contas'
@@ -313,7 +518,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end
         item
           Visible = True
-          ItemName = 'btnCPaagarCad'
+          ItemName = 'btnCPagarCad'
         end
         item
           BeginGroup = True
@@ -357,7 +562,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
       WholeRow = False
     end
     object navContasBar3: TdxBar
-      Caption = 'Sair'
+      Caption = 'Outros'
       CaptionButtons = <>
       DockedLeft = 373
       DockedTop = 0
@@ -376,7 +581,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
       Visible = True
       WholeRow = False
     end
-    object btnCPaagarCad: TdxBarLargeButton
+    object btnCPagarCad: TdxBarLargeButton
       Caption = 'Contas a Pagar'
       Category = 0
       Hint = 'Contas a Pagar'
@@ -565,6 +770,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         F76D8690E73BC04C02A600E3819189116E4EE2FFF184E0570365406962FE7CE8
         7C46B2E73BA36E4F6CDC9A98A6160179802B0130049C00F6245AC9E3FFCEDC58
         FCA7FF0CF1AF010037412913A7F59D350000000049454E44AE426082}
+      OnClick = btnCPagarCadClick
     end
     object btnCReceberCad: TdxBarLargeButton
       Caption = 'Contas a Receber'
@@ -890,6 +1096,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         EF3B7D61458C1D112F2CB9E95E538F2BC07B914BFE0AE00CF05704D4C588F35F
         80F3519CC14B75DE33F7FBDF10FF0C00A4FD058A60139D340000000049454E44
         AE426082}
+      OnClick = btnEditContasClick
     end
     object btnSairContas: TdxBarLargeButton
       Caption = 'Sair'
@@ -1170,6 +1377,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         F4EE6B971EEBEF9BFFF9F77F8E7F7EF9A777803C7011F8945849388D1AF51A70
         0D781A2845C08D4C68CB40DD0943FDAD25C48C946A1A380C8C477324AE578BBD
         FE37C4FD01005A8F664026A9BF410000000049454E44AE426082}
+      OnClick = btnDeleteContasClick
     end
     object btnCancelarContas: TdxBarLargeButton
       Caption = 'Cancelar'
@@ -1341,6 +1549,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         CCE6CB3DC01CE48C9C61CF2C60063019B8C271C2CAB16F67807AC795FC1DF81B
         60FCBF66D406F091332C3FEFDD4603B94E9F14034E01479D7D75170BD72F8BBF
         C9EB7F0300AEB746B192C0A3730000000049454E44AE426082}
+      OnClick = btnCancelarContasClick
     end
     object btnSalvarContas: TdxBarLargeButton
       Caption = 'Lan'#231'ar'
@@ -1507,15 +1716,27 @@ object Frm_CadastroContas: TFrm_CadastroContas
         EC39438F77A7A8034E0347818F81E4FFAB476D79D546DC33D60EAF479DEF3943
         D47382F39E006AAF176E888ABFCBE37F03005025EC1E3028BD2A000000004945
         4E44AE426082}
+      OnClick = btnSalvarContasClick
     end
   end
-  object itensCadastro: TdxRibbonPopupMenu
+  object navItens: TdxRibbonPopupMenu
     BarManager = navContasCadastro
     ItemLinks = <>
     Ribbon = navContasBar
     UseOwnFont = False
     Left = 560
-    Top = 80
+    Top = 72
     PixelsPerInch = 96
+  end
+  object ds_ContasPagar: TDataSource
+    DataSet = DM_Financeiro.Q_ContasPagar
+    OnStateChange = ds_ContasPagarStateChange
+    Left = 584
+    Top = 349
+  end
+  object ds_Categorias: TDataSource
+    DataSet = DM_Financeiro.Q_Categorias
+    Left = 584
+    Top = 301
   end
 end

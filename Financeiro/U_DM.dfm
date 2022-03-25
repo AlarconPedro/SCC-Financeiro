@@ -18,7 +18,6 @@ object DM_Financeiro: TDM_Financeiro
   object Q_Login: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -28,7 +27,7 @@ object DM_Financeiro: TDM_Financeiro
       'TB_USUARIOS'
       'WHERE login = :userLogin'
       'AND senha = :senhaLogin')
-    Left = 224
+    Left = 208
     Top = 24
     ParamData = <
       item
@@ -88,7 +87,7 @@ object DM_Financeiro: TDM_Financeiro
       'delete from TB_USUARIOS'
       'where'
       '  USU_CODIGO = :OLD_USU_CODIGO')
-    Left = 288
+    Left = 296
     Top = 80
   end
   object Q_Usuario: TIBQuery
@@ -97,7 +96,6 @@ object DM_Financeiro: TDM_Financeiro
     AfterDelete = Q_UsuarioAfterDelete
     AfterPost = Q_UsuarioAfterPost
     BeforePost = Q_UsuarioBeforePost
-    Active = True
     BufferChunks = 1000
     CachedUpdates = True
     ParamCheck = True
@@ -108,7 +106,7 @@ object DM_Financeiro: TDM_Financeiro
     UpdateObject = Up_Usuario
     GeneratorField.Field = 'USU_CODIGO'
     GeneratorField.Generator = 'GEN_TB_USUARIOS_ID'
-    Left = 224
+    Left = 208
     Top = 80
     object Q_UsuarioUSU_CODIGO: TIntegerField
       FieldName = 'USU_CODIGO'
@@ -131,15 +129,163 @@ object DM_Financeiro: TDM_Financeiro
       Size = 32
     end
   end
-  object Q_Contas: TIBQuery
+  object Q_ContasPagar: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    AfterDelete = Q_ContasPagarAfterDelete
+    AfterPost = Q_ContasPagarAfterPost
+    BufferChunks = 1000
+    CachedUpdates = True
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT *  FROM TB_CPAGAR'
+      '')
+    UpdateObject = Up_ContasPagar
+    GeneratorField.Field = 'CP_CODIGO'
+    GeneratorField.Generator = 'GEN_TB_CPAGAR_ID'
+    Left = 208
+    Top = 136
+    object Q_ContasPagarCP_CODIGO: TIntegerField
+      FieldName = 'CP_CODIGO'
+      Origin = '"TB_CPAGAR"."CP_CODIGO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_ContasPagarDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Origin = '"TB_CPAGAR"."DESCRICAO"'
+      Size = 200
+    end
+    object Q_ContasPagarVALOR: TIBBCDField
+      FieldName = 'VALOR'
+      KeyFields = 'VALOR'
+      Origin = '"TB_CPAGAR"."VALOR"'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object Q_ContasPagarF_PAGAMENTO: TIntegerField
+      FieldName = 'F_PAGAMENTO'
+      Origin = '"TB_CPAGAR"."F_PAGAMENTO"'
+      Required = True
+      MaxValue = 1
+    end
+    object Q_ContasPagarPARCELAS: TIntegerField
+      FieldName = 'PARCELAS'
+      KeyFields = 'PARCELAS'
+      Origin = '"TB_CPAGAR"."PARCELAS"'
+    end
+    object Q_ContasPagarVENCIMENTO: TDateField
+      FieldName = 'VENCIMENTO'
+      Origin = '"TB_CPAGAR"."VENCIMENTO"'
+      Required = True
+      EditMask = '00/99/0000;'
+    end
+    object Q_ContasPagarCAT_CODIGO: TIntegerField
+      FieldName = 'CAT_CODIGO'
+      Origin = '"TB_CPAGAR"."CAT_CODIGO"'
+      Required = True
+    end
+  end
+  object Q_Categorias: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
     BufferChunks = 1000
-    CachedUpdates = False
+    CachedUpdates = True
     ParamCheck = True
     SQL.Strings = (
-      '')
-    Left = 224
+      'SELECT * FROM TB_CATEGORIA')
+    UpdateObject = Up_Categoria
+    GeneratorField.Field = 'CAT_CODIGO'
+    GeneratorField.Generator = 'GEN_TB_CATEGORIA_ID'
+    Left = 208
+    Top = 192
+    object Q_CategoriasCAT_CODIGO: TIntegerField
+      FieldName = 'CAT_CODIGO'
+      LookupDataSet = Q_ContasPagar
+      LookupKeyFields = 'CAT_CODIGO'
+      Origin = '"TB_CATEGORIA"."CAT_CODIGO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_CategoriasNOME: TIBStringField
+      FieldName = 'NOME'
+      Origin = '"TB_CATEGORIA"."NOME"'
+      Required = True
+      Size = 50
+    end
+  end
+  object Up_Categoria: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  CAT_CODIGO,'
+      '  NOME'
+      'from TB_CATEGORIA '
+      'where'
+      '  CAT_CODIGO = :CAT_CODIGO and'
+      '  NOME = :NOME')
+    ModifySQL.Strings = (
+      'update TB_CATEGORIA'
+      'set'
+      '  CAT_CODIGO = :CAT_CODIGO,'
+      '  NOME = :NOME'
+      'where'
+      '  CAT_CODIGO = :OLD_CAT_CODIGO and'
+      '  NOME = :OLD_NOME')
+    InsertSQL.Strings = (
+      'insert into TB_CATEGORIA'
+      '  (CAT_CODIGO, NOME)'
+      'values'
+      '  (:CAT_CODIGO, :NOME)')
+    DeleteSQL.Strings = (
+      'delete from TB_CATEGORIA'
+      'where'
+      '  CAT_CODIGO = :OLD_CAT_CODIGO and'
+      '  NOME = :OLD_NOME')
+    Left = 296
+    Top = 192
+  end
+  object Up_ContasPagar: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  CP_CODIGO,'
+      '  DESCRICAO,'
+      '  VALOR,'
+      '  F_PAGAMENTO,'
+      '  PARCELAS,'
+      '  VENCIMENTO,'
+      '  CAT_CODIGO'
+      'from TB_CPAGAR '
+      'where'
+      '  CP_CODIGO = :CP_CODIGO')
+    ModifySQL.Strings = (
+      'update TB_CPAGAR'
+      'set'
+      '  CP_CODIGO = :CP_CODIGO,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  VALOR = :VALOR,'
+      '  F_PAGAMENTO = :F_PAGAMENTO,'
+      '  PARCELAS = :PARCELAS,'
+      '  VENCIMENTO = :VENCIMENTO,'
+      '  CAT_CODIGO = :CAT_CODIGO'
+      'where'
+      '  CP_CODIGO = :OLD_CP_CODIGO')
+    InsertSQL.Strings = (
+      'insert into TB_CPAGAR'
+      
+        '  (CP_CODIGO, DESCRICAO, VALOR, F_PAGAMENTO, PARCELAS, VENCIMENT' +
+        'O, CAT_CODIGO)'
+      'values'
+      
+        '  (:CP_CODIGO, :DESCRICAO, :VALOR, :F_PAGAMENTO, :PARCELAS, :VEN' +
+        'CIMENTO, '
+      '   :CAT_CODIGO)')
+    DeleteSQL.Strings = (
+      'delete from TB_CPAGAR'
+      'where'
+      '  CP_CODIGO = :OLD_CP_CODIGO')
+    Left = 296
     Top = 136
   end
 end

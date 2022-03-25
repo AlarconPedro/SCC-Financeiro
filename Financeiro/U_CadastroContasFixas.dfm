@@ -26,7 +26,6 @@ object Frm_ContasFixas: TFrm_ContasFixas
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 445
     object navBarCadCategorias: TdxRibbonTab
       Active = True
       Caption = 'Cadastro de Contas Fixas'
@@ -45,6 +44,36 @@ object Frm_ContasFixas: TFrm_ContasFixas
         end>
       Index = 0
     end
+  end
+  object dxRibbonStatusBar1: TdxRibbonStatusBar
+    AlignWithMargins = True
+    Left = 0
+    Top = 398
+    Width = 644
+    Height = 23
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Text = 'Nome do Usu'#225'rio :'
+        Width = 120
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
+    Ribbon = RibbonContasFixas
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clDefault
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = itensCadastro
+    ExplicitWidth = 614
   end
   object navCadastroFixas: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -83,8 +112,8 @@ object Frm_ContasFixas: TFrm_ContasFixas
           Visible = True
           ItemName = 'btnSalvarFixa'
         end>
-      OneOnRow = True
-      Row = 2
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -113,8 +142,8 @@ object Frm_ContasFixas: TFrm_ContasFixas
           Visible = True
           ItemName = 'btnCancelar'
         end>
-      OneOnRow = True
-      Row = 1
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -133,7 +162,7 @@ object Frm_ContasFixas: TFrm_ContasFixas
           Visible = True
           ItemName = 'btnSair'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True

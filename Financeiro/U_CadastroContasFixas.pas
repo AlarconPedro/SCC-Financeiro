@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxSkinsCore, dxSkinsDefaultPainters,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
-  dxRibbonCustomizationForm, dxBar, dxRibbon, cxClasses;
+  dxRibbonCustomizationForm, dxBar, dxRibbon, cxClasses, dxStatusBar,
+  dxRibbonStatusBar;
 
 type
   TFrm_ContasFixas = class(TForm)
@@ -23,6 +24,7 @@ type
     RibbonContasFixas: TdxRibbon;
     navBarCadCategorias: TdxRibbonTab;
     itensCadastro: TdxRibbonPopupMenu;
+    dxRibbonStatusBar1: TdxRibbonStatusBar;
     procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }

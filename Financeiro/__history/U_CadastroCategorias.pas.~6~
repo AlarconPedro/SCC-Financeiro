@@ -1,0 +1,61 @@
+unit U_CadastroCategorias;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxSkinsCore, dxSkinsDefaultPainters,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
+  dxRibbonCustomizationForm, dxBar, cxClasses, dxRibbon, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, dxStatusBar,
+  dxRibbonStatusBar;
+
+type
+  TFrm_CadastroCategoria = class(TForm)
+    navCadastroCategorias: TdxBarManager;
+    itensCadastro: TdxRibbonPopupMenu;
+    navBarCadCategorias: TdxRibbonTab;
+    RibbonCategorias: TdxRibbon;
+    navCadastroCategoriasBar1: TdxBar;
+    btnNovaCategoria: TdxBarLargeButton;
+    btnSalvarCategoria: TdxBarLargeButton;
+    navCadastroCategoriasBar2: TdxBar;
+    btnEditarCategoria: TdxBarLargeButton;
+    btnExcluirCategoria: TdxBarLargeButton;
+    btnCancelar: TdxBarLargeButton;
+    navCadastroCategoriasBar3: TdxBar;
+    btnSair: TdxBarLargeButton;
+    dxRibbonStatusBar1: TdxRibbonStatusBar;
+    GroupBox1: TGroupBox;
+    DBEdit1: TDBEdit;
+    Label1: TLabel;
+    DBGrid1: TDBGrid;
+    ds_Categorias: TDataSource;
+    procedure btnSairClick(Sender: TObject);
+    procedure btnNovaCategoriaClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_CadastroCategoria: TFrm_CadastroCategoria;
+
+implementation
+
+uses U_DM;
+
+{$R *.dfm}
+
+procedure TFrm_CadastroCategoria.btnNovaCategoriaClick(Sender: TObject);
+begin
+ DM_Financeiro.Q_Categorias.Append;
+end;
+
+procedure TFrm_CadastroCategoria.btnSairClick(Sender: TObject);
+begin
+ Close;
+end;
+
+end.

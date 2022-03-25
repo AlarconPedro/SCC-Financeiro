@@ -19,11 +19,25 @@ type
     Q_UsuarioNOME: TIBStringField;
     Q_UsuarioLOGIN: TIBStringField;
     Q_UsuarioSENHA: TIBStringField;
-    Q_Contas: TIBQuery;
+    Q_ContasPagar: TIBQuery;
+    Q_Categorias: TIBQuery;
+    Up_Categoria: TIBUpdateSQL;
+    Q_ContasPagarCP_CODIGO: TIntegerField;
+    Q_ContasPagarDESCRICAO: TIBStringField;
+    Q_ContasPagarVALOR: TIBBCDField;
+    Q_ContasPagarF_PAGAMENTO: TIntegerField;
+    Q_ContasPagarPARCELAS: TIntegerField;
+    Q_ContasPagarVENCIMENTO: TDateField;
+    Q_ContasPagarCAT_CODIGO: TIntegerField;
+    Up_ContasPagar: TIBUpdateSQL;
+    Q_CategoriasCAT_CODIGO: TIntegerField;
+    Q_CategoriasNOME: TIBStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);
     procedure Q_UsuarioAfterDelete(DataSet: TDataSet);
+    procedure Q_ContasPagarAfterPost(DataSet: TDataSet);
+    procedure Q_ContasPagarAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -63,6 +77,18 @@ begin
     end;
   end;
 
+end;
+
+procedure TDM_Financeiro.Q_ContasPagarAfterDelete(DataSet: TDataSet);
+begin
+  Q_ContasPagar.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+end;
+
+procedure TDM_Financeiro.Q_ContasPagarAfterPost(DataSet: TDataSet);
+begin
+  Q_ContasPagar.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
 end;
 
 procedure TDM_Financeiro.Q_UsuarioAfterDelete(DataSet: TDataSet);

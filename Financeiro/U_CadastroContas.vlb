@@ -1,44 +1,111 @@
 ﻿[btnCancelarContas]
-Coordinates=0,0,108,33
+Coordinates=0,0,125,36
 
 [navContasBar1]
-Coordinates=16,55,89,33
+Coordinates=16,55,103,36
 
 [navContasBar2]
-Coordinates=261,111,89,33
+Coordinates=261,111,103,36
 
 [navContasBar3]
-Coordinates=43,129,89,33
+Coordinates=43,129,103,36
 
 [btnEditContas]
-Coordinates=186,203,84,33
+Coordinates=186,203,95,36
 
 [btnCReceberCad]
-Coordinates=67,203,97,33
-
-[btnCPaagarCad]
-Coordinates=566,111,91,33
+Coordinates=67,203,113,36
 
 [btnSairContas]
-Coordinates=51,277,84,33
+Coordinates=51,277,96,36
 
 [btnDeleteContas]
-Coordinates=736,111,96,33
+Coordinates=736,111,110,36
 
 [btnSalvarContas]
-Coordinates=736,166,96,33
+Coordinates=736,166,110,36
 
 []
-Coordinates=249,1,82,33
+Coordinates=162,129,91,36
 Visible=True
 
 [navContasBar]
-Coordinates=150,10,84,33
+Coordinates=150,10,96,36
 Visible=True
 
 [NavBarContas]
-Coordinates=108,52,85,33
+Coordinates=108,52,98,36
 
 [navContasCadastro]
-Coordinates=566,221,66,33
+Coordinates=566,221,128,36
+
+[btnCPagarCad]
+Coordinates=566,111,99,36
+
+[dxRibbonStatusBar1]
+Coordinates=284,1,132,36
+
+[navItens]
+Coordinates=284,56,63,36
+
+[Label2]
+Coordinates=30,416,53,58
+
+[(TLabel)]
+Coordinates=535,1,63,58
+
+[GroupBox1]
+Coordinates=732,342,79,58
+
+[edtParcelasPagar]
+Coordinates=955,1,117,36
+
+[edtValorPagar]
+Coordinates=454,78,97,36
+
+[Label3]
+Coordinates=248,416,53,58
+
+[gridContasPagar]
+Coordinates=955,56,111,36
+Visible=True
+
+[Label1]
+Coordinates=732,419,53,58
+
+[edtDescricaoPagar]
+Coordinates=955,111,124,36
+
+[ds_ContasPagar]
+Coordinates=535,276,110,36
+
+[DM_Financeiro.Q_Categorias]
+Coordinates=732,221,185,102
+
+[DM_Financeiro.Q_Login]
+Coordinates=89,416,154,102
+
+[edtVencimentoPagar]
+Coordinates=955,166,134,36
+
+[rg_FPagamentoPagar]
+Coordinates=732,1,140,58
+
+[DBLookupComboBox1]
+Coordinates=415,129,144,36
+
+[ds_Categorias]
+Coordinates=202,277,97,36
+
+[DM_Financeiro.Q_ContasPagar]
+Coordinates=300,166,197,212
+
+[pnlContasPagar]
+Coordinates=732,496,107,58
+
+[DM_Financeiro.Q_Usuario]
+Coordinates=307,416,167,146
+
+[Label4]
+Coordinates=476,416,53,58
 

@@ -12,6 +12,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object RibbonCategorias: TdxRibbon
@@ -25,7 +26,6 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 445
     object navBarCadCategorias: TdxRibbonTab
       Active = True
       Caption = 'Cadastro de Categorias'
@@ -44,6 +44,83 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
         end>
       Index = 0
     end
+  end
+  object dxRibbonStatusBar1: TdxRibbonStatusBar
+    AlignWithMargins = True
+    Left = 0
+    Top = 388
+    Width = 634
+    Height = 23
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Text = 'Nome do Usu'#225'rio :'
+        Width = 120
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
+    Ribbon = RibbonCategorias
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clDefault
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = itensCadastro
+    ExplicitWidth = 614
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 125
+    Width = 634
+    Height = 60
+    Align = alTop
+    Caption = 'Dados da Categoria'
+    TabOrder = 6
+    object Label1: TLabel
+      Left = 10
+      Top = 24
+      Width = 34
+      Height = 13
+      Caption = 'Nome :'
+    end
+    object dbEditNome: TDBEdit
+      Left = 46
+      Top = 21
+      Width = 579
+      Height = 21
+      DataField = 'NOME'
+      DataSource = ds_Categorias
+      TabOrder = 0
+    end
+  end
+  object dbGridCategorias: TDBGrid
+    Left = 0
+    Top = 185
+    Width = 634
+    Height = 203
+    Align = alClient
+    DataSource = ds_Categorias
+    TabOrder = 7
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Title.Caption = 'Nome da Categoria'
+        Width = 617
+        Visible = True
+      end>
   end
   object navCadastroCategorias: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -82,8 +159,8 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
           Visible = True
           ItemName = 'btnSalvarCategoria'
         end>
-      OneOnRow = True
-      Row = 2
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -112,8 +189,8 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
           Visible = True
           ItemName = 'btnCancelar'
         end>
-      OneOnRow = True
-      Row = 1
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -132,7 +209,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
           Visible = True
           ItemName = 'btnSair'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -301,6 +378,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
         971AB97D5C8073A1019B818D6EF7B5D66D5D836E65C8B93DC510F036F01AF022
         505A2EB13EEA8CDA72DDC6AC5B5853EE8CBAD5AD0C19B7127CE0126070B9E01A
         58FC498EFF0D00C5F5FFC6ED43847A0000000049454E44AE426082}
+      OnClick = btnNovaCategoriaClick
     end
     object btnSalvarCategoria: TdxBarLargeButton
       Caption = 'Salvar'
@@ -448,6 +526,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
         8A4AD9B45FBC6FE02F9DC7CF1EEDF8EECB4703CDAD63C062F1ECEE3BCDA84781
         D78A73916D9B99613C3BFB3A88DFA035EE42BA0D68299E3D7ACB8CFAFDBCFE3B
         00ED83AA3C409E05160000000049454E44AE426082}
+      OnClick = btnSalvarCategoriaClick
     end
     object btnEditarCategoria: TdxBarLargeButton
       Caption = 'Editar'
@@ -584,6 +663,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
         EF3B7D61458C1D112F2CB9E95E538F2BC07B914BFE0AE00CF05704D4C588F35F
         80F3519CC14B75DE33F7FBDF10FF0C00A4FD058A60139D340000000049454E44
         AE426082}
+      OnClick = btnEditarCategoriaClick
     end
     object btnExcluirCategoria: TdxBarLargeButton
       Caption = 'Excluir'
@@ -707,6 +787,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
         F4EE6B971EEBEF9BFFF9F77F8E7F7EF9A777803C7011F8945849388D1AF51A70
         0D781A2845C08D4C68CB40DD0943FDAD25C48C946A1A380C8C477324AE578BBD
         FE37C4FD01005A8F664026A9BF410000000049454E44AE426082}
+      OnClick = btnExcluirCategoriaClick
     end
     object btnCancelar: TdxBarLargeButton
       Caption = 'Cancelar'
@@ -878,6 +959,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
         CCE6CB3DC01CE48C9C61CF2C60063019B8C271C2CAB16F67807AC795FC1DF81B
         60FCBF66D406F091332C3FEFDD4603B94E9F14034E01479D7D75170BD72F8BBF
         C9EB7F0300AEB746B192C0A3730000000049454E44AE426082}
+      OnClick = btnCancelarClick
     end
     object btnSair: TdxBarLargeButton
       Caption = 'Sair'
@@ -1045,5 +1127,10 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
     Left = 585
     Top = 32
     PixelsPerInch = 96
+  end
+  object ds_Categorias: TDataSource
+    DataSet = DM_Financeiro.Q_Categorias
+    Left = 584
+    Top = 344
   end
 end

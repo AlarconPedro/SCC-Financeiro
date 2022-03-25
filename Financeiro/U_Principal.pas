@@ -16,18 +16,12 @@ type
 
   TFrm_Principal = class(TForm)
     navBarRibbon: TdxBarManager;
-    NavBarCadastro: TdxRibbonTab;
     NavBar: TdxRibbon;
     itensRibbon: TdxRibbonPopupMenu;
-    NavBarEditar: TdxRibbonTab;
-    NavBarLogin: TdxRibbonTab;
     NavBarContas: TdxRibbonTab;
-    navCpagar: TdxBar;
-    navFluxoCaixa: TdxBar;
     btnCPagar: TdxBarLargeButton;
     btnContasReceber: TdxBarLargeButton;
-    navNovaCategoria: TdxBar;
-    navEditar: TdxBar;
+    navCadastroOld: TdxBar;
     navUsuário: TdxBar;
     btnNovaCategoria: TdxBarLargeButton;
     btnAlterarConta: TdxBarLargeButton;
@@ -42,10 +36,14 @@ type
     dxBarLargeButton2: TdxBarLargeButton;
     dxBarLargeButton3: TdxBarLargeButton;
     dxBarLargeButton4: TdxBarLargeButton;
-    dxRibbonStatusBar1: TdxRibbonStatusBar;
+    nav24: TdxBar;
+    dxBarButton1: TdxBarButton;
+    dxBarLargeButton5: TdxBarLargeButton;
+    dxBarLargeButton6: TdxBarLargeButton;
+    dxBarButton2: TdxBarButton;
+    dxBarLargeButton7: TdxBarLargeButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnAlterarContaClick(Sender: TObject);
-    procedure btnSairContaClick(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
     procedure btnCPagarClick(Sender: TObject);
     procedure btnContasReceberClick(Sender: TObject);
@@ -54,6 +52,7 @@ type
     procedure dxBarLargeButton4Click(Sender: TObject);
     procedure dxBarLargeButton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure dxBarButton2Click(Sender: TObject);
 
   private
     procedure DoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -101,9 +100,10 @@ begin
  Frm_CadastroCategoria.ShowModal;
 end;
 
-procedure TFrm_Principal.btnSairContaClick(Sender: TObject);
+procedure TFrm_Principal.dxBarButton2Click(Sender: TObject);
 begin
   Close;
+
 end;
 
 procedure TFrm_Principal.dxBarLargeButton1Click(Sender: TObject);

@@ -1,4 +1,4 @@
-program Financeiro;
+ program Financeiro;
 
 uses
   Vcl.Forms,

@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxSkinsCore, dxSkinsDefaultPainters,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
-  dxRibbonCustomizationForm, dxBar, cxClasses, dxRibbon;
+  dxRibbonCustomizationForm, dxBar, cxClasses, dxRibbon, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, dxStatusBar,
+  dxRibbonStatusBar;
 
 type
   TFrm_CadastroCategoria = class(TForm)
@@ -23,7 +25,19 @@ type
     btnCancelar: TdxBarLargeButton;
     navCadastroCategoriasBar3: TdxBar;
     btnSair: TdxBarLargeButton;
+    dxRibbonStatusBar1: TdxRibbonStatusBar;
+    GroupBox1: TGroupBox;
+    dbEditNome: TDBEdit;
+    Label1: TLabel;
+    dbGridCategorias: TDBGrid;
+    ds_Categorias: TDataSource;
     procedure btnSairClick(Sender: TObject);
+    procedure btnNovaCategoriaClick(Sender: TObject);
+    procedure btnSalvarCategoriaClick(Sender: TObject);
+    procedure btnEditarCategoriaClick(Sender: TObject);
+    procedure btnExcluirCategoriaClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,11 +49,45 @@ var
 
 implementation
 
+uses U_DM;
+
 {$R *.dfm}
+
+procedure TFrm_CadastroCategoria.btnCancelarClick(Sender: TObject);
+begin
+ DM_Financeiro.Q_Categorias.Cancel;
+end;
+
+procedure TFrm_CadastroCategoria.btnEditarCategoriaClick(Sender: TObject);
+begin
+ DM_Financeiro.Q_Categorias.Edit;
+end;
+
+procedure TFrm_CadastroCategoria.btnExcluirCategoriaClick(Sender: TObject);
+begin
+ DM_Financeiro.Q_Categorias.Delete;
+end;
+
+procedure TFrm_CadastroCategoria.btnNovaCategoriaClick(Sender: TObject);
+begin
+ DM_Financeiro.Q_Categorias.Append;
+ dbEditNome.SetFocus;
+end;
 
 procedure TFrm_CadastroCategoria.btnSairClick(Sender: TObject);
 begin
  Close;
+end;
+
+procedure TFrm_CadastroCategoria.btnSalvarCategoriaClick(Sender: TObject);
+begin
+ DM_Financeiro.Q_Categorias.Post;
+end;
+
+procedure TFrm_CadastroCategoria.FormShow(Sender: TObject);
+begin
+ DM_Financeiro.Q_Categorias.Close;
+ DM_Financeiro.Q_Categorias.Open;
 end;
 
 end.
