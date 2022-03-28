@@ -279,35 +279,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
       Index = 0
     end
   end
-  object dxRibbonStatusBar1: TdxRibbonStatusBar
-    AlignWithMargins = True
-    Left = 0
-    Top = 398
-    Width = 644
-    Height = 23
-    Margins.Left = 0
-    Margins.Top = 0
-    Margins.Right = 0
-    Margins.Bottom = 0
-    Panels = <
-      item
-        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        Text = 'Total: '
-        Width = 40
-      end
-      item
-        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-      end>
-    Ribbon = navContasBar
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clDefault
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ShowHint = False
-    ParentShowHint = False
-    PopupMenu = navItens
-  end
   object pnlContasPagar: TPanel
     Left = 0
     Top = 125
@@ -315,7 +286,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Height = 273
     Align = alClient
     BevelOuter = bvNone
-    TabOrder = 2
+    TabOrder = 1
     Visible = False
     object GroupBox1: TGroupBox
       Left = 0
@@ -484,6 +455,231 @@ object Frm_CadastroContas: TFrm_CadastroContas
           Visible = True
         end>
     end
+  end
+  object pnlContasReceber: TPanel
+    Left = 0
+    Top = 125
+    Width = 644
+    Height = 273
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 2
+    Visible = False
+    ExplicitTop = 264
+    ExplicitHeight = 134
+    object GroupBox2: TGroupBox
+      Left = 0
+      Top = 0
+      Width = 644
+      Height = 81
+      Align = alTop
+      Caption = 'Dados Contas a Receber'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      ExplicitLeft = -25
+      ExplicitTop = 87
+      object Label5: TLabel
+        Left = 6
+        Top = 29
+        Width = 50
+        Height = 13
+        Caption = 'Descri'#231#227'o:'
+      end
+      object TLabel
+        Left = 6
+        Top = 54
+        Width = 59
+        Height = 13
+        Caption = 'Vencimento:'
+      end
+      object Label6: TLabel
+        Left = 308
+        Top = 28
+        Width = 31
+        Height = 13
+        Caption = 'Valor: '
+      end
+      object Label7: TLabel
+        Left = 480
+        Top = 57
+        Width = 44
+        Height = 13
+        Caption = 'Parcelas:'
+      end
+      object Label8: TLabel
+        Left = 287
+        Top = 54
+        Width = 54
+        Height = 13
+        Caption = 'Categoria: '
+      end
+      object edtDescricaoReceber: TDBEdit
+        Left = 58
+        Top = 24
+        Width = 214
+        Height = 21
+        DataField = 'DESCRICAO'
+        DataSource = ds_ContasReceber
+        TabOrder = 0
+      end
+      object edtVencimentoReceber: TDBEdit
+        Left = 67
+        Top = 51
+        Width = 203
+        Height = 21
+        DataField = 'DATA_RECEBER'
+        DataSource = ds_ContasReceber
+        TabOrder = 1
+      end
+      object edtValorReceber: TDBEdit
+        Left = 340
+        Top = 24
+        Width = 133
+        Height = 21
+        DataField = 'VALOR'
+        DataSource = ds_ContasReceber
+        TabOrder = 2
+      end
+      object edtParcelasReceber: TDBEdit
+        Left = 530
+        Top = 54
+        Width = 89
+        Height = 21
+        DataField = 'PARCELAS'
+        DataSource = ds_ContasReceber
+        Enabled = False
+        TabOrder = 4
+      end
+      object edtCatReceber: TDBLookupComboBox
+        Left = 340
+        Top = 51
+        Width = 133
+        Height = 21
+        DataField = 'CAT_CODIGO'
+        DataSource = ds_ContasReceber
+        KeyField = 'CAT_CODIGO'
+        ListField = 'NOME'
+        ListSource = ds_Categorias
+        TabOrder = 3
+      end
+      object DBRadioGroup1: TDBRadioGroup
+        Left = 477
+        Top = 12
+        Width = 142
+        Height = 33
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Caption = 'Forma de Pagamento:'
+        Columns = 2
+        DataField = 'F_PAGAMENTO'
+        DataSource = ds_ContasReceber
+        Items.Strings = (
+          'A vista'
+          'Parcelado')
+        TabOrder = 5
+        Values.Strings = (
+          '0'
+          '1')
+        OnChange = rg_FPagamentoPagarChange
+      end
+    end
+    object dgContasReceber: TDBGrid
+      Left = 0
+      Top = 81
+      Width = 644
+      Height = 192
+      Align = alClient
+      DataSource = ds_ContasReceber
+      FixedColor = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'DESCRICAO'
+          Width = 382
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR'
+          Width = 68
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VENCIMENTO'
+          Width = 88
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PARCELAS'
+          Visible = True
+        end>
+    end
+  end
+  object totalBar: TdxRibbonStatusBar
+    AlignWithMargins = True
+    Left = 0
+    Top = 398
+    Width = 644
+    Height = 23
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        BiDiMode = bdLeftToRight
+        ParentBiDiMode = False
+        Text = 'Total a Pagar: '
+        Width = 200
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        BiDiMode = bdLeftToRight
+        ParentBiDiMode = False
+        Text = 'Total a Receber:'
+        Width = 200
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        BiDiMode = bdRightToLeft
+        ParentBiDiMode = False
+        Text = 'Valor L'#237'quido:'
+        Width = 200
+      end>
+    Ribbon = navContasBar
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clDefault
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = navItens
+    ExplicitLeft = 24
+    ExplicitTop = 310
   end
   object navContasCadastro: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -961,6 +1157,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         ECFD2E43C8AB1D604601338149C098C8083735F27B3822F8F540195012993F9F
         BA9A91ECD5CEA8BB2237EE884C53738101803D02D00B54014723AD64E53F3337
         16FFEA7F43FCFF00A35A0BE18B5C32CA0000000049454E44AE426082}
+      OnClick = btnCReceberCadClick
     end
     object btnEditContas: TdxBarLargeButton
       Caption = 'Editar'
@@ -1739,5 +1936,11 @@ object Frm_CadastroContas: TFrm_CadastroContas
     DataSet = DM_Financeiro.Q_Categorias
     Left = 584
     Top = 301
+  end
+  object ds_ContasReceber: TDataSource
+    DataSet = DM_Financeiro.Q_ContasReceber
+    OnStateChange = ds_ContasReceberStateChange
+    Left = 504
+    Top = 349
   end
 end

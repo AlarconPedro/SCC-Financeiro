@@ -32,6 +32,19 @@ type
     Up_ContasPagar: TIBUpdateSQL;
     Q_CategoriasCAT_CODIGO: TIntegerField;
     Q_CategoriasNOME: TIBStringField;
+    Q_ContasReceber: TIBQuery;
+    Up_ContasReceber: TIBUpdateSQL;
+    Q_ContasReceberCR_CODIGO: TIntegerField;
+    Q_ContasReceberDESCRICAO: TIBStringField;
+    Q_ContasReceberVALOR: TIBBCDField;
+    Q_ContasReceberDATA_RECEBER: TDateField;
+    Q_ContasReceberF_PAGAMENTO: TIntegerField;
+    Q_ContasReceberPARCELAS: TIntegerField;
+    Q_ContasReceberCAT_CODIGO: TIntegerField;
+    Q_Soma: TIBQuery;
+    Q_SomaTOTALPAGAR: TIBBCDField;
+    Q_SomaTOTALRECEBER: TIBBCDField;
+    Q_SomaTOTALGERAL: TIBBCDField;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);
@@ -39,6 +52,8 @@ type
     procedure Q_ContasPagarAfterPost(DataSet: TDataSet);
     procedure Q_ContasPagarAfterDelete(DataSet: TDataSet);
     procedure Q_ContasPagarAfterInsert(DataSet: TDataSet);
+    procedure Q_ContasReceberAfterPost(DataSet: TDataSet);
+    procedure Q_ContasReceberAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -95,13 +110,28 @@ procedure TDM_Financeiro.Q_ContasPagarAfterPost(DataSet: TDataSet);
 begin
   Q_ContasPagar.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
+  Q_Soma.Close;
+  Q_Soma.Open;
+end;
+
+procedure TDM_Financeiro.Q_ContasReceberAfterDelete(DataSet: TDataSet);
+begin
+  Q_ContasReceber.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+  Q_Soma.Close;
+  Q_Soma.Open;
+end;
+
+procedure TDM_Financeiro.Q_ContasReceberAfterPost(DataSet: TDataSet);
+begin
+  Q_ContasReceber.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
 end;
 
 procedure TDM_Financeiro.Q_UsuarioAfterDelete(DataSet: TDataSet);
 begin
   Q_Usuario.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
-
 end;
 
 procedure TDM_Financeiro.Q_UsuarioAfterPost(DataSet: TDataSet);

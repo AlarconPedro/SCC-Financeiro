@@ -26,7 +26,7 @@ Coordinates=736,111,110,36
 Coordinates=736,166,110,36
 
 []
-Coordinates=732,1,140,58
+Coordinates=284,1,132,36
 Visible=True
 
 [navContasBar]
@@ -41,9 +41,6 @@ Coordinates=566,221,128,36
 
 [btnCPagarCad]
 Coordinates=566,111,99,36
-
-[dxRibbonStatusBar1]
-Coordinates=284,1,132,36
 
 [navItens]
 Coordinates=284,56,63,36

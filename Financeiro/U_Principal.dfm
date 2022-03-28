@@ -477,7 +477,6 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 711
     object NavBarContas: TdxRibbonTab
       Active = True
       Caption = 'Principal'
@@ -537,7 +536,7 @@
           Visible = True
           ItemName = 'dxBarLargeButton3'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -562,8 +561,8 @@
           Visible = True
           ItemName = 'btnAlterarConta'
         end>
-      OneOnRow = True
-      Row = 1
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -587,8 +586,8 @@
           Visible = True
           ItemName = 'btnListarContas'
         end>
-      OneOnRow = True
-      Row = 2
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False

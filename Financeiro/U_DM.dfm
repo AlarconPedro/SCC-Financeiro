@@ -4,8 +4,7 @@ object DM_Financeiro: TDM_Financeiro
   Height = 519
   Width = 722
   object DB_Financeiro: TIBDatabase
-    Connected = True
-    DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
+    DatabaseName = 'D:\Desenvolvimento\Delphi\SCC-Financeiro\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -54,7 +53,6 @@ object DM_Financeiro: TDM_Financeiro
     end
   end
   object Trans_Financeiro: TIBTransaction
-    Active = True
     DefaultDatabase = DB_Financeiro
     Left = 136
     Top = 24
@@ -87,7 +85,7 @@ object DM_Financeiro: TDM_Financeiro
       'delete from TB_USUARIOS'
       'where'
       '  USU_CODIGO = :OLD_USU_CODIGO')
-    Left = 296
+    Left = 304
     Top = 80
   end
   object Q_Usuario: TIBQuery
@@ -201,7 +199,7 @@ object DM_Financeiro: TDM_Financeiro
     GeneratorField.Field = 'CAT_CODIGO'
     GeneratorField.Generator = 'GEN_TB_CATEGORIA_ID'
     Left = 208
-    Top = 192
+    Top = 248
     object Q_CategoriasCAT_CODIGO: TIntegerField
       FieldName = 'CAT_CODIGO'
       LookupDataSet = Q_ContasPagar
@@ -244,8 +242,8 @@ object DM_Financeiro: TDM_Financeiro
       'where'
       '  CAT_CODIGO = :OLD_CAT_CODIGO and'
       '  NOME = :OLD_NOME')
-    Left = 296
-    Top = 192
+    Left = 304
+    Top = 248
   end
   object Up_ContasPagar: TIBUpdateSQL
     RefreshSQL.Strings = (
@@ -286,7 +284,142 @@ object DM_Financeiro: TDM_Financeiro
       'delete from TB_CPAGAR'
       'where'
       '  CP_CODIGO = :OLD_CP_CODIGO')
-    Left = 296
+    Left = 304
     Top = 136
+  end
+  object Q_ContasReceber: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    AfterDelete = Q_ContasReceberAfterDelete
+    AfterPost = Q_ContasReceberAfterPost
+    BufferChunks = 1000
+    CachedUpdates = True
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT * FROM TB_CRECEBER')
+    UpdateObject = Up_ContasReceber
+    GeneratorField.Field = 'CR_CODIGO'
+    GeneratorField.Generator = 'GEN_TB_CRECEBER_ID'
+    Left = 208
+    Top = 192
+    object Q_ContasReceberCR_CODIGO: TIntegerField
+      FieldName = 'CR_CODIGO'
+      KeyFields = 'CR_CODIGO'
+      Origin = 'TB_CRECEBER.CR_CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_ContasReceberDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'TB_CRECEBER.DESCRICAO'
+      Size = 200
+    end
+    object Q_ContasReceberVALOR: TIBBCDField
+      FieldName = 'VALOR'
+      KeyFields = 'VALOR'
+      Origin = 'TB_CRECEBER.VALOR'
+      Required = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
+    object Q_ContasReceberDATA_RECEBER: TDateField
+      FieldName = 'DATA_RECEBER'
+      KeyFields = 'DATA_RECEBER'
+      Origin = 'TB_CRECEBER.DATA_RECEBER'
+      Required = True
+      EditMask = '99/99/0000;'
+    end
+    object Q_ContasReceberF_PAGAMENTO: TIntegerField
+      FieldName = 'F_PAGAMENTO'
+      Origin = 'TB_CRECEBER.F_PAGAMENTO'
+      Required = True
+    end
+    object Q_ContasReceberPARCELAS: TIntegerField
+      FieldName = 'PARCELAS'
+      Origin = 'TB_CRECEBER.PARCELAS'
+    end
+    object Q_ContasReceberCAT_CODIGO: TIntegerField
+      FieldName = 'CAT_CODIGO'
+      Origin = 'TB_CRECEBER.CAT_CODIGO'
+      Required = True
+    end
+  end
+  object Up_ContasReceber: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  CR_CODIGO,'
+      '  DESCRICAO,'
+      '  VALOR,'
+      '  DATA_RECEBER,'
+      '  F_PAGAMENTO,'
+      '  PARCELAS,'
+      '  CAT_CODIGO'
+      'from TB_CRECEBER '
+      'where'
+      '  CR_CODIGO = :CR_CODIGO')
+    ModifySQL.Strings = (
+      'update TB_CRECEBER'
+      'set'
+      '  CR_CODIGO = :CR_CODIGO,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  VALOR = :VALOR,'
+      '  DATA_RECEBER = :DATA_RECEBER,'
+      '  F_PAGAMENTO = :F_PAGAMENTO,'
+      '  PARCELAS = :PARCELAS,'
+      '  CAT_CODIGO = :CAT_CODIGO'
+      'where'
+      '  CR_CODIGO = :OLD_CR_CODIGO')
+    InsertSQL.Strings = (
+      'insert into TB_CRECEBER'
+      
+        '  (CR_CODIGO, DESCRICAO, VALOR, DATA_RECEBER, F_PAGAMENTO, PARCE' +
+        'LAS, CAT_CODIGO)'
+      'values'
+      
+        '  (:CR_CODIGO, :DESCRICAO, :VALOR, :DATA_RECEBER, :F_PAGAMENTO, ' +
+        ':PARCELAS, '
+      '   :CAT_CODIGO)')
+    DeleteSQL.Strings = (
+      'delete from TB_CRECEBER'
+      'where'
+      '  CR_CODIGO = :OLD_CR_CODIGO')
+    Left = 304
+    Top = 192
+  end
+  object Q_Soma: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT  DISTINCT(SELECT SUM(p.valor) AS TotalPagar '
+      'FROM     tb_cpagar p), '
+      '(SELECT SUM(r.valor) AS TotalReceber '
+      'FROM tb_creceber r), '
+      '(SELECT (SUM(r.valor) - SUM(p.valor)) AS TotalGeral '
+      'FROM tb_creceber r, tb_cpagar p)'
+      'FROM tb_cpagar p, tb_creceber r')
+    Left = 208
+    Top = 304
+    object Q_SomaTOTALPAGAR: TIBBCDField
+      FieldName = 'TOTALPAGAR'
+      ProviderFlags = []
+      Precision = 18
+      Size = 2
+    end
+    object Q_SomaTOTALRECEBER: TIBBCDField
+      FieldName = 'TOTALRECEBER'
+      ProviderFlags = []
+      Precision = 18
+      Size = 2
+    end
+    object Q_SomaTOTALGERAL: TIBBCDField
+      FieldName = 'TOTALGERAL'
+      ProviderFlags = []
+      Precision = 18
+      Size = 2
+    end
   end
 end
