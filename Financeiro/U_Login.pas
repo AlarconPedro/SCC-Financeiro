@@ -94,6 +94,7 @@ begin
     showmessage('Usuário ou senha inválida!');
   end else
     begin
+      DM_Financeiro.UsuarioLogado := DM_Financeiro.Q_LoginUSU_CODIGO.AsInteger;
       Logado := true;
       F_Login.CloseModal;
     end;

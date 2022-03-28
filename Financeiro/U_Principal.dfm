@@ -6,11 +6,11 @@
   Margins.Right = 0
   Margins.Bottom = 0
   Align = alClient
-  BorderIcons = []
+  BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
   Caption = 'Financeiro'
   ClientHeight = 464
-  ClientWidth = 717
+  ClientWidth = 700
   Color = clBtnFace
   DefaultMonitor = dmDesktop
   Font.Charset = DEFAULT_CHARSET
@@ -261,7 +261,7 @@
     AlignWithMargins = True
     Left = 0
     Top = 0
-    Width = 717
+    Width = 700
     Height = 158
     Cursor = crHandPoint
     Margins.Left = 0
@@ -477,6 +477,7 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
+    ExplicitWidth = 717
     object NavBarContas: TdxRibbonTab
       Active = True
       Caption = 'Principal'
@@ -494,6 +495,37 @@
         end>
       Index = 0
     end
+  end
+  object dxRibbonStatusBar1: TdxRibbonStatusBar
+    AlignWithMargins = True
+    Left = 0
+    Top = 441
+    Width = 700
+    Height = 23
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Text = 'Nome do Usu'#225'rio :'
+        Width = 120
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
+    Ribbon = NavBar
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clDefault
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ShowHint = False
+    ParentShowHint = False
+    PopupMenu = itensRibbon
+    ExplicitTop = 398
+    ExplicitWidth = 644
   end
   object navBarRibbon: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -554,7 +586,7 @@
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'btnCalendario'
+          ItemName = 'btnAgendaRibbon'
         end
         item
           BeginGroup = True
@@ -604,7 +636,7 @@
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton6'
+          ItemName = 'btnAgenda'
         end
         item
           Visible = True
@@ -1968,7 +2000,7 @@
         3F1F0396B337AEAB37ACE34557D42F8AFD3B007E6FE09AB25016260000000049
         454E44AE426082}
     end
-    object btnCalendario: TdxBarLargeButton
+    object btnAgendaRibbon: TdxBarLargeButton
       Caption = 'Agenda'
       Category = 0
       Hint = 'Agenda'
@@ -2876,10 +2908,10 @@
       Hint = 'New Button'
       Visible = ivAlways
     end
-    object dxBarLargeButton6: TdxBarLargeButton
-      Caption = 'New Button'
+    object btnAgenda: TdxBarLargeButton
+      Caption = 'Agenda'
       Category = 0
-      Hint = 'New Button'
+      Hint = 'Agenda'
       Visible = ivAlways
       Glyph.SourceDPI = 96
       Glyph.Data = {

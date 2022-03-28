@@ -12,6 +12,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -73,7 +74,6 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
     ShowHint = False
     ParentShowHint = False
     PopupMenu = itensCadastro
-    ExplicitWidth = 614
   end
   object GroupBox1: TGroupBox
     Left = 0
@@ -82,7 +82,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
     Height = 60
     Align = alTop
     Caption = 'Dados da Categoria'
-    TabOrder = 6
+    TabOrder = 2
     object Label1: TLabel
       Left = 10
       Top = 24
@@ -107,7 +107,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
     Height = 203
     Align = alClient
     DataSource = ds_Categorias
-    TabOrder = 7
+    TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -1130,6 +1130,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
   end
   object ds_Categorias: TDataSource
     DataSet = DM_Financeiro.Q_Categorias
+    OnStateChange = ds_CategoriasStateChange
     Left = 584
     Top = 344
   end

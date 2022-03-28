@@ -99,8 +99,8 @@ end;
 
 procedure TFrm_CadastroUsuarios.btnAddUserClick(Sender: TObject);
   begin
-    DM_Financeiro.Q_Usuario.Append;
     dbeditNome.SetFocus;
+    DM_Financeiro.Q_Usuario.Append;
   end;
 
 procedure TFrm_CadastroUsuarios.FormShow(Sender: TObject);

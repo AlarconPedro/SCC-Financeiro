@@ -38,6 +38,7 @@ type
     procedure btnExcluirCategoriaClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ds_CategoriasStateChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,7 +66,8 @@ end;
 
 procedure TFrm_CadastroCategoria.btnExcluirCategoriaClick(Sender: TObject);
 begin
- DM_Financeiro.Q_Categorias.Delete;
+   if (Application.MessageBox(PChar('Deseja realmente excluir está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+     DM_Financeiro.Q_Categorias.Delete;
 end;
 
 procedure TFrm_CadastroCategoria.btnNovaCategoriaClick(Sender: TObject);
@@ -84,10 +86,22 @@ begin
  DM_Financeiro.Q_Categorias.Post;
 end;
 
+procedure TFrm_CadastroCategoria.ds_CategoriasStateChange(Sender: TObject);
+begin
+  with ds_Categorias.DataSet do
+    begin
+      btnNovaCategoria.Enabled := (State = dsBrowse);
+      btnEditarCategoria.Enabled := (State = dsBrowse) and (not IsEmpty);
+      btnExcluirCategoria.Enabled := (State = dsBrowse) and (not IsEmpty);
+      btnCancelar.Enabled := (State <> dsBrowse);
+      btnSalvarCategoria.Enabled := (state <> dsBrowse);
+    end;
+end;
+
 procedure TFrm_CadastroCategoria.FormShow(Sender: TObject);
 begin
- DM_Financeiro.Q_Categorias.Close;
- DM_Financeiro.Q_Categorias.Open;
+  DM_Financeiro.Q_Categorias.Close;
+  DM_Financeiro.Q_Categorias.Open;
 end;
 
 end.

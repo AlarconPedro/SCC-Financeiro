@@ -56,6 +56,7 @@ type
     dgContasReceber: TDBGrid;
     ds_ContasReceber: TDataSource;
     totalBar: TdxRibbonStatusBar;
+    btnNovaConta: TdxBarLargeButton;
     procedure btnSairContasClick(Sender: TObject);
     procedure btnSalvarContasClick(Sender: TObject);
     procedure btnCancelarContasClick(Sender: TObject);
@@ -67,6 +68,7 @@ type
     procedure btnCReceberCadClick(Sender: TObject);
     procedure ds_ContasReceberStateChange(Sender: TObject);
     procedure btnCPagarCadClick(Sender: TObject);
+    procedure btnNovaContaClick(Sender: TObject);
   private
     procedure AtualizaValor;
     { Private declarations }
@@ -87,36 +89,33 @@ procedure TFrm_CadastroContas.btnCancelarContasClick(Sender: TObject);
 begin
  DM_Financeiro.Q_ContasPagar.Cancel;
  DM_Financeiro.Q_ContasReceber.Cancel;
- AtualizaValor;
 end;
 
 procedure TFrm_CadastroContas.btnCPagarCadClick(Sender: TObject);
 begin
  pnlContasReceber.Visible := false;
  pnlContasPagar.Visible := true;
- DM_Financeiro.Q_ContasPagar.Append;
- AtualizaValor;
 end;
 
 procedure TFrm_CadastroContas.btnCReceberCadClick(Sender: TObject);
 begin
  pnlContasPagar.Visible := false;
  pnlContasReceber.Visible := true;
- DM_Financeiro.Q_ContasReceber.Append;
- AtualizaValor;
 end;
 
 procedure TFrm_CadastroContas.btnDeleteContasClick(Sender: TObject);
 begin
   if pnlContasPagar.Visible then
    if (ds_ContasPagar.DataSet.State = dsBrowse) and (not ds_ContasPagar.DataSet.IsEmpty) then
-      DM_Financeiro.Q_ContasPagar.Delete;
-      AtualizaValor;
+     if (Application.MessageBox(PChar('Deseja realmente excluir está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+        DM_Financeiro.Q_ContasPagar.Delete;
 
   if pnlContasReceber.Visible then
    if (ds_ContasReceber.DataSet.State = dsBrowse) and (not ds_ContasReceber.DataSet.IsEmpty) then
+    if (Application.MessageBox(PChar('Deseja realmente excluir está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
       DM_Financeiro.Q_ContasReceber.Delete;
-      AtualizaValor;
+
+  AtualizaValor;
 end;
 
 procedure TFrm_CadastroContas.btnEditContasClick(Sender: TObject);
@@ -124,30 +123,47 @@ begin
   if pnlContasPagar.Visible then
    if (ds_ContasPagar.DataSet.State = dsBrowse) and (not ds_ContasPagar.DataSet.IsEmpty) then
       DM_Financeiro.Q_ContasPagar.Edit;
-      AtualizaValor;
 
   if pnlContasReceber.Visible then
    if (ds_ContasReceber.DataSet.State = dsBrowse) and (not ds_ContasReceber.DataSet.IsEmpty) then
       DM_Financeiro.Q_ContasReceber.Edit;
-      AtualizaValor;
 end;
 
 procedure TFrm_CadastroContas.btnSairContasClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TFrm_CadastroContas.btnSalvarContasClick(Sender: TObject);
 begin
+  if (edtDescricaoPagar.EditText.IsEmpty) then
+  begin
+    ShowMessage('É Necessário adicionar uma descrição para a conta !');
+    Abort
+  end;
+
+  if (edtVencimentoPagar.EditText.IsEmpty) then
+  begin
+    ShowMessage('É Necessário adicionar uma data de vencimento para a conta !');
+    Abort
+  end;
+
+  if (edtValorPagar.EditText.IsEmpty) then
+  begin
+    ShowMessage('É Necessário adicionar um valor para a conta !');
+    Abort
+  end;
+
+
  if pnlContasPagar.Visible then
    if ds_ContasPagar.DataSet.State <> dsBrowse then
       DM_Financeiro.Q_ContasPagar.Post;
-      AtualizaValor;
 
  if pnlContasReceber.Visible then
    if ds_ContasReceber.DataSet.State <> dsBrowse then
       DM_Financeiro.Q_ContasReceber.Post;
-      AtualizaValor;
+
+ AtualizaValor;
 end;
 
 procedure TFrm_CadastroContas.ds_ContasPagarStateChange(Sender: TObject);
@@ -155,12 +171,12 @@ begin
  with ds_ContasPagar.DataSet do
    begin
     btnCPagarCad.Enabled := (State = dsBrowse);
+    btnNovaConta.Enabled := (State = dsBrowse);
     btnEditContas.Enabled := (State = dsBrowse) and (not IsEmpty);
     btnDeleteContas.Enabled := (State = dsBrowse) and (not IsEmpty);
     btnSalvarContas.Enabled := (State <> dsBrowse);
     btnCancelarContas.Enabled := (State <> dsBrowse);
     btnCReceberCad.Enabled := (State = dsBrowse);
-    AtualizaValor;
    end;
 end;
 
@@ -169,13 +185,22 @@ begin
  with ds_ContasReceber.DataSet do
    begin
     btnCReceberCad.Enabled := (State = dsBrowse);
+    btnNovaConta.Enabled := (State = dsBrowse);
     btnEditContas.Enabled := (State = dsBrowse) and (not IsEmpty);
     btnDeleteContas.Enabled := (State = dsBrowse) and (not IsEmpty);
     btnSalvarContas.Enabled := (State <> dsBrowse);
     btnCancelarContas.Enabled := (State <> dsBrowse);
     btnCPagarCad.Enabled := (State = dsBrowse);
-    AtualizaValor;
    end;
+end;
+
+procedure TFrm_CadastroContas.btnNovaContaClick(Sender: TObject);
+begin
+  if pnlContasReceber.Visible then
+    DM_Financeiro.Q_ContasReceber.Append;
+
+  if pnlContasPagar.Visible then
+     DM_Financeiro.Q_ContasPagar.Append;
 end;
 
 procedure TFrm_CadastroContas.FormShow(Sender: TObject);
@@ -188,8 +213,10 @@ begin
  DM_Financeiro.Q_Categorias.Open;
  DM_Financeiro.Q_Categorias.FetchAll;
  DM_Financeiro.Q_Soma.Close;
+ DM_Financeiro.Q_Soma.ParamByName('pusuario').AsInteger := DM_Financeiro.UsuarioLogado;
+ DM_Financeiro.Q_Soma.ParamByName('rusuario').AsInteger := DM_Financeiro.UsuarioLogado;
  DM_Financeiro.Q_Soma.Open;
-
+ AtualizaValor;
 end;
 
 procedure TFrm_CadastroContas.rg_FPagamentoPagarChange(Sender: TObject);
@@ -199,9 +226,9 @@ end;
 
 procedure TFrm_CadastroContas.AtualizaValor;
 begin
- totalBar.Panels.Items[0].Text := 'Total a Pagar: ' + DM_Financeiro.Q_SomaTOTALPAGAR.AsString;
- totalBar.Panels.Items[1].Text := 'Total a Receber: ' + DM_Financeiro.Q_SomaTOTALRECEBER.AsString;
- totalBar.Panels.Items[2].Text := 'Total Líquido: ' + DM_Financeiro.Q_SomaTOTALGERAL.AsString;
+ totalBar.Panels.Items[0].Text := 'Total a Pagar: ' + DM_Financeiro.Q_SomaTPAGAR.AsString;
+ totalBar.Panels.Items[1].Text := 'Total a Receber: ' + DM_Financeiro.Q_SomaTRECEBER.AsString;
+ totalBar.Panels.Items[2].Text := 'Total Líquido: ' + DM_Financeiro.Q_SomaTOTAL.AsString;
 end;
 
 end.

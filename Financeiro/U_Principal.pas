@@ -29,7 +29,7 @@ type
     btnFluxoCaixa: TdxBarLargeButton;
     navContas: TdxBar;
     btnListarContas: TdxBarLargeButton;
-    btnCalendario: TdxBarLargeButton;
+    btnAgendaRibbon: TdxBarLargeButton;
     btnContasFixas: TdxBarLargeButton;
     dxBarLargeButton1: TdxBarLargeButton;
     dxBarLargeButton2: TdxBarLargeButton;
@@ -38,9 +38,10 @@ type
     nav24: TdxBar;
     dxBarButton1: TdxBarButton;
     dxBarLargeButton5: TdxBarLargeButton;
-    dxBarLargeButton6: TdxBarLargeButton;
+    btnAgenda: TdxBarLargeButton;
     dxBarButton2: TdxBarButton;
     dxBarLargeButton7: TdxBarLargeButton;
+    dxRibbonStatusBar1: TdxRibbonStatusBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnAlterarContaClick(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
@@ -67,7 +68,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_Login, U_CadastroUsuario, U_CadastroContas, U_CadastroCategorias, U_CadastroContasFixas;
+uses U_Login, U_CadastroUsuario, U_CadastroContas, U_CadastroCategorias, U_CadastroContasFixas, U_ListarContas;
 
 procedure TFrm_Principal.btnAlterarContaClick(Sender: TObject);
   begin
@@ -102,7 +103,6 @@ end;
 procedure TFrm_Principal.dxBarButton2Click(Sender: TObject);
 begin
   Close;
-
 end;
 
 procedure TFrm_Principal.dxBarLargeButton1Click(Sender: TObject);
@@ -130,7 +130,9 @@ end;
 
 procedure TFrm_Principal.FormShow(Sender: TObject);
 begin
- Self.WindowState := wsMaximized;
+  Self.WindowState := wsMaximized;
+  Application.CreateForm(TFrm_ListarContas, Frm_ListarContas);
+  Frm_ListarContas.Show;
 end;
 
 procedure TFrm_Principal.SetarCursor;

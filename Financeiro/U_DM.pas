@@ -30,8 +30,6 @@ type
     Q_ContasPagarVENCIMENTO: TDateField;
     Q_ContasPagarCAT_CODIGO: TIntegerField;
     Up_ContasPagar: TIBUpdateSQL;
-    Q_CategoriasCAT_CODIGO: TIntegerField;
-    Q_CategoriasNOME: TIBStringField;
     Q_ContasReceber: TIBQuery;
     Up_ContasReceber: TIBUpdateSQL;
     Q_ContasReceberCR_CODIGO: TIntegerField;
@@ -42,9 +40,14 @@ type
     Q_ContasReceberPARCELAS: TIntegerField;
     Q_ContasReceberCAT_CODIGO: TIntegerField;
     Q_Soma: TIBQuery;
-    Q_SomaTOTALPAGAR: TIBBCDField;
-    Q_SomaTOTALRECEBER: TIBBCDField;
-    Q_SomaTOTALGERAL: TIBBCDField;
+    Q_SomaTRECEBER: TIBBCDField;
+    Q_SomaTPAGAR: TIBBCDField;
+    Q_SomaTOTAL: TIBBCDField;
+    Q_LoginUSU_CODIGO: TIntegerField;
+    Q_ContasPagarUSU_CODIGO: TIntegerField;
+    Q_ContasReceberUSU_CODIGO: TIntegerField;
+    Q_CategoriasCAT_CODIGO: TIntegerField;
+    Q_CategoriasNOME: TIBStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);
@@ -54,10 +57,17 @@ type
     procedure Q_ContasPagarAfterInsert(DataSet: TDataSet);
     procedure Q_ContasReceberAfterPost(DataSet: TDataSet);
     procedure Q_ContasReceberAfterDelete(DataSet: TDataSet);
+    procedure Q_ContasReceberAfterInsert(DataSet: TDataSet);
+    procedure Q_ContasPagarBeforeOpen(DataSet: TDataSet);
+    procedure Q_ContasReceberBeforeOpen(DataSet: TDataSet);
+    procedure Q_CategoriasAfterDelete(DataSet: TDataSet);
+    procedure Q_CategoriasAfterInsert(DataSet: TDataSet);
+    procedure Q_CategoriasAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
   public
     SenhaAtual: String;
+    UsuarioLogado: Integer;
   end;
 
 var
@@ -95,15 +105,38 @@ begin
 
 end;
 
+procedure TDM_Financeiro.Q_CategoriasAfterDelete(DataSet: TDataSet);
+begin
+  Q_Categorias.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+end;
+
+procedure TDM_Financeiro.Q_CategoriasAfterInsert(DataSet: TDataSet);
+begin
+  Q_Categorias.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+end;
+
+procedure TDM_Financeiro.Q_CategoriasAfterPost(DataSet: TDataSet);
+begin
+  Q_Categorias.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+end;
+
 procedure TDM_Financeiro.Q_ContasPagarAfterDelete(DataSet: TDataSet);
 begin
   Q_ContasPagar.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
+  Q_Soma.Close;
+  Q_Soma.ParamByName('pusuario').AsInteger := UsuarioLogado;
+  Q_Soma.ParamByName('rusuario').AsInteger := UsuarioLogado;
+  Q_Soma.Open;
 end;
 
 procedure TDM_Financeiro.Q_ContasPagarAfterInsert(DataSet: TDataSet);
 begin
   Q_ContasPagarF_PAGAMENTO.AsInteger := 0;
+  Q_ContasPagarUSU_CODIGO.AsInteger := UsuarioLogado;
 end;
 
 procedure TDM_Financeiro.Q_ContasPagarAfterPost(DataSet: TDataSet);
@@ -111,7 +144,14 @@ begin
   Q_ContasPagar.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
   Q_Soma.Close;
+  Q_Soma.ParamByName('pusuario').AsInteger := UsuarioLogado;
+  Q_Soma.ParamByName('rusuario').AsInteger := UsuarioLogado;
   Q_Soma.Open;
+end;
+
+procedure TDM_Financeiro.Q_ContasPagarBeforeOpen(DataSet: TDataSet);
+begin
+  Q_ContasPagar.ParamByName('usuario').AsInteger := UsuarioLogado;
 end;
 
 procedure TDM_Financeiro.Q_ContasReceberAfterDelete(DataSet: TDataSet);
@@ -119,13 +159,30 @@ begin
   Q_ContasReceber.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
   Q_Soma.Close;
+  Q_Soma.ParamByName('pusuario').AsInteger := UsuarioLogado;
+  Q_Soma.ParamByName('rusuario').AsInteger := UsuarioLogado;
   Q_Soma.Open;
+end;
+
+procedure TDM_Financeiro.Q_ContasReceberAfterInsert(DataSet: TDataSet);
+begin
+  Q_ContasReceberF_PAGAMENTO.AsInteger := 0;
+  Q_ContasReceberUSU_CODIGO.AsInteger := UsuarioLogado;
 end;
 
 procedure TDM_Financeiro.Q_ContasReceberAfterPost(DataSet: TDataSet);
 begin
   Q_ContasReceber.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
+  Q_Soma.Close;
+  Q_Soma.ParamByName('pusuario').AsInteger := UsuarioLogado;
+  Q_Soma.ParamByName('rusuario').AsInteger := UsuarioLogado;
+  Q_Soma.Open;
+end;
+
+procedure TDM_Financeiro.Q_ContasReceberBeforeOpen(DataSet: TDataSet);
+begin
+  Q_ContasReceber.ParamByName('usuario').AsInteger := UsuarioLogado;
 end;
 
 procedure TDM_Financeiro.Q_UsuarioAfterDelete(DataSet: TDataSet);
