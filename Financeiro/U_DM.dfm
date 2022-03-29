@@ -161,17 +161,23 @@ object DM_Financeiro: TDM_Financeiro
         ParamType = ptInput
       end>
     object Q_ContasPagarCP_CODIGO: TIntegerField
+      DisplayLabel = 'ID'
+      DisplayWidth = 10
       FieldName = 'CP_CODIGO'
       Origin = '"TB_CPAGAR"."CP_CODIGO"'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object Q_ContasPagarDESCRICAO: TIBStringField
+      DisplayLabel = 'Descri'#231#227'o'
+      DisplayWidth = 33
       FieldName = 'DESCRICAO'
       Origin = '"TB_CPAGAR"."DESCRICAO"'
       Size = 200
     end
     object Q_ContasPagarVALOR: TIBBCDField
+      DisplayLabel = 'Valor'
+      DisplayWidth = 19
       FieldName = 'VALOR'
       KeyFields = 'VALOR'
       Origin = '"TB_CPAGAR"."VALOR"'
@@ -181,30 +187,43 @@ object DM_Financeiro: TDM_Financeiro
       Size = 2
     end
     object Q_ContasPagarF_PAGAMENTO: TIntegerField
+      DisplayLabel = 'Forma de Pgto'
+      DisplayWidth = 11
       FieldName = 'F_PAGAMENTO'
       Origin = '"TB_CPAGAR"."F_PAGAMENTO"'
       Required = True
       MaxValue = 1
     end
-    object Q_ContasPagarPARCELAS: TIntegerField
-      FieldName = 'PARCELAS'
-      KeyFields = 'PARCELAS'
-      Origin = '"TB_CPAGAR"."PARCELAS"'
-    end
     object Q_ContasPagarVENCIMENTO: TDateField
+      DisplayLabel = 'Vencimento'
+      DisplayWidth = 10
       FieldName = 'VENCIMENTO'
       Origin = '"TB_CPAGAR"."VENCIMENTO"'
       Required = True
       EditMask = '00/99/0000;'
     end
     object Q_ContasPagarCAT_CODIGO: TIntegerField
+      DisplayWidth = 11
       FieldName = 'CAT_CODIGO'
       Origin = '"TB_CPAGAR"."CAT_CODIGO"'
       Required = True
     end
     object Q_ContasPagarUSU_CODIGO: TIntegerField
+      DisplayWidth = 11
       FieldName = 'USU_CODIGO'
       Origin = '"TB_CPAGAR"."USU_CODIGO"'
+      Required = True
+    end
+    object Q_ContasPagarPARCELA: TIBStringField
+      DisplayLabel = 'Parcelas'
+      FieldName = 'PARCELA'
+      Origin = '"TB_CPAGAR"."PARCELA"'
+      Size = 10
+    end
+    object Q_ContasPagarSTATUS: TIntegerField
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS'
+      Origin = '"TB_CPAGAR"."STATUS"'
       Required = True
     end
   end
@@ -271,10 +290,11 @@ object DM_Financeiro: TDM_Financeiro
       '  DESCRICAO,'
       '  VALOR,'
       '  F_PAGAMENTO,'
-      '  PARCELAS,'
       '  VENCIMENTO,'
       '  CAT_CODIGO,'
-      '  USU_CODIGO'
+      '  USU_CODIGO,'
+      '  PARCELA,'
+      '  STATUS'
       'from TB_CPAGAR '
       'where'
       '  CP_CODIGO = :CP_CODIGO')
@@ -285,23 +305,24 @@ object DM_Financeiro: TDM_Financeiro
       '  DESCRICAO = :DESCRICAO,'
       '  VALOR = :VALOR,'
       '  F_PAGAMENTO = :F_PAGAMENTO,'
-      '  PARCELAS = :PARCELAS,'
       '  VENCIMENTO = :VENCIMENTO,'
       '  CAT_CODIGO = :CAT_CODIGO,'
-      '  USU_CODIGO = :USU_CODIGO'
+      '  USU_CODIGO = :USU_CODIGO,'
+      '  PARCELA = :PARCELA,'
+      '  STATUS = :STATUS'
       'where'
       '  CP_CODIGO = :OLD_CP_CODIGO')
     InsertSQL.Strings = (
       'insert into TB_CPAGAR'
       
-        '  (CP_CODIGO, DESCRICAO, VALOR, F_PAGAMENTO, PARCELAS, VENCIMENT' +
-        'O, CAT_CODIGO, '
-      '   USU_CODIGO)'
+        '  (CP_CODIGO, DESCRICAO, VALOR, F_PAGAMENTO, VENCIMENTO, CAT_COD' +
+        'IGO, USU_CODIGO, '
+      '   PARCELA, STATUS)'
       'values'
       
-        '  (:CP_CODIGO, :DESCRICAO, :VALOR, :F_PAGAMENTO, :PARCELAS, :VEN' +
-        'CIMENTO, '
-      '   :CAT_CODIGO, :USU_CODIGO)')
+        '  (:CP_CODIGO, :DESCRICAO, :VALOR, :F_PAGAMENTO, :VENCIMENTO, :C' +
+        'AT_CODIGO, '
+      '   :USU_CODIGO, :PARCELA, :STATUS)')
     DeleteSQL.Strings = (
       'delete from TB_CPAGAR'
       'where'
@@ -341,11 +362,14 @@ object DM_Financeiro: TDM_Financeiro
       Required = True
     end
     object Q_ContasReceberDESCRICAO: TIBStringField
+      DisplayLabel = 'Descri'#231#227'o'
+      DisplayWidth = 50
       FieldName = 'DESCRICAO'
       Origin = 'TB_CRECEBER.DESCRICAO'
       Size = 200
     end
     object Q_ContasReceberVALOR: TIBBCDField
+      DisplayLabel = 'Valor'
       FieldName = 'VALOR'
       KeyFields = 'VALOR'
       Origin = 'TB_CRECEBER.VALOR'
@@ -355,6 +379,7 @@ object DM_Financeiro: TDM_Financeiro
       Size = 2
     end
     object Q_ContasReceberDATA_RECEBER: TDateField
+      DisplayLabel = 'Vencimento'
       FieldName = 'DATA_RECEBER'
       KeyFields = 'DATA_RECEBER'
       Origin = 'TB_CRECEBER.DATA_RECEBER'
@@ -362,13 +387,10 @@ object DM_Financeiro: TDM_Financeiro
       EditMask = '99/99/0000;'
     end
     object Q_ContasReceberF_PAGAMENTO: TIntegerField
+      DisplayLabel = 'Forma Pgto'
       FieldName = 'F_PAGAMENTO'
       Origin = 'TB_CRECEBER.F_PAGAMENTO'
       Required = True
-    end
-    object Q_ContasReceberPARCELAS: TIntegerField
-      FieldName = 'PARCELAS'
-      Origin = 'TB_CRECEBER.PARCELAS'
     end
     object Q_ContasReceberCAT_CODIGO: TIntegerField
       FieldName = 'CAT_CODIGO'
@@ -380,6 +402,18 @@ object DM_Financeiro: TDM_Financeiro
       Origin = '"TB_CRECEBER"."USU_CODIGO"'
       Required = True
     end
+    object Q_ContasReceberPARCELA: TIBStringField
+      DisplayLabel = 'Parcelas'
+      FieldName = 'PARCELA'
+      Origin = '"TB_CRECEBER"."PARCELA"'
+      Size = 10
+    end
+    object Q_ContasReceberSTATUS: TIntegerField
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS'
+      Origin = '"TB_CRECEBER"."STATUS"'
+      Required = True
+    end
   end
   object Up_ContasReceber: TIBUpdateSQL
     RefreshSQL.Strings = (
@@ -389,9 +423,10 @@ object DM_Financeiro: TDM_Financeiro
       '  VALOR,'
       '  DATA_RECEBER,'
       '  F_PAGAMENTO,'
-      '  PARCELAS,'
       '  CAT_CODIGO,'
-      '  USU_CODIGO'
+      '  USU_CODIGO,'
+      '  PARCELA,'
+      '  STATUS'
       'from TB_CRECEBER '
       'where'
       '  CR_CODIGO = :CR_CODIGO')
@@ -403,22 +438,23 @@ object DM_Financeiro: TDM_Financeiro
       '  VALOR = :VALOR,'
       '  DATA_RECEBER = :DATA_RECEBER,'
       '  F_PAGAMENTO = :F_PAGAMENTO,'
-      '  PARCELAS = :PARCELAS,'
       '  CAT_CODIGO = :CAT_CODIGO,'
-      '  USU_CODIGO = :USU_CODIGO'
+      '  USU_CODIGO = :USU_CODIGO,'
+      '  PARCELA = :PARCELA,'
+      '  STATUS = :STATUS'
       'where'
       '  CR_CODIGO = :OLD_CR_CODIGO')
     InsertSQL.Strings = (
       'insert into TB_CRECEBER'
       
-        '  (CR_CODIGO, DESCRICAO, VALOR, DATA_RECEBER, F_PAGAMENTO, PARCE' +
-        'LAS, CAT_CODIGO, '
-      '   USU_CODIGO)'
+        '  (CR_CODIGO, DESCRICAO, VALOR, DATA_RECEBER, F_PAGAMENTO, CAT_C' +
+        'ODIGO, '
+      '   USU_CODIGO, PARCELA, STATUS)'
       'values'
       
         '  (:CR_CODIGO, :DESCRICAO, :VALOR, :DATA_RECEBER, :F_PAGAMENTO, ' +
-        ':PARCELAS, '
-      '   :CAT_CODIGO, :USU_CODIGO)')
+        ':CAT_CODIGO, '
+      '   :USU_CODIGO, :PARCELA, :STATUS)')
     DeleteSQL.Strings = (
       'delete from TB_CRECEBER'
       'where'

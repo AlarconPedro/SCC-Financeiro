@@ -41,7 +41,6 @@ type
     btnAgenda: TdxBarLargeButton;
     dxBarButton2: TdxBarButton;
     dxBarLargeButton7: TdxBarLargeButton;
-    dxRibbonStatusBar1: TdxRibbonStatusBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnAlterarContaClick(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
@@ -53,6 +52,10 @@ type
     procedure dxBarLargeButton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dxBarButton2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnListarContasClick(Sender: TObject);
+    procedure NavBarTabChanging(Sender: TdxCustomRibbon; ANewTab: TdxRibbonTab;
+      var Allow: Boolean);
 
   private
     procedure DoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -68,7 +71,8 @@ implementation
 
 {$R *.dfm}
 
-uses U_Login, U_CadastroUsuario, U_CadastroContas, U_CadastroCategorias, U_CadastroContasFixas, U_ListarContas;
+uses U_Login, U_CadastroUsuario, U_CadastroContas, U_CadastroCategorias, U_CadastroContasFixas, U_ListarContas,
+  U_Funcoes;
 
 procedure TFrm_Principal.btnAlterarContaClick(Sender: TObject);
   begin
@@ -90,8 +94,12 @@ end;
 
 procedure TFrm_Principal.btnCPagarClick(Sender: TObject);
 begin
- Application.CreateForm(TFrm_CadastroContas, Frm_CadastroContas);
- Frm_CadastroContas.ShowModal;
+  Frm_CadastroContas := CriaFormularioModal(TFrm_CadastroContas) as TFrm_CadastroContas;
+end;
+
+procedure TFrm_Principal.btnListarContasClick(Sender: TObject);
+begin
+  Frm_ListarContas := CriaFormulario(TFrm_ListarContas, false, false) as TFrm_ListarContas;
 end;
 
 procedure TFrm_Principal.btnNovaCategoriaClick(Sender: TObject);
@@ -128,11 +136,24 @@ begin
   Application.Terminate;
 end;
 
+procedure TFrm_Principal.FormCreate(Sender: TObject);
+begin
+  MDIMain := Frm_Principal;
+end;
+
 procedure TFrm_Principal.FormShow(Sender: TObject);
 begin
-  Self.WindowState := wsMaximized;
-  Application.CreateForm(TFrm_ListarContas, Frm_ListarContas);
-  Frm_ListarContas.Show;
+  Frm_ListarContas := CriaFormulario(TFrm_ListarContas, false, false) as TFrm_ListarContas;
+end;
+
+procedure TFrm_Principal.NavBarTabChanging(Sender: TdxCustomRibbon;
+  ANewTab: TdxRibbonTab; var Allow: Boolean);
+begin
+  if Frm_ListarContas <> nil then
+  begin
+    Frm_ListarContas.pnl_Receber.Visible := ANewTab.Name = 'NavBarTab2';
+    Frm_ListarContas.pnl_Pagar.Visible := ANewTab.Name = 'NavBarTab1';
+  end;
 end;
 
 procedure TFrm_Principal.SetarCursor;

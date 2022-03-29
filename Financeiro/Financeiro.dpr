@@ -11,7 +11,8 @@ uses
   U_CadastroContas in 'U_CadastroContas.pas' {Frm_CadastroContas},
   U_CadastroCategorias in 'U_CadastroCategorias.pas' {Frm_CadastroCategoria},
   U_CadastroContasFixas in 'U_CadastroContasFixas.pas' {Frm_ContasFixas},
-  U_ListarContas in 'U_ListarContas.pas' {Frm_ListarContas};
+  U_ListarContas in 'U_ListarContas.pas' {Frm_ListarContas},
+  U_Funcoes in 'U_Funcoes.pas';
 
 {$R *.res}
 

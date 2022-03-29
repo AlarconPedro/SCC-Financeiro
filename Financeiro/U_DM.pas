@@ -26,7 +26,6 @@ type
     Q_ContasPagarDESCRICAO: TIBStringField;
     Q_ContasPagarVALOR: TIBBCDField;
     Q_ContasPagarF_PAGAMENTO: TIntegerField;
-    Q_ContasPagarPARCELAS: TIntegerField;
     Q_ContasPagarVENCIMENTO: TDateField;
     Q_ContasPagarCAT_CODIGO: TIntegerField;
     Up_ContasPagar: TIBUpdateSQL;
@@ -37,7 +36,6 @@ type
     Q_ContasReceberVALOR: TIBBCDField;
     Q_ContasReceberDATA_RECEBER: TDateField;
     Q_ContasReceberF_PAGAMENTO: TIntegerField;
-    Q_ContasReceberPARCELAS: TIntegerField;
     Q_ContasReceberCAT_CODIGO: TIntegerField;
     Q_Soma: TIBQuery;
     Q_SomaTRECEBER: TIBBCDField;
@@ -48,6 +46,10 @@ type
     Q_ContasReceberUSU_CODIGO: TIntegerField;
     Q_CategoriasCAT_CODIGO: TIntegerField;
     Q_CategoriasNOME: TIBStringField;
+    Q_ContasPagarPARCELA: TIBStringField;
+    Q_ContasPagarSTATUS: TIntegerField;
+    Q_ContasReceberPARCELA: TIBStringField;
+    Q_ContasReceberSTATUS: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);
@@ -136,6 +138,8 @@ end;
 procedure TDM_Financeiro.Q_ContasPagarAfterInsert(DataSet: TDataSet);
 begin
   Q_ContasPagarF_PAGAMENTO.AsInteger := 0;
+  Q_ContasPagarSTATUS.AsInteger := 0;
+
   Q_ContasPagarUSU_CODIGO.AsInteger := UsuarioLogado;
 end;
 
@@ -167,6 +171,7 @@ end;
 procedure TDM_Financeiro.Q_ContasReceberAfterInsert(DataSet: TDataSet);
 begin
   Q_ContasReceberF_PAGAMENTO.AsInteger := 0;
+  Q_ContasReceberSTATUS.AsInteger := 0;
   Q_ContasReceberUSU_CODIGO.AsInteger := UsuarioLogado;
 end;
 

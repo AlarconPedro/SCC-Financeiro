@@ -369,7 +369,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         Top = 54
         Width = 89
         Height = 21
-        DataField = 'PARCELAS'
+        DataField = 'PARCELA'
         DataSource = ds_ContasPagar
         Enabled = False
         TabOrder = 4
@@ -546,7 +546,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         Top = 54
         Width = 89
         Height = 21
-        DataField = 'PARCELAS'
+        DataField = 'PARCELA'
         DataSource = ds_ContasReceber
         Enabled = False
         TabOrder = 4
@@ -691,7 +691,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     PopupMenuLinks = <>
     UseSystemFont = True
     Left = 561
-    Top = 24
+    Top = 28
     PixelsPerInch = 96
     object navContasBar1: TdxBar
       Caption = 'Contas'
@@ -2087,7 +2087,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Ribbon = navContasBar
     UseOwnFont = False
     Left = 560
-    Top = 72
+    Top = 76
     PixelsPerInch = 96
   end
   object ds_ContasPagar: TDataSource
@@ -2102,6 +2102,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Top = 301
   end
   object ds_ContasReceber: TDataSource
+    AutoEdit = False
     DataSet = DM_Financeiro.Q_ContasReceber
     OnStateChange = ds_ContasReceberStateChange
     Left = 504

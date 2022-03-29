@@ -226,9 +226,9 @@ end;
 
 procedure TFrm_CadastroContas.AtualizaValor;
 begin
- totalBar.Panels.Items[0].Text := 'Total a Pagar: ' + DM_Financeiro.Q_SomaTPAGAR.AsString;
- totalBar.Panels.Items[1].Text := 'Total a Receber: ' + DM_Financeiro.Q_SomaTRECEBER.AsString;
- totalBar.Panels.Items[2].Text := 'Total Líquido: ' + DM_Financeiro.Q_SomaTOTAL.AsString;
+ totalBar.Panels.Items[0].Text := 'Total a Pagar: R$ ' + FormatCurr('##.###,##',DM_Financeiro.Q_SomaTPAGAR.AsCurrency);
+ totalBar.Panels.Items[1].Text := 'Total a Receber: R$ ' + FormatCurr('##.###,##',DM_Financeiro.Q_SomaTRECEBER.AsCurrency);
+ totalBar.Panels.Items[2].Text := 'Total Líquido: R$ ' + FormatCurr('##.###,##',DM_Financeiro.Q_SomaTOTAL.AsCurrency);
 end;
 
 end.
