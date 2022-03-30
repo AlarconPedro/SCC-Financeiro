@@ -8,7 +8,7 @@ uses
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
   dxRibbonCustomizationForm, dxBar, dxRibbon, cxClasses, dxStatusBar,
   dxRibbonStatusBar, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker;
+  Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker, Vcl.DBCtrls;
 
 type
   TFrm_ListarContas = class(TForm)
@@ -33,11 +33,9 @@ type
     barManagerContasBar4: TdxBar;
     dxBarLargeButton2: TdxBarLargeButton;
     dxBarLargeButton3: TdxBarLargeButton;
-    dxBarLargeButton7: TdxBarLargeButton;
+    btnFiltrarReceber: TdxBarLargeButton;
     dxBarLargeButton8: TdxBarLargeButton;
     dxBarLargeButton9: TdxBarLargeButton;
-    ds_ContasPagar: TDataSource;
-    ds_ContasReceber: TDataSource;
     pnl_Receber: TPanel;
     dbg_Receber: TDBGrid;
     gb_Filtro: TGroupBox;
@@ -47,12 +45,25 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    ComboBox2: TComboBox;
-    ComboBox1: TComboBox;
     Label5: TLabel;
-    JvDateTimePicker1: TJvDateTimePicker;
     Label4: TLabel;
-    JvDateTimePicker2: TJvDateTimePicker;
+    btnRLimpaFiltro: TdxBarLargeButton;
+    DateTimePicker2: TDateTimePicker;
+    DateTimePicker1: TDateTimePicker;
+    ds_FiltroReceber: TDataSource;
+    ds_FiltroPagar: TDataSource;
+    cb_Status: TComboBox;
+    ds_CatPagar: TDataSource;
+    cb_CatPagar: TDBLookupComboBox;
+    Label6: TLabel;
+    ComboBox1: TComboBox;
+    Label7: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Label8: TLabel;
+    Label9: TLabel;
+    DateTimePicker3: TDateTimePicker;
+    Label10: TLabel;
+    DateTimePicker4: TDateTimePicker;
     procedure navbarListarContasTabChanging(Sender: TdxCustomRibbon;
       ANewTab: TdxRibbonTab; var Allow: Boolean);
     procedure FormShow(Sender: TObject);
@@ -66,6 +77,7 @@ type
     procedure btnExcluirPagarClick(Sender: TObject);
     procedure dxBarLargeButton2Click(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
+    procedure btnFiltrarPagarClick(Sender: TObject);
   private
     procedure AtualizaValor;
     procedure OrganizaCampos;
@@ -85,26 +97,50 @@ uses U_DM, U_CadastroContas;
 
 procedure TFrm_ListarContas.btnEstornarPagarClick(Sender: TObject);
 begin
-  DM_Financeiro.Q_ContasPagar.Edit;
-  DM_Financeiro.Q_ContasPagarSTATUS.Value := 0;
-  DM_Financeiro.Q_ContasPagar.Post;
+  DM_Financeiro.Q_CPagarFiltro.Edit;
+  DM_Financeiro.Q_CPagarFiltroSTATUS.AsInteger := 0;
+  DM_Financeiro.Q_CPagarFiltro.Post;
   AtualizaValor;
 end;
 
 procedure TFrm_ListarContas.btnExcluirPagarClick(Sender: TObject);
 begin
-   if (ds_ContasPagar.DataSet.State = dsBrowse) and (not ds_ContasPagar.DataSet.IsEmpty) then
+   if (ds_FiltroPagar.DataSet.State = dsBrowse) and (not ds_FiltroPagar.DataSet.IsEmpty) then
      if (Application.MessageBox(PChar('Deseja realmente excluir está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
         DM_Financeiro.Q_ContasPagar.Delete;
 
    AtualizaValor;
 end;
 
+procedure TFrm_ListarContas.btnFiltrarPagarClick(Sender: TObject);
+begin
+
+  DM_Financeiro.Q_CPagarFiltro.Close;
+  DM_Financeiro.Q_CPagarFiltro.SQL.Clear;
+  DM_Financeiro.Q_CPagarFiltro.SQL.Add('SELECT * FROM TB_CPAGAR WHERE USU_CODIGO = :usuario');
+  DM_Financeiro.Q_CPagarFiltro.ParamByName('usuario').AsInteger := DM_Financeiro.UsuarioLogado;
+
+  if cb_Status.ItemIndex > 0 then
+  begin
+    DM_Financeiro.Q_CPagarFiltro.SQL.Add('AND STATUS = :cod_status');
+    DM_Financeiro.Q_CPagarFiltro.ParamByName('cod_status').AsInteger := cb_Status.ItemIndex - 1;
+  end;
+
+  if cb_CatPagar.KeyValue > 0 then
+  begin
+    DM_Financeiro.Q_CPagarFiltro.SQL.Add('AND CAT_CODIGO = :cod_categoria');
+    DM_Financeiro.Q_CPagarFiltro.ParamByName('cod_categoria').AsInteger := DM_Financeiro.Q_CatFiltroCAT_CODIGO.AsInteger;
+  end;
+
+  DM_Financeiro.Q_CPagarFiltro.Open;
+
+end;
+
 procedure TFrm_ListarContas.btnPagarClick(Sender: TObject);
 begin
-  DM_Financeiro.Q_ContasPagar.Edit;
-  DM_Financeiro.Q_ContasPagarSTATUS.Value := 1;
-  DM_Financeiro.Q_ContasPagar.Post;
+  DM_Financeiro.Q_CPagarFiltro.Edit;
+  DM_Financeiro.Q_CPagarFiltroSTATUS.Value := 1;
+  DM_Financeiro.Q_CPagarFiltro.Post;
   AtualizaValor;
 end;
 
@@ -143,7 +179,6 @@ end;
 procedure TFrm_ListarContas.FormPaint(Sender: TObject);
 begin
   OrganizaCampos;
-
 end;
 
 procedure TFrm_ListarContas.FormResize(Sender: TObject);
@@ -174,6 +209,9 @@ begin
   DM_Financeiro.Q_ContasPagar.Open;
   DM_Financeiro.Q_ContasReceber.Close;
   DM_Financeiro.Q_ContasReceber.Open;
+  DM_Financeiro.Q_CatFiltro.Close;
+  DM_Financeiro.Q_CatFiltro.Open;
+  DM_Financeiro.Q_CatFiltro.FetchAll;
   DM_Financeiro.Q_Soma.Close;
   DM_Financeiro.Q_Soma.ParamByName('pusuario').AsInteger := DM_Financeiro.UsuarioLogado;
   DM_Financeiro.Q_Soma.ParamByName('rusuario').AsInteger := DM_Financeiro.UsuarioLogado;

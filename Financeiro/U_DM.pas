@@ -50,6 +50,29 @@ type
     Q_ContasPagarSTATUS: TIntegerField;
     Q_ContasReceberPARCELA: TIBStringField;
     Q_ContasReceberSTATUS: TIntegerField;
+    Q_CPagarFiltro: TIBQuery;
+    Q_CReceberFiltro: TIBQuery;
+    Q_CPagarFiltroCP_CODIGO: TIntegerField;
+    Q_CPagarFiltroDESCRICAO: TIBStringField;
+    Q_CPagarFiltroVALOR: TIBBCDField;
+    Q_CPagarFiltroF_PAGAMENTO: TIntegerField;
+    Q_CPagarFiltroVENCIMENTO: TDateField;
+    Q_CPagarFiltroCAT_CODIGO: TIntegerField;
+    Q_CPagarFiltroUSU_CODIGO: TIntegerField;
+    Q_CPagarFiltroPARCELA: TIBStringField;
+    Q_CPagarFiltroSTATUS: TIntegerField;
+    Q_CReceberFiltroCR_CODIGO: TIntegerField;
+    Q_CReceberFiltroDESCRICAO: TIBStringField;
+    Q_CReceberFiltroVALOR: TIBBCDField;
+    Q_CReceberFiltroDATA_RECEBER: TDateField;
+    Q_CReceberFiltroF_PAGAMENTO: TIntegerField;
+    Q_CReceberFiltroCAT_CODIGO: TIntegerField;
+    Q_CReceberFiltroUSU_CODIGO: TIntegerField;
+    Q_CReceberFiltroPARCELA: TIBStringField;
+    Q_CReceberFiltroSTATUS: TIntegerField;
+    Q_CatFiltro: TIBQuery;
+    Q_CatFiltroCAT_CODIGO: TIntegerField;
+    Q_CatFiltroNOME: TIBStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);
@@ -65,6 +88,8 @@ type
     procedure Q_CategoriasAfterDelete(DataSet: TDataSet);
     procedure Q_CategoriasAfterInsert(DataSet: TDataSet);
     procedure Q_CategoriasAfterPost(DataSet: TDataSet);
+    procedure Q_CPagarFiltroSTATUSGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
   private
     { Private declarations }
   public
@@ -189,6 +214,15 @@ procedure TDM_Financeiro.Q_ContasReceberBeforeOpen(DataSet: TDataSet);
 begin
   Q_ContasReceber.ParamByName('usuario').AsInteger := UsuarioLogado;
 end;
+
+procedure TDM_Financeiro.Q_CPagarFiltroSTATUSGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if Sender.Asstring = '0' then
+    Text := 'Pendente'
+  else
+    Text := 'Pago';
+  end;
 
 procedure TDM_Financeiro.Q_UsuarioAfterDelete(DataSet: TDataSet);
 begin

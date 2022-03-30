@@ -2105,7 +2105,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     AutoEdit = False
     DataSet = DM_Financeiro.Q_ContasReceber
     OnStateChange = ds_ContasReceberStateChange
-    Left = 504
+    Left = 496
     Top = 349
   end
 end

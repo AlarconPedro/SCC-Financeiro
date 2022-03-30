@@ -233,6 +233,7 @@ object DM_Financeiro: TDM_Financeiro
     AfterDelete = Q_CategoriasAfterDelete
     AfterInsert = Q_CategoriasAfterInsert
     AfterPost = Q_CategoriasAfterPost
+    Active = True
     BufferChunks = 1000
     CachedUpdates = True
     ParamCheck = True
@@ -506,6 +507,176 @@ object DM_Financeiro: TDM_Financeiro
       ProviderFlags = []
       Precision = 18
       Size = 2
+    end
+  end
+  object Q_CPagarFiltro: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT * FROM TB_CPAGAR')
+    Left = 208
+    Top = 360
+    object Q_CPagarFiltroCP_CODIGO: TIntegerField
+      FieldName = 'CP_CODIGO'
+      Origin = '"TB_CPAGAR"."CP_CODIGO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_CPagarFiltroDESCRICAO: TIBStringField
+      DisplayLabel = 'Descri'#231#227'o'
+      FieldName = 'DESCRICAO'
+      Origin = '"TB_CPAGAR"."DESCRICAO"'
+      Size = 200
+    end
+    object Q_CPagarFiltroVALOR: TIBBCDField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Valor'
+      FieldName = 'VALOR'
+      Origin = '"TB_CPAGAR"."VALOR"'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object Q_CPagarFiltroF_PAGAMENTO: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Forma de Pagamento'
+      FieldName = 'F_PAGAMENTO'
+      Origin = '"TB_CPAGAR"."F_PAGAMENTO"'
+      Required = True
+    end
+    object Q_CPagarFiltroVENCIMENTO: TDateField
+      DisplayLabel = 'Vencimento'
+      FieldName = 'VENCIMENTO'
+      Origin = '"TB_CPAGAR"."VENCIMENTO"'
+      Required = True
+    end
+    object Q_CPagarFiltroCAT_CODIGO: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'CAT_CODIGO'
+      Origin = '"TB_CPAGAR"."CAT_CODIGO"'
+    end
+    object Q_CPagarFiltroUSU_CODIGO: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'USU_CODIGO'
+      Origin = '"TB_CPAGAR"."USU_CODIGO"'
+      Required = True
+    end
+    object Q_CPagarFiltroPARCELA: TIBStringField
+      DisplayLabel = 'Parcelas'
+      FieldName = 'PARCELA'
+      Origin = '"TB_CPAGAR"."PARCELA"'
+      Size = 10
+    end
+    object Q_CPagarFiltroSTATUS: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS'
+      Origin = '"TB_CPAGAR"."STATUS"'
+      Required = True
+      OnGetText = Q_CPagarFiltroSTATUSGetText
+    end
+  end
+  object Q_CReceberFiltro: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT * FROM TB_CRECEBER')
+    Left = 208
+    Top = 416
+    object Q_CReceberFiltroCR_CODIGO: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'CR_CODIGO'
+      Origin = '"TB_CRECEBER"."CR_CODIGO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_CReceberFiltroDESCRICAO: TIBStringField
+      DisplayLabel = 'Descri'#231#227'o'
+      FieldName = 'DESCRICAO'
+      Origin = '"TB_CRECEBER"."DESCRICAO"'
+      Size = 200
+    end
+    object Q_CReceberFiltroVALOR: TIBBCDField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Valor'
+      FieldName = 'VALOR'
+      Origin = '"TB_CRECEBER"."VALOR"'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+    object Q_CReceberFiltroDATA_RECEBER: TDateField
+      DisplayLabel = 'Vencimento'
+      FieldName = 'DATA_RECEBER'
+      Origin = '"TB_CRECEBER"."DATA_RECEBER"'
+      Required = True
+    end
+    object Q_CReceberFiltroF_PAGAMENTO: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Forma de Pagamento'
+      FieldName = 'F_PAGAMENTO'
+      Origin = '"TB_CRECEBER"."F_PAGAMENTO"'
+      Required = True
+    end
+    object Q_CReceberFiltroCAT_CODIGO: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'CAT_CODIGO'
+      Origin = '"TB_CRECEBER"."CAT_CODIGO"'
+    end
+    object Q_CReceberFiltroUSU_CODIGO: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'USU_CODIGO'
+      Origin = '"TB_CRECEBER"."USU_CODIGO"'
+      Required = True
+    end
+    object Q_CReceberFiltroPARCELA: TIBStringField
+      DisplayLabel = 'Parcela'
+      FieldName = 'PARCELA'
+      Origin = '"TB_CRECEBER"."PARCELA"'
+      Size = 10
+    end
+    object Q_CReceberFiltroSTATUS: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS'
+      Origin = '"TB_CRECEBER"."STATUS"'
+      Required = True
+    end
+  end
+  object Q_CatFiltro: TIBQuery
+    Database = DB_Financeiro
+    Transaction = Trans_Financeiro
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT CAT_CODIGO, NOME FROM TB_CATEGORIA'
+      'UNION'
+      'SELECT 0 as CAT_CODIGO, '#39'TODOS'#39' as NOME FROM TB_CATEGORIA'
+      'ORDER BY 1'
+      ' ')
+    Left = 208
+    Top = 472
+    object Q_CatFiltroCAT_CODIGO: TIntegerField
+      FieldName = 'CAT_CODIGO'
+      Origin = '"TB_CATEGORIA"."CAT_CODIGO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_CatFiltroNOME: TIBStringField
+      FieldName = 'NOME'
+      Origin = '"TB_CATEGORIA"."NOME"'
+      Required = True
+      Size = 50
     end
   end
 end
