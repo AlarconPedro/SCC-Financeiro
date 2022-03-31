@@ -107,6 +107,7 @@ object Frm_CadastroCategoria: TFrm_CadastroCategoria
     Height = 203
     Align = alClient
     DataSource = ds_Categorias
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

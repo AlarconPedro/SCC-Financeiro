@@ -4,7 +4,6 @@ object DM_Financeiro: TDM_Financeiro
   Height = 519
   Width = 722
   object DB_Financeiro: TIBDatabase
-    Connected = True
     DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
@@ -60,7 +59,6 @@ object DM_Financeiro: TDM_Financeiro
     end
   end
   object Trans_Financeiro: TIBTransaction
-    Active = True
     DefaultDatabase = DB_Financeiro
     Left = 136
     Top = 24
@@ -231,9 +229,7 @@ object DM_Financeiro: TDM_Financeiro
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
     AfterDelete = Q_CategoriasAfterDelete
-    AfterInsert = Q_CategoriasAfterInsert
     AfterPost = Q_CategoriasAfterPost
-    Active = True
     BufferChunks = 1000
     CachedUpdates = True
     ParamCheck = True
@@ -512,12 +508,13 @@ object DM_Financeiro: TDM_Financeiro
   object Q_CPagarFiltro: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
-    Active = True
+    AfterPost = Q_CPagarFiltroAfterPost
     BufferChunks = 1000
-    CachedUpdates = False
+    CachedUpdates = True
     ParamCheck = True
     SQL.Strings = (
       'SELECT * FROM TB_CPAGAR')
+    UpdateObject = Up_CPagarFiltro
     Left = 208
     Top = 360
     object Q_CPagarFiltroCP_CODIGO: TIntegerField
@@ -583,12 +580,13 @@ object DM_Financeiro: TDM_Financeiro
   object Q_CReceberFiltro: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
-    Active = True
+    AfterPost = Q_CReceberFiltroAfterPost
     BufferChunks = 1000
-    CachedUpdates = False
+    CachedUpdates = True
     ParamCheck = True
     SQL.Strings = (
       'SELECT * FROM TB_CRECEBER')
+    UpdateObject = Up_CReceberFiltro
     Left = 208
     Top = 416
     object Q_CReceberFiltroCR_CODIGO: TIntegerField
@@ -649,12 +647,12 @@ object DM_Financeiro: TDM_Financeiro
       FieldName = 'STATUS'
       Origin = '"TB_CRECEBER"."STATUS"'
       Required = True
+      OnGetText = Q_CReceberFiltroSTATUSGetText
     end
   end
   object Q_CatFiltro: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -678,5 +676,99 @@ object DM_Financeiro: TDM_Financeiro
       Required = True
       Size = 50
     end
+  end
+  object Up_CPagarFiltro: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  CP_CODIGO,'
+      '  DESCRICAO,'
+      '  VALOR,'
+      '  F_PAGAMENTO,'
+      '  VENCIMENTO,'
+      '  CAT_CODIGO,'
+      '  USU_CODIGO,'
+      '  PARCELA,'
+      '  STATUS'
+      'from TB_CPAGAR '
+      'where'
+      '  CP_CODIGO = :CP_CODIGO')
+    ModifySQL.Strings = (
+      'update TB_CPAGAR'
+      'set'
+      '  CP_CODIGO = :CP_CODIGO,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  VALOR = :VALOR,'
+      '  F_PAGAMENTO = :F_PAGAMENTO,'
+      '  VENCIMENTO = :VENCIMENTO,'
+      '  CAT_CODIGO = :CAT_CODIGO,'
+      '  USU_CODIGO = :USU_CODIGO,'
+      '  PARCELA = :PARCELA,'
+      '  STATUS = :STATUS'
+      'where'
+      '  CP_CODIGO = :OLD_CP_CODIGO')
+    InsertSQL.Strings = (
+      'insert into TB_CPAGAR'
+      
+        '  (CP_CODIGO, DESCRICAO, VALOR, F_PAGAMENTO, VENCIMENTO, CAT_COD' +
+        'IGO, USU_CODIGO, '
+      '   PARCELA, STATUS)'
+      'values'
+      
+        '  (:CP_CODIGO, :DESCRICAO, :VALOR, :F_PAGAMENTO, :VENCIMENTO, :C' +
+        'AT_CODIGO, '
+      '   :USU_CODIGO, :PARCELA, :STATUS)')
+    DeleteSQL.Strings = (
+      'delete from TB_CPAGAR'
+      'where'
+      '  CP_CODIGO = :OLD_CP_CODIGO')
+    Left = 304
+    Top = 360
+  end
+  object Up_CReceberFiltro: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  CR_CODIGO,'
+      '  DESCRICAO,'
+      '  VALOR,'
+      '  DATA_RECEBER,'
+      '  F_PAGAMENTO,'
+      '  CAT_CODIGO,'
+      '  USU_CODIGO,'
+      '  PARCELA,'
+      '  STATUS'
+      'from TB_CRECEBER '
+      'where'
+      '  CR_CODIGO = :CR_CODIGO')
+    ModifySQL.Strings = (
+      'update TB_CRECEBER'
+      'set'
+      '  CR_CODIGO = :CR_CODIGO,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  VALOR = :VALOR,'
+      '  DATA_RECEBER = :DATA_RECEBER,'
+      '  F_PAGAMENTO = :F_PAGAMENTO,'
+      '  CAT_CODIGO = :CAT_CODIGO,'
+      '  USU_CODIGO = :USU_CODIGO,'
+      '  PARCELA = :PARCELA,'
+      '  STATUS = :STATUS'
+      'where'
+      '  CR_CODIGO = :OLD_CR_CODIGO')
+    InsertSQL.Strings = (
+      'insert into TB_CRECEBER'
+      
+        '  (CR_CODIGO, DESCRICAO, VALOR, DATA_RECEBER, F_PAGAMENTO, CAT_C' +
+        'ODIGO, '
+      '   USU_CODIGO, PARCELA, STATUS)'
+      'values'
+      
+        '  (:CR_CODIGO, :DESCRICAO, :VALOR, :DATA_RECEBER, :F_PAGAMENTO, ' +
+        ':CAT_CODIGO, '
+      '   :USU_CODIGO, :PARCELA, :STATUS)')
+    DeleteSQL.Strings = (
+      'delete from TB_CRECEBER'
+      'where'
+      '  CR_CODIGO = :OLD_CR_CODIGO')
+    Left = 304
+    Top = 416
   end
 end

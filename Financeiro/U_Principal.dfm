@@ -581,7 +581,7 @@
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'btnCPagar'
+          ItemName = 'btnCadContas'
         end
         item
           BeginGroup = True
@@ -618,7 +618,7 @@
       Visible = True
       WholeRow = False
     end
-    object btnCPagar: TdxBarLargeButton
+    object btnCadContas: TdxBarLargeButton
       Caption = 'Lan'#231'ar Contas'
       Category = 0
       Hint = 'Lan'#231'ar Contas'
@@ -759,7 +759,7 @@
         CB3EFE46D81E20BC6AB4E7C0FA2230F3091F3B25A0CE7E73ECC7138F0D5C16C0
         DC2BA527AEFC71F50540D3B909761C3BC5E1F7C1438087000F01FE9F03FCF700
         4E5AD47B0E5A35E30000000049454E44AE426082}
-      OnClick = btnCPagarClick
+      OnClick = btnCadContasClick
     end
     object btnContasReceber: TdxBarLargeButton
       Caption = 'Contas a Receber'
@@ -1391,6 +1391,7 @@
     object btnContaFixa: TdxBarLargeButton
       Caption = 'Contas Fixas'
       Category = 0
+      Enabled = False
       Hint = 'Contas Fixas'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96
@@ -1974,6 +1975,7 @@
     object btnAgendaRibbon: TdxBarLargeButton
       Caption = 'Agenda'
       Category = 0
+      Enabled = False
       Hint = 'Agenda'
       Visible = ivAlways
       LargeGlyph.SourceDPI = 96

@@ -85,9 +85,6 @@ Coordinates=89,416,154,102
 [edtVencimentoPagar]
 Coordinates=955,166,134,36
 
-[DBLookupComboBox1]
-Coordinates=415,129,144,36
-
 [ds_Categorias]
 Coordinates=202,277,97,36
 
@@ -102,4 +99,7 @@ Coordinates=307,416,167,146
 
 [Label4]
 Coordinates=476,416,53,58
+
+[edtCatPagar]
+Coordinates=415,129,144,36
 

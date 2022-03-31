@@ -5,7 +5,7 @@ object Frm_ListarContas: TFrm_ListarContas
   BorderStyle = bsNone
   Caption = 'Listar Contas'
   ClientHeight = 436
-  ClientWidth = 700
+  ClientWidth = 743
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,6 +14,7 @@ object Frm_ListarContas: TFrm_ListarContas
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
+  OnCreate = FormCreate
   OnPaint = FormPaint
   OnResize = FormResize
   OnShow = FormShow
@@ -22,20 +23,22 @@ object Frm_ListarContas: TFrm_ListarContas
   object pnl_Receber: TPanel
     Left = 0
     Top = 125
-    Width = 700
+    Width = 743
     Height = 288
     Align = alClient
     Caption = 'pnl_Receber'
     TabOrder = 1
     Visible = False
+    ExplicitWidth = 700
     object gb_Filtro: TGroupBox
       Left = 1
       Top = 1
-      Width = 698
+      Width = 741
       Height = 60
       Align = alTop
       Caption = 'Filtros'
       TabOrder = 0
+      ExplicitWidth = 698
       object Label6: TLabel
         Left = 16
         Top = 30
@@ -50,28 +53,21 @@ object Frm_ListarContas: TFrm_ListarContas
         Height = 13
         Caption = 'Categoria:'
       end
-      object Label8: TLabel
-        Left = 393
-        Top = 30
-        Width = 55
-        Height = 13
-        Caption = 'Vencimento'
-      end
-      object Label9: TLabel
-        Left = 453
+      object lbDe: TLabel
+        Left = 572
         Top = 30
         Width = 13
         Height = 13
         Caption = 'De'
       end
       object Label10: TLabel
-        Left = 568
+        Left = 687
         Top = 30
         Width = 7
         Height = 13
         Caption = 'A'
       end
-      object ComboBox1: TComboBox
+      object cb_StatusReceber: TComboBox
         Left = 51
         Top = 27
         Width = 139
@@ -83,20 +79,17 @@ object Frm_ListarContas: TFrm_ListarContas
           'Pendente'
           'Pago')
       end
-      object DBLookupComboBox2: TDBLookupComboBox
-        Left = 247
+      object dataDeReceber: TDateTimePicker
+        Left = 590
         Top = 27
-        Width = 141
+        Width = 91
         Height = 21
-        DataField = 'CAT_CODIGO'
-        DataSource = ds_FiltroPagar
-        KeyField = 'CAT_CODIGO'
-        ListField = 'NOME'
-        ListSource = ds_CatPagar
+        Date = 44650.000000000000000000
+        Time = 0.362854571758362000
         TabOrder = 1
       end
-      object DateTimePicker3: TDateTimePicker
-        Left = 471
+      object dataAReceber: TDateTimePicker
+        Left = 699
         Top = 27
         Width = 91
         Height = 21
@@ -104,20 +97,34 @@ object Frm_ListarContas: TFrm_ListarContas
         Time = 0.362854571758362000
         TabOrder = 2
       end
-      object DateTimePicker4: TDateTimePicker
-        Left = 580
+      object cb_CatReceber: TDBLookupComboBox
+        Left = 246
         Top = 27
-        Width = 91
+        Width = 141
         Height = 21
-        Date = 44650.000000000000000000
-        Time = 0.362854571758362000
+        KeyField = 'CAT_CODIGO'
+        ListField = 'NOME'
+        ListSource = ds_CatPagar
         TabOrder = 3
+      end
+      object rg_VencimentoReceber: TRadioGroup
+        Left = 390
+        Top = 13
+        Width = 179
+        Height = 35
+        Caption = 'Vencimento :'
+        Columns = 2
+        Items.Strings = (
+          'Tudo'
+          'Personalizado')
+        TabOrder = 4
+        OnClick = rg_VencimentoReceberClick
       end
     end
     object dbg_Receber: TDBGrid
       Left = 1
       Top = 61
-      Width = 698
+      Width = 741
       Height = 226
       Align = alClient
       DataSource = ds_FiltroReceber
@@ -166,7 +173,7 @@ object Frm_ListarContas: TFrm_ListarContas
   object navbarListarContas: TdxRibbon
     Left = 0
     Top = 0
-    Width = 700
+    Width = 743
     Height = 125
     BarManager = barManagerContas
     ColorSchemeName = 'UserSkin'
@@ -174,6 +181,7 @@ object Frm_ListarContas: TFrm_ListarContas
     TabOrder = 0
     TabStop = False
     OnTabChanging = navbarListarContasTabChanging
+    ExplicitWidth = 700
     object navContasPagar: TdxRibbonTab
       Active = True
       Caption = 'Contas a Pagar'
@@ -205,7 +213,7 @@ object Frm_ListarContas: TFrm_ListarContas
     AlignWithMargins = True
     Left = 0
     Top = 413
-    Width = 700
+    Width = 743
     Height = 23
     Margins.Left = 0
     Margins.Top = 0
@@ -250,19 +258,24 @@ object Frm_ListarContas: TFrm_ListarContas
     ShowHint = False
     ParentShowHint = False
     PopupMenu = itensContas
+    ExplicitWidth = 700
   end
   object pnl_Pagar: TPanel
     Left = 0
     Top = 125
-    Width = 700
+    Width = 743
     Height = 288
     Align = alClient
     Caption = 'pnl_Pagar'
     TabOrder = 3
+    ExplicitLeft = 248
+    ExplicitTop = 288
+    ExplicitWidth = 452
+    ExplicitHeight = 125
     object dbg_Pagar: TDBGrid
       Left = 1
       Top = 55
-      Width = 698
+      Width = 741
       Height = 232
       Align = alClient
       DataSource = ds_FiltroPagar
@@ -313,11 +326,12 @@ object Frm_ListarContas: TFrm_ListarContas
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
-      Width = 698
+      Width = 741
       Height = 54
       Align = alTop
       Caption = 'Filtros'
       TabOrder = 0
+      ExplicitWidth = 698
       object Label1: TLabel
         Left = 8
         Top = 22
@@ -332,29 +346,22 @@ object Frm_ListarContas: TFrm_ListarContas
         Height = 13
         Caption = 'Categoria:'
       end
-      object Label3: TLabel
-        Left = 385
-        Top = 22
-        Width = 55
-        Height = 13
-        Caption = 'Vencimento'
-      end
       object Label5: TLabel
-        Left = 445
+        Left = 567
         Top = 22
         Width = 13
         Height = 13
         Caption = 'De'
       end
       object Label4: TLabel
-        Left = 560
+        Left = 682
         Top = 22
         Width = 7
         Height = 13
         Caption = 'A'
       end
-      object DateTimePicker2: TDateTimePicker
-        Left = 572
+      object dataAPagar: TDateTimePicker
+        Left = 694
         Top = 19
         Width = 91
         Height = 21
@@ -362,8 +369,8 @@ object Frm_ListarContas: TFrm_ListarContas
         Time = 0.362854571758362000
         TabOrder = 0
       end
-      object DateTimePicker1: TDateTimePicker
-        Left = 463
+      object dataDePagar: TDateTimePicker
+        Left = 585
         Top = 19
         Width = 91
         Height = 21
@@ -392,6 +399,19 @@ object Frm_ListarContas: TFrm_ListarContas
         ListField = 'NOME'
         ListSource = ds_CatPagar
         TabOrder = 3
+      end
+      object rg_VencimentoPagar: TRadioGroup
+        Left = 384
+        Top = 8
+        Width = 179
+        Height = 35
+        Caption = 'Vencimento :'
+        Columns = 2
+        Items.Strings = (
+          'Tudo'
+          'Personalizado')
+        TabOrder = 4
+        OnClick = rg_VencimentoPagarClick
       end
     end
   end
@@ -479,12 +499,12 @@ object Frm_ListarContas: TFrm_ListarContas
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton2'
+          ItemName = 'btnReceber'
         end
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'dxBarLargeButton3'
+          ItemName = 'btnEstornar'
         end>
       OneOnRow = False
       Row = 0
@@ -509,17 +529,12 @@ object Frm_ListarContas: TFrm_ListarContas
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'btnRLimpaFiltro'
+          ItemName = 'btnExcluirReceber'
         end
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'dxBarLargeButton8'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'dxBarLargeButton9'
+          ItemName = 'btnSairReceber'
         end>
       OneOnRow = False
       Row = 0
@@ -1701,7 +1716,7 @@ object Frm_ListarContas: TFrm_ListarContas
         173A0CD287FD6F88FF0C00AEEE5AE92D5AA0B30000000049454E44AE426082}
       OnClick = btnSairPagarClick
     end
-    object dxBarLargeButton2: TdxBarLargeButton
+    object btnReceber: TdxBarLargeButton
       Caption = 'Receber'
       Category = 0
       Hint = 'Receber'
@@ -1892,9 +1907,9 @@ object Frm_ListarContas: TFrm_ListarContas
         7C29373B34E5647A20A73F63C02810023A80FDC01B333BC4FFF719B591CBBA14
         30928329050A7280915CD16FCB29A59E4B853BA750FF29AFFF1B000C85B730B2
         F331730000000049454E44AE426082}
-      OnClick = dxBarLargeButton2Click
+      OnClick = btnReceberClick
     end
-    object dxBarLargeButton3: TdxBarLargeButton
+    object btnEstornar: TdxBarLargeButton
       Caption = 'Estornar'
       Category = 0
       Hint = 'Estornar'
@@ -2080,7 +2095,7 @@ object Frm_ListarContas: TFrm_ListarContas
         A6F32EBAC797024AF43A5D727444C84FDBA69B12E9DA711555757621C453DA44
         D49384029B357A100CB4DEC8BD0ED8E75255F7D9CA9ADFBBA42CD6F638BDC925
         E035E0726FCFDA59FE33000FE3A0515BB469270000000049454E44AE426082}
-      OnClick = dxBarLargeButton3Click
+      OnClick = btnEstornarClick
     end
     object btnFiltrarReceber: TdxBarLargeButton
       Caption = 'Filtrar'
@@ -2218,8 +2233,9 @@ object Frm_ListarContas: TFrm_ListarContas
         ED082D0EC91367513B8002BBCDA6F2572C559913D214F07A4C6C2374A3FA9EA6
         69615DD714F0C6680404781168025E8E0570243BC939A0AAFBE03FFC2630DA3F
         43FC3D00E3FE6B345DA604AF0000000049454E44AE426082}
+      OnClick = btnFiltrarReceberClick
     end
-    object dxBarLargeButton8: TdxBarLargeButton
+    object btnExcluirReceber: TdxBarLargeButton
       Caption = 'Excluir'
       Category = 0
       Hint = 'Excluir'
@@ -2342,7 +2358,7 @@ object Frm_ListarContas: TFrm_ListarContas
         0D781A2845C08D4C68CB40DD0943FDAD25C48C946A1A380C8C477324AE578BBD
         FE37C4FD01005A8F664026A9BF410000000049454E44AE426082}
     end
-    object dxBarLargeButton9: TdxBarLargeButton
+    object btnSairReceber: TdxBarLargeButton
       Caption = 'Sair'
       Category = 0
       Hint = 'Sair'
@@ -2497,7 +2513,7 @@ object Frm_ListarContas: TFrm_ListarContas
         860D28B78FAE5DA54EAD5BF5D2CC8987527A7DAC9DBEC75236F73E4DA931C7F6
         C41DF505E0EF40B0A13152096A1F4270BB390A90091C6FA7EFF1FB6CA3FAD498
         173A0CD287FD6F88FF0C00AEEE5AE92D5AA0B30000000049454E44AE426082}
-      OnClick = dxBarLargeButton9Click
+      OnClick = btnSairReceberClick
     end
     object btnRLimpaFiltro: TdxBarLargeButton
       Caption = 'Limpar Filtro'
@@ -2661,12 +2677,13 @@ object Frm_ListarContas: TFrm_ListarContas
   end
   object ds_FiltroPagar: TDataSource
     DataSet = DM_Financeiro.Q_CPagarFiltro
+    OnStateChange = ds_FiltroPagarStateChange
     Left = 638
     Top = 368
   end
   object ds_CatPagar: TDataSource
     DataSet = DM_Financeiro.Q_CatFiltro
-    Left = 568
+    Left = 563
     Top = 368
   end
 end

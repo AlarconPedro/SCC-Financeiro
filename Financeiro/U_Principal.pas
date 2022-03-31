@@ -18,7 +18,7 @@ type
     NavBar: TdxRibbon;
     itensRibbon: TdxRibbonPopupMenu;
     NavBarContas: TdxRibbonTab;
-    btnCPagar: TdxBarLargeButton;
+    btnCadContas: TdxBarLargeButton;
     btnContasReceber: TdxBarLargeButton;
     navCadastroOld: TdxBar;
     navUsuário: TdxBar;
@@ -44,7 +44,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnAlterarContaClick(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
-    procedure btnCPagarClick(Sender: TObject);
+    procedure btnCadContasClick(Sender: TObject);
     procedure btnContasReceberClick(Sender: TObject);
     procedure btnNovaCategoriaClick(Sender: TObject);
     procedure btnContaFixaClick(Sender: TObject);
@@ -92,9 +92,11 @@ begin
  Frm_CadastroContas.ShowModal;
 end;
 
-procedure TFrm_Principal.btnCPagarClick(Sender: TObject);
+procedure TFrm_Principal.btnCadContasClick(Sender: TObject);
 begin
   Frm_CadastroContas := CriaFormularioModal(TFrm_CadastroContas) as TFrm_CadastroContas;
+  if Frm_ListarContas <> nil then
+    Frm_ListarContas.AtualizaValor;
 end;
 
 procedure TFrm_Principal.btnListarContasClick(Sender: TObject);

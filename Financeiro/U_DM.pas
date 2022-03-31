@@ -73,6 +73,8 @@ type
     Q_CatFiltro: TIBQuery;
     Q_CatFiltroCAT_CODIGO: TIntegerField;
     Q_CatFiltroNOME: TIBStringField;
+    Up_CPagarFiltro: TIBUpdateSQL;
+    Up_CReceberFiltro: TIBUpdateSQL;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);
@@ -86,10 +88,13 @@ type
     procedure Q_ContasPagarBeforeOpen(DataSet: TDataSet);
     procedure Q_ContasReceberBeforeOpen(DataSet: TDataSet);
     procedure Q_CategoriasAfterDelete(DataSet: TDataSet);
-    procedure Q_CategoriasAfterInsert(DataSet: TDataSet);
     procedure Q_CategoriasAfterPost(DataSet: TDataSet);
     procedure Q_CPagarFiltroSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
+    procedure Q_CPagarFiltroAfterPost(DataSet: TDataSet);
+    procedure Q_CReceberFiltroSTATUSGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure Q_CReceberFiltroAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -133,12 +138,6 @@ begin
 end;
 
 procedure TDM_Financeiro.Q_CategoriasAfterDelete(DataSet: TDataSet);
-begin
-  Q_Categorias.ApplyUpdates;
-  Trans_Financeiro.CommitRetaining;
-end;
-
-procedure TDM_Financeiro.Q_CategoriasAfterInsert(DataSet: TDataSet);
 begin
   Q_Categorias.ApplyUpdates;
   Trans_Financeiro.CommitRetaining;
@@ -215,6 +214,14 @@ begin
   Q_ContasReceber.ParamByName('usuario').AsInteger := UsuarioLogado;
 end;
 
+procedure TDM_Financeiro.Q_CPagarFiltroAfterPost(DataSet: TDataSet);
+begin
+  Q_CPagarFiltro.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+  Q_CPagarFiltro.Close;
+  Q_CPagarFiltro.Open;
+end;
+
 procedure TDM_Financeiro.Q_CPagarFiltroSTATUSGetText(Sender: TField;
   var Text: string; DisplayText: Boolean);
 begin
@@ -223,6 +230,23 @@ begin
   else
     Text := 'Pago';
   end;
+
+procedure TDM_Financeiro.Q_CReceberFiltroAfterPost(DataSet: TDataSet);
+begin
+  Q_CReceberFiltro.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+  Q_CReceberFiltro.Close;
+  Q_CReceberFiltro.Open;
+end;
+
+procedure TDM_Financeiro.Q_CReceberFiltroSTATUSGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if Sender.Asstring = '0' then
+    Text := 'Pendente'
+  else
+    Text := 'Pago';
+end;
 
 procedure TDM_Financeiro.Q_UsuarioAfterDelete(DataSet: TDataSet);
 begin
