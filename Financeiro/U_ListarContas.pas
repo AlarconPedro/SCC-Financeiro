@@ -8,7 +8,7 @@ uses
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
   dxRibbonCustomizationForm, dxBar, dxRibbon, cxClasses, dxStatusBar,
   dxRibbonStatusBar, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker, Vcl.DBCtrls;
+  Vcl.ComCtrls, Vcl.DBCtrls;
 
 type
   TFrm_ListarContas = class(TForm)

@@ -465,10 +465,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
     BevelOuter = bvNone
     TabOrder = 2
     Visible = False
-    ExplicitLeft = 104
-    ExplicitTop = 224
-    ExplicitWidth = 540
-    ExplicitHeight = 174
     object GroupBox2: TGroupBox
       Left = 0
       Top = 0

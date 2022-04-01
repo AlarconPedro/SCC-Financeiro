@@ -29,7 +29,6 @@ object Frm_ListarContas: TFrm_ListarContas
     Caption = 'pnl_Receber'
     TabOrder = 1
     Visible = False
-    ExplicitWidth = 700
     object gb_Filtro: TGroupBox
       Left = 1
       Top = 1
@@ -38,7 +37,6 @@ object Frm_ListarContas: TFrm_ListarContas
       Align = alTop
       Caption = 'Filtros'
       TabOrder = 0
-      ExplicitWidth = 698
       object Label6: TLabel
         Left = 16
         Top = 30
@@ -181,7 +179,6 @@ object Frm_ListarContas: TFrm_ListarContas
     TabOrder = 0
     TabStop = False
     OnTabChanging = navbarListarContasTabChanging
-    ExplicitWidth = 700
     object navContasPagar: TdxRibbonTab
       Active = True
       Caption = 'Contas a Pagar'
@@ -258,7 +255,6 @@ object Frm_ListarContas: TFrm_ListarContas
     ShowHint = False
     ParentShowHint = False
     PopupMenu = itensContas
-    ExplicitWidth = 700
   end
   object pnl_Pagar: TPanel
     Left = 0
@@ -268,10 +264,6 @@ object Frm_ListarContas: TFrm_ListarContas
     Align = alClient
     Caption = 'pnl_Pagar'
     TabOrder = 3
-    ExplicitLeft = 248
-    ExplicitTop = 288
-    ExplicitWidth = 452
-    ExplicitHeight = 125
     object dbg_Pagar: TDBGrid
       Left = 1
       Top = 55
@@ -331,7 +323,6 @@ object Frm_ListarContas: TFrm_ListarContas
       Align = alTop
       Caption = 'Filtros'
       TabOrder = 0
-      ExplicitWidth = 698
       object Label1: TLabel
         Left = 8
         Top = 22
