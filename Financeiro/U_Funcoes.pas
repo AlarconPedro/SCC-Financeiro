@@ -5,11 +5,7 @@ interface
 uses
   Windows, filectrl, Printers, Winsock, MMSystem, Forms, ShellApi, SysUtils, DB,
   MD5, IBX.IB, StdCtrls, Classes, registry, IBX.IBDatabase, DBCtrls, Messages, IniFiles,
-  Controls, IBX.IBStoredProc, Urlmon, Buttons, Dialogs, IBX.IBQuery, AdvGlowButton,
-  AdvToolBar, AdvToolBarStylers, AdvMenus, AdvMenuStylers, AdvOfficeStatusBar,
-  AdvOfficeStatusBarStylers, AdvOfficeHint, ImgList, AdvNavBar, AdvShapeButton,
-  AdvOfficePager, AdvOfficePagerStylers, AdvPanel, JvDatePickerEdit, Graphics,
-  JvDBDatePickerEdit, ACBrBoleto, Menus,  IdHTTP, IdFTP, IdMultiPartFormData, IdAntiFreeze, IdAntiFreezeBase, IdStackWindows,
+  Controls, IBX.IBStoredProc, Urlmon, Buttons, Dialogs, IBX.IBQuery, Menus,  IdHTTP, IdFTP, IdMultiPartFormData, IdAntiFreeze, IdAntiFreezeBase, IdStackWindows,
   cxTextEdit;
 
 const
@@ -245,11 +241,9 @@ end;
 //  procedure AlteraCadastrada(Arquivo, Status: String);
   procedure RetiraReadOnlyArquivo(sArquivo: String);
   procedure AtualizaScroll(Sender: TControl; DataSet: TDataSet);
-  procedure FormPadrao(nomeForm: TForm);
   function ChamaFormaPagamentos(Form: TForm; FormClass : TFormClass):Boolean;
   procedure AbrirRelatorio(blnDesigner: Boolean; Arquivo : String; DataSource : TDataSource);
   function Criptografia(Action, Src: String): String;
-  function retornaTipoCobranca(iNumero: Integer): TACBrTipoCobranca;
   function AnoBiSexto(Ano: Integer): Boolean;
   function DiasPorMes(Ano, Mes: Integer): Integer;
   function DataExtenso(Data: TDateTime; tipo: integer): String;
@@ -2206,127 +2200,6 @@ begin
   RetornaDiaSemana:=DiaDasemana[NoDia];
 end;
 
-procedure FormPadrao(nomeForm: TForm);
-var
-  x, y: Integer;
-begin
-  With TForm(nomeForm) do
-  begin
-    Position := poScreenCenter;
-    for y := 0 To ComponentCount -1 Do
-    begin
-      TAdvGlowButton(Components[y]).Appearance.BorderColor := $00C0BCB2;
-      TAdvGlowButton(Components[y]).Appearance.BorderColorChecked := clBlack;
-      TAdvGlowButton(Components[y]).Appearance.BorderColorDisabled := clGray;
-      TAdvGlowButton(Components[y]).Appearance.BorderColorDown := $0045667B;
-      TAdvGlowButton(Components[y]).Appearance.BorderColorHot := $0099CEDB;
-      TAdvGlowButton(Components[y]).Appearance.Color := $00DFDED6;
-      TAdvGlowButton(Components[y]).Appearance.ColorChecked := $0078C7FE;
-      TAdvGlowButton(Components[y]).Appearance.ColorCheckedTo := $00B5DBFB;
-      TAdvGlowButton(Components[y]).Appearance.ColorDisabled := $00F2F2F2;
-      TAdvGlowButton(Components[y]).Appearance.ColorDisabledTo := $00F2F2F2;
-      TAdvGlowButton(Components[y]).Appearance.ColorDown := $0076AFF1;
-      TAdvGlowButton(Components[y]).Appearance.ColorDownTo := $004190F3;
-      TAdvGlowButton(Components[y]).Appearance.ColorHot := $00EBFDFF;
-      TAdvGlowButton(Components[y]).Appearance.ColorHotTo := $00ACECFF;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirror := $00D7D5CE;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorChecked := $009FEBFD;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorCheckedTo := $0056B4FE;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorDisabled := $00B6B6B6;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorDisabledTo := $00F2F2F2;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorDown := $000E72F1;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorDownTo := $004C9FFD;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorHot := $0059DAFF;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorHotTo := $00A4E9FF;
-      TAdvGlowButton(Components[y]).Appearance.ColorMirrorTo := $00E7E5E0;
-      TAdvGlowButton(Components[y]).Appearance.ColorTo := $00E4E2DB;
-      If Components[y] Is TAdvGlowMenuButton Then
-      begin
-        TAdvGlowMenuButton(Components[y]).Appearance.BorderColor := $00C0BCB2;
-        TAdvGlowMenuButton(Components[y]).Appearance.BorderColorChecked := clBlack;
-        TAdvGlowMenuButton(Components[y]).Appearance.BorderColorDisabled := clGray;
-        TAdvGlowMenuButton(Components[y]).Appearance.BorderColorDown := $0045667B;
-        TAdvGlowMenuButton(Components[y]).Appearance.BorderColorHot := $0099CEDB;
-        TAdvGlowMenuButton(Components[y]).Appearance.Color := $00DFDED6;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorChecked := $0078C7FE;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorCheckedTo := $00B5DBFB;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorDisabled := $00F2F2F2;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorDisabledTo := $00F2F2F2;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorDown := $0076AFF1;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorDownTo := $004190F3;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorHot := $00EBFDFF;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorHotTo := $00ACECFF;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirror := $00D7D5CE;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorChecked := $009FEBFD;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorCheckedTo := $0056B4FE;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorDisabled := $00B6B6B6;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorDisabledTo := $00F2F2F2;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorDown := $000E72F1;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorDownTo := $004C9FFD;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorHot := $0059DAFF;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorHotTo := $00A4E9FF;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorMirrorTo := $00E7E5E0;
-        TAdvGlowMenuButton(Components[y]).Appearance.ColorTo := $00E4E2DB;
-      end;
-      If Components[y] Is TDBAdvGlowButton Then
-      begin
-        TDBAdvGlowButton(Components[y]).Appearance.BorderColor := $00C0BCB2;
-        TDBAdvGlowButton(Components[y]).Appearance.BorderColorChecked := clBlack;
-        TDBAdvGlowButton(Components[y]).Appearance.BorderColorDisabled := clGray;
-        TDBAdvGlowButton(Components[y]).Appearance.BorderColorDown := $0045667B;
-        TDBAdvGlowButton(Components[y]).Appearance.BorderColorHot := $0099CEDB;
-        TDBAdvGlowButton(Components[y]).Appearance.Color := $00DFDED6;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorChecked := $0078C7FE;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorCheckedTo := $00B5DBFB;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorDisabled := $00F2F2F2;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorDisabledTo := $00F2F2F2;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorDown := $0076AFF1;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorDownTo := $004190F3;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorHot := $00EBFDFF;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorHotTo := $00ACECFF;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirror := $00D7D5CE;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorChecked := $009FEBFD;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorCheckedTo := $0056B4FE;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorDisabled := $00B6B6B6;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorDisabledTo := $00F2F2F2;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorDown := $000E72F1;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorDownTo := $004C9FFD;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorHot := $0059DAFF;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorHotTo := $00A4E9FF;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorMirrorTo := $00E7E5E0;
-        TDBAdvGlowButton(Components[y]).Appearance.ColorTo := $00E4E2DB;
-      end;
-      If Components[y] Is TDbEdit Then
-      begin
-        TDbEdit(Components[y]).BevelInner  := bvSpace;
-        TDbEdit(Components[y]).BevelKind   := bkFlat;
-        TDbEdit(Components[y]).BevelOuter  := bvRaised;
-        TDbEdit(Components[y]).BorderStyle := bsNone;
-        if TDBEdit(Components[y]).Tag = 1 then
-          TDbEdit(Components[y]).Color := $00C4FEFF
-        else
-          TDbEdit(Components[y]).Color := clWindow;
-      end;
-
-      If Components[y] Is TEdit Then
-      begin
-      TEdit(Components[y]).Color := clWindow;
-        TEdit(Components[y]).BevelInner  := bvSpace;
-        TEdit(Components[y]).BevelKind   := bkFlat;
-        TEdit(Components[y]).BevelOuter  := bvRaised;
-        TEdit(Components[y]).BorderStyle := bsNone;
-      end;
-      if Components[y] Is TJvDBDatePickerEdit then
-      begin
-        TJvDBDatePickerEdit(Components[Y]).BevelInner := bvSpace;
-        TJvDBDatePickerEdit(Components[Y]).BevelKind := bkFlat;
-        TJvDBDatePickerEdit(Components[Y]).BevelOuter := bvRaised;
-        TJvDBDatePickerEdit(Components[Y]).BorderStyle := bsNone;
-      end;
-    end;
-  end;
-end;
-
 function StrZero( Const nNum: integer; Const nLen: integer ): String;
 var
   nTam: integer;
@@ -2421,29 +2294,6 @@ begin
   end;
   Result:= Dest;
   Fim:
-end;
-
-function retornaTipoCobranca(iNumero: Integer): TACBrTipoCobranca;
-begin
-  case iNumero of
-      1: Result := cobBancoDoBrasil;
-      4: Result := cobBancoDoNordeste;
-     21: Result := cobBanestes;
-     33: Result := cobSantander;
-     41: Result := cobBanrisul;
-     70: Result := cobBRB;
-     85: Result := cobBancoCECRED;
-    104: Result := cobCaixaEconomica;
-    237: Result := cobBradesco;
-    341: Result := cobItau;
-    389: Result := cobBancoMercantil;
-    399: Result := cobHSBC;
-    422: Result := cobBancoSafra;
-    748: Result := cobSicred;
-    756: Result := cobBancoob;
-  else
-    Result := cobNenhum;
-  end;
 end;
 
 function AnoBiSexto(Ano: Integer): Boolean;
