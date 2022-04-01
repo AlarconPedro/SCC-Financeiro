@@ -83,8 +83,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure rg_VencimentoReceberClick(Sender: TObject);
     procedure rg_VencimentoPagarClick(Sender: TObject);
+    procedure btnExcluirReceberClick(Sender: TObject);
   private
     procedure OrganizaCampos;
+    procedure AtualizaBotao;
     { Private declarations }
   public
     procedure AtualizaValor;
@@ -108,6 +110,7 @@ if not DM_Financeiro.Q_CPagarFiltro.IsEmpty then
     DM_Financeiro.Q_CPagarFiltroSTATUS.AsInteger := 0;
     DM_Financeiro.Q_CPagarFiltro.Post;
     AtualizaValor;
+    AtualizaBotao;
   end;
 end;
 
@@ -117,6 +120,16 @@ begin
       DM_Financeiro.Q_CPagarFiltro.Delete;
 
    AtualizaValor;
+   AtualizaBotao;
+end;
+
+procedure TFrm_ListarContas.btnExcluirReceberClick(Sender: TObject);
+begin
+  if (Application.MessageBox(PChar('Deseja realmente excluir está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+      DM_Financeiro.Q_CReceberFiltro.Delete;
+
+   AtualizaValor;
+   AtualizaBotao;
 end;
 
 procedure TFrm_ListarContas.btnFiltrarPagarClick(Sender: TObject);
@@ -148,6 +161,7 @@ begin
 
   DM_Financeiro.Q_CPagarFiltro.Open;
   AtualizaValor;
+  AtualizaBotao;
 
 end;
 
@@ -179,6 +193,7 @@ begin
 
   DM_Financeiro.Q_CReceberFiltro.Open;
   AtualizaValor;
+  AtualizaBotao;
 end;
 
 procedure TFrm_ListarContas.btnPagarClick(Sender: TObject);
@@ -189,6 +204,7 @@ begin
       DM_Financeiro.Q_CPagarFiltroSTATUS.Value := 1;
       DM_Financeiro.Q_CPagarFiltro.Post;
       AtualizaValor;
+      AtualizaBotao;
     end;
 end;
 
@@ -201,22 +217,31 @@ procedure TFrm_ListarContas.ds_FiltroPagarStateChange(Sender: TObject);
 begin
   btnExcluirPagar.Enabled := (DM_Financeiro.Q_CPagarFiltro.State = dsBrowse);
   btnExcluirReceber.Enabled := (DM_Financeiro.Q_CReceberFiltro.State = dsBrowse);
+  AtualizaBotao;
 end;
 
 procedure TFrm_ListarContas.btnReceberClick(Sender: TObject);
 begin
-  DM_Financeiro.Q_CReceberFiltro.Edit;
-  DM_Financeiro.Q_CReceberFiltroSTATUS.Value := 1;
-  DM_Financeiro.Q_CReceberFiltro.Post;
-  AtualizaValor;
+  if not DM_Financeiro.Q_CReceberFiltro.IsEmpty then
+    begin
+      DM_Financeiro.Q_CReceberFiltro.Edit;
+      DM_Financeiro.Q_CReceberFiltroSTATUS.Value := 1;
+      DM_Financeiro.Q_CReceberFiltro.Post;
+      AtualizaValor;
+      AtualizaBotao;
+    end;
 end;
 
 procedure TFrm_ListarContas.btnEstornarClick(Sender: TObject);
 begin
-  DM_Financeiro.Q_CReceberFiltro.Edit;
-  DM_Financeiro.Q_CReceberFiltroSTATUS.Value := 0;
-  DM_Financeiro.Q_CReceberFiltro.Post;
-  AtualizaValor;
+  if not DM_Financeiro.Q_CReceberFiltro.IsEmpty then
+    begin
+      DM_Financeiro.Q_CReceberFiltro.Edit;
+      DM_Financeiro.Q_CReceberFiltroSTATUS.Value := 0;
+      DM_Financeiro.Q_CReceberFiltro.Post;
+      AtualizaValor;
+      AtualizaBotao;
+    end;
 end;
 
 procedure TFrm_ListarContas.btnSairReceberClick(Sender: TObject);
@@ -228,6 +253,7 @@ procedure TFrm_ListarContas.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   action := cafree;
+//  Frm_Principal.NavBar.Tabs.Items[0].Active := true;
   Frm_Principal.btnListarContas.Enabled := true;
 end;
 
@@ -284,16 +310,26 @@ begin
   DM_Financeiro.Q_CatFiltro.Close;
   DM_Financeiro.Q_CatFiltro.Open;
   DM_Financeiro.Q_CatFiltro.FetchAll;
+
   DM_Financeiro.Q_Soma.Close;
   DM_Financeiro.Q_Soma.ParamByName('pusuario').AsInteger := DM_Financeiro.UsuarioLogado;
   DM_Financeiro.Q_Soma.ParamByName('rusuario').AsInteger := DM_Financeiro.UsuarioLogado;
+
   rg_VencimentoReceber.ItemIndex := 0;
   rg_VencimentoPagar.ItemIndex := 0;
+
   dataDeReceber.Date := Date;
   dataAReceber.Date := Date;
+  dataDePagar.Date := Date;
+  dataAPagar.Date := Date;
+
   DM_Financeiro.Q_Soma.Open;
+
   WindowState := wsMaximized;
   AtualizaValor;
+  AtualizaBotao;
+
+
 end;
 
 procedure TFrm_ListarContas.navbarListarContasTabChanging(
@@ -301,7 +337,8 @@ procedure TFrm_ListarContas.navbarListarContasTabChanging(
 begin
     pnl_Receber.Visible := navContasReceber.Active;
     pnl_Pagar.Visible := navContasPagar.Active;
-    AtualizaValor;
+
+
 end;
 
 procedure TFrm_ListarContas.AtualizaValor;
@@ -309,5 +346,44 @@ procedure TFrm_ListarContas.AtualizaValor;
    totalBar.Panels.Items[0].Text := 'Total a Pagar: R$ ' + FormatCurr('##.###,##',DM_Financeiro.Q_SomaTPAGAR.AsCurrency);
    totalBar.Panels.Items[1].Text := 'Total a Receber: R$ ' + FormatCurr('##.###,##',DM_Financeiro.Q_SomaTRECEBER.AsCurrency);
    totalBar.Panels.Items[2].Text := 'Total Líquido: R$ ' + FormatCurr('##.###,##',DM_Financeiro.Q_SomaTOTAL.AsCurrency);
+  end;
+
+procedure TFrm_ListarContas.AtualizaBotao;
+  begin
+    if cb_Status.ItemIndex = 0 then
+      begin
+        btnPagar.Enabled := true;
+        btnEstornarPagar.Enabled := true;
+      end;
+
+    if cb_Status.ItemIndex = 1 then
+      begin
+        btnPagar.Enabled := (not DM_Financeiro.Q_CPagarFiltro.IsEmpty);
+        btnEstornarPagar.Enabled := false;
+      end;
+
+    if cb_Status.ItemIndex = 2 then
+      begin
+        btnPagar.Enabled := false;
+        btnEstornarPagar.Enabled := (not DM_Financeiro.Q_CPagarFiltro.IsEmpty);
+      end;
+
+      if cb_StatusReceber.ItemIndex = 0 then
+      begin
+        btnReceber.Enabled := true;
+        btnEstornar.Enabled := true;
+      end;
+
+    if cb_StatusReceber.ItemIndex = 1 then
+      begin
+        btnReceber.Enabled := (not DM_Financeiro.Q_CReceberFiltro.IsEmpty);
+        btnEstornar.Enabled := false;
+      end;
+
+    if cb_StatusReceber.ItemIndex = 2 then
+      begin
+        btnReceber.Enabled := false;
+        btnEstornar.Enabled := (not DM_Financeiro.Q_CReceberFiltro.IsEmpty);
+      end;
   end;
 end.

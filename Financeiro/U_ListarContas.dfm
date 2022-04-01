@@ -13,6 +13,7 @@ object Frm_ListarContas: TFrm_ListarContas
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnPaint = FormPaint
@@ -179,6 +180,8 @@ object Frm_ListarContas: TFrm_ListarContas
     TabOrder = 0
     TabStop = False
     OnTabChanging = navbarListarContasTabChanging
+    ExplicitLeft = -1
+    ExplicitTop = 3
     object navContasPagar: TdxRibbonTab
       Active = True
       Caption = 'Contas a Pagar'
@@ -2348,6 +2351,7 @@ object Frm_ListarContas: TFrm_ListarContas
         F4EE6B971EEBEF9BFFF9F77F8E7F7EF9A777803C7011F8945849388D1AF51A70
         0D781A2845C08D4C68CB40DD0943FDAD25C48C946A1A380C8C477324AE578BBD
         FE37C4FD01005A8F664026A9BF410000000049454E44AE426082}
+      OnClick = btnExcluirReceberClick
     end
     object btnSairReceber: TdxBarLargeButton
       Caption = 'Sair'

@@ -89,6 +89,9 @@ procedure TFrm_CadastroContas.btnCancelarContasClick(Sender: TObject);
 begin
  DM_Financeiro.Q_ContasPagar.Cancel;
  DM_Financeiro.Q_ContasReceber.Cancel;
+
+ btnCPagarCad.Enabled := (pnlContasReceber.Visible = true);
+ btnCReceberCad.Enabled := (pnlContasPagar.Visible = true);
 end;
 
 procedure TFrm_CadastroContas.btnCPagarCadClick(Sender: TObject);
@@ -99,7 +102,9 @@ begin
  btnCPagarCad.Enabled := false;
  btnCReceberCad.Enabled := true;
  btnNovaConta.Enabled := true;
-end;
+ btnEditContas.Enabled := true;
+ btnDeleteContas.Enabled := true;
+ end;
 
 procedure TFrm_CadastroContas.btnCReceberCadClick(Sender: TObject);
 begin
@@ -109,6 +114,8 @@ begin
  btnCReceberCad.Enabled := false;
  btnCPagarCad.Enabled := true;
  btnNovaConta.Enabled := true;
+ btnEditContas.Enabled := true;
+ btnDeleteContas.Enabled := true;
  end;
 
 procedure TFrm_CadastroContas.btnDeleteContasClick(Sender: TObject);
@@ -235,6 +242,8 @@ begin
  DM_Financeiro.Q_Soma.ParamByName('rusuario').AsInteger := DM_Financeiro.UsuarioLogado;
  DM_Financeiro.Q_Soma.Open;
  btnNovaConta.Enabled := false;
+ btnEditContas.Enabled := false;
+ btnDeleteContas.Enabled := false;
  AtualizaValor;
 end;
 

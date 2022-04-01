@@ -56,6 +56,7 @@ type
     procedure btnListarContasClick(Sender: TObject);
     procedure NavBarTabChanging(Sender: TdxCustomRibbon; ANewTab: TdxRibbonTab;
       var Allow: Boolean);
+    procedure FormPaint(Sender: TObject);
 
   private
     procedure DoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -141,6 +142,12 @@ end;
 procedure TFrm_Principal.FormCreate(Sender: TObject);
 begin
   MDIMain := Frm_Principal;
+end;
+
+procedure TFrm_Principal.FormPaint(Sender: TObject);
+begin
+  if NavBar.Tabs.Count > 1 then
+    NavBar.Tabs.Items[1].Active := true;
 end;
 
 procedure TFrm_Principal.FormShow(Sender: TObject);

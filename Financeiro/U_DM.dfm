@@ -4,8 +4,7 @@ object DM_Financeiro: TDM_Financeiro
   Height = 519
   Width = 722
   object DB_Financeiro: TIBDatabase
-    Connected = True
-    DatabaseName = 'D:\Desenvolvimento\Delphi\SCC-Financeiro\SCCDB.FDB'
+    DatabaseName = 'C:\UniAlfa\SCC\SCCDB.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -70,7 +69,8 @@ object DM_Financeiro: TDM_Financeiro
       '  USU_CODIGO,'
       '  NOME,'
       '  LOGIN,'
-      '  SENHA'
+      '  SENHA,'
+      '  ISADM'
       'from TB_USUARIOS '
       'where'
       '  USU_CODIGO = :USU_CODIGO')
@@ -80,14 +80,15 @@ object DM_Financeiro: TDM_Financeiro
       '  USU_CODIGO = :USU_CODIGO,'
       '  NOME = :NOME,'
       '  LOGIN = :LOGIN,'
-      '  SENHA = :SENHA'
+      '  SENHA = :SENHA,'
+      '  ISADM = :ISADM'
       'where'
       '  USU_CODIGO = :OLD_USU_CODIGO')
     InsertSQL.Strings = (
       'insert into TB_USUARIOS'
-      '  (USU_CODIGO, NOME, LOGIN, SENHA)'
+      '  (USU_CODIGO, NOME, LOGIN, SENHA, ISADM)'
       'values'
-      '  (:USU_CODIGO, :NOME, :LOGIN, :SENHA)')
+      '  (:USU_CODIGO, :NOME, :LOGIN, :SENHA, :ISADM)')
     DeleteSQL.Strings = (
       'delete from TB_USUARIOS'
       'where'
@@ -132,6 +133,11 @@ object DM_Financeiro: TDM_Financeiro
       Origin = '"TB_USUARIOS"."SENHA"'
       Required = True
       Size = 32
+    end
+    object Q_UsuarioISADM: TIBStringField
+      FieldName = 'ISADM'
+      Origin = '"TB_USUARIOS"."ISADM"'
+      Size = 1
     end
   end
   object Q_ContasPagar: TIBQuery

@@ -29,12 +29,12 @@ type
     btnExcluirUser: TdxBarLargeButton;
     btnCancelarCad: TdxBarLargeButton;
     ds_Usuarios: TDataSource;
-    DBGrid1: TDBGrid;
     navCadastroSair: TdxBar;
     btnSairCad: TdxBarLargeButton;
     dbeditLogin: TDBEdit;
     dbeditNome: TDBEdit;
     dbeditSenha: TDBEdit;
+    DBGrid1: TDBGrid;
     procedure btnSairCadClick(Sender: TObject);
     procedure btnSalvarUserClick(Sender: TObject);
     procedure btnAddUserClick(Sender: TObject);
@@ -54,7 +54,7 @@ var
 
 implementation
 
-uses U_DM, U_Login;
+uses U_DM, U_Login, U_Funcoes, U_Principal;
 
 {$R *.dfm}
 
@@ -71,7 +71,13 @@ end;
 
 procedure TFrm_CadastroUsuarios.btnExcluirUserClick(Sender: TObject);
 begin
-  if (Application.MessageBox(PChar('Deseja realmente excluir este usuário?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+  if DM_Financeiro.Q_UsuarioUSU_CODIGO.AsInteger = DM_Financeiro.UsuarioLogado then
+    if (Application.MessageBox(PChar('O Usuário que você está tentando excluir é o mesmo usuário que está logado, '+#13#13+'Deseja realmente excluir sua conta e tudo o que estiver relacionado a ela?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+    begin
+      DM_Financeiro.Q_Usuario.Delete;
+      Frm_Principal.btnAlterarConta.Click;
+    end
+  else if (Application.MessageBox(PChar('Deseja realmente excluir este usuário?'+#13#13+'Obs: Todas as contas cadastradas por este usuários serão excluidas, Deseja continuar?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
     DM_Financeiro.Q_Usuario.Delete;
 end;
 
@@ -83,6 +89,11 @@ procedure TFrm_CadastroUsuarios.btnSairCadClick(Sender: TObject);
 procedure TFrm_CadastroUsuarios.btnSalvarUserClick(Sender: TObject);
   begin
     DM_Financeiro.Q_Usuario.Post;
+    if not DBGrid1.Visible then
+    begin
+      Showmessage('Usuário cadastrado com sucesso!');
+      Close;
+    end;
   end;
 
 procedure TFrm_CadastroUsuarios.ds_UsuariosStateChange(Sender: TObject);
@@ -107,6 +118,14 @@ procedure TFrm_CadastroUsuarios.FormShow(Sender: TObject);
 begin
   DM_Financeiro.Q_Usuario.Close;
   DM_Financeiro.Q_Usuario.Open;
+  if DM_Financeiro.UsuarioLogado = 0 then
+  begin
+    DBGrid1.Visible := false;
+    Frm_CadastroUsuarios.Height := 270;
+    DM_Financeiro.Q_Usuario.Append;
+    btnCancelarCad.Enabled := false;
+    dbeditNome.SetFocus;
+  end;
 end;
 
 end.

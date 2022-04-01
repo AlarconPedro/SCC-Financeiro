@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, Vcl.Dialogs, Vcl.Forms, System.Inifiles, System.Classes, Data.DB, Data.FMTBcd, Data.SqlExpr,
-  IBX.IBCustomDataSet, IBX.IBDatabase, IBX.IBQuery, IBX.IBUpdateSQL, MD5;
+  IBX.IBCustomDataSet, IBX.IBDatabase, IBX.IBQuery, IBX.IBUpdateSQL, MD5, U_Funcoes;
 
 type
   TDM_Financeiro = class(TDataModule)
@@ -75,6 +75,7 @@ type
     Q_CatFiltroNOME: TIBStringField;
     Up_CPagarFiltro: TIBUpdateSQL;
     Up_CReceberFiltro: TIBUpdateSQL;
+    Q_UsuarioISADM: TIBStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure Q_UsuarioAfterPost(DataSet: TDataSet);
     procedure Q_UsuarioBeforePost(DataSet: TDataSet);
@@ -95,6 +96,7 @@ type
     procedure Q_CReceberFiltroSTATUSGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure Q_CReceberFiltroAfterPost(DataSet: TDataSet);
+    function VerificaTabelaVazia(Database: TIBDatabase; Tabela, CampoCodigo: String): Boolean;
   private
     { Private declarations }
   public
@@ -262,11 +264,31 @@ end;
 
 procedure TDM_Financeiro.Q_UsuarioBeforePost(DataSet: TDataSet);
 begin
-    if Q_UsuarioSENHA.AsString <> SenhaAtual then
-    begin
-        Q_Usuario.Edit;
-        Q_UsuarioSENHA.AsString := MD5Print(MD5String(DM_Financeiro.Q_UsuarioSENHA.AsString));
-    end;
+  if VerificaTabelaVazia(DB_Financeiro, 'TB_Usuarios', 'Usu_codigo') then
+    Q_UsuarioISADM.AsString := 'S'
+  else
+    Q_UsuarioISADM.AsString := 'N';
+
+  if Q_UsuarioSENHA.AsString <> SenhaAtual then
+    Q_UsuarioSENHA.AsString := MD5Print(MD5String(DM_Financeiro.Q_UsuarioSENHA.AsString));
 end;
+
+function TDM_Financeiro.VerificaTabelaVazia(Database: TIBDatabase; Tabela,
+  CampoCodigo: String): Boolean;
+var
+  Q: TIBQuery;
+begin
+  Q := TIBQuery.Create(nil);
+  try
+    Q.Database := Database;
+    Q.SQL.Add('SELECT ' + CampoCodigo + ' FROM ' + Tabela);
+    Q.Open;
+    Result := Q.IsEmpty;
+  finally
+    Q.Free;
+  end;
+end;
+
+
 
 end.
