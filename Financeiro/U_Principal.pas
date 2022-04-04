@@ -97,7 +97,12 @@ procedure TFrm_Principal.btnCadContasClick(Sender: TObject);
 begin
   Frm_CadastroContas := CriaFormularioModal(TFrm_CadastroContas) as TFrm_CadastroContas;
   if Frm_ListarContas <> nil then
-    Frm_ListarContas.AtualizaValor;
+    Frm_ListarContas.AtualizaValor
+  else
+    begin
+      btnListarContas.Enabled := true;
+      Frm_ListarContas.AtualizaValor;
+    end;
 end;
 
 procedure TFrm_Principal.btnListarContasClick(Sender: TObject);

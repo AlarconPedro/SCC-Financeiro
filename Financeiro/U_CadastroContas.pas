@@ -222,10 +222,16 @@ end;
 procedure TFrm_CadastroContas.btnNovaContaClick(Sender: TObject);
 begin
   if pnlContasReceber.Visible then
-    DM_Financeiro.Q_ContasReceber.Append;
+   begin
+     DM_Financeiro.Q_ContasReceber.Append;
+     edtDescricaoReceber.SetFocus;
+   end;
 
   if pnlContasPagar.Visible then
-     DM_Financeiro.Q_ContasPagar.Append;
+    begin
+      DM_Financeiro.Q_ContasPagar.Append;
+      edtDescricaoPagar.SetFocus;
+    end;
 end;
 
 procedure TFrm_CadastroContas.FormShow(Sender: TObject);

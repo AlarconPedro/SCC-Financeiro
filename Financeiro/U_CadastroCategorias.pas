@@ -64,7 +64,7 @@ begin
  DM_Financeiro.Q_Categorias.Edit;
 end;
 
-procedure TFrm_CadastroCategoria.       btnExcluirCategoriaClick(Sender: TObject);
+procedure TFrm_CadastroCategoria.btnExcluirCategoriaClick(Sender: TObject);
 begin
    if (Application.MessageBox(PChar('Deseja realmente excluir está conta?'+#13#13+'Obs: Todas as contas cadastradas com essa categoria serão excluidas, Deseja continuar?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
      DM_Financeiro.Q_Categorias.Delete;

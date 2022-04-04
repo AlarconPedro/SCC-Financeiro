@@ -97,6 +97,8 @@ type
       DisplayText: Boolean);
     procedure Q_CReceberFiltroAfterPost(DataSet: TDataSet);
     function VerificaTabelaVazia(Database: TIBDatabase; Tabela, CampoCodigo: String): Boolean;
+    procedure Q_CPagarFiltroAfterDelete(DataSet: TDataSet);
+    procedure Q_CReceberFiltroAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -216,6 +218,14 @@ begin
   Q_ContasReceber.ParamByName('usuario').AsInteger := UsuarioLogado;
 end;
 
+procedure TDM_Financeiro.Q_CPagarFiltroAfterDelete(DataSet: TDataSet);
+begin
+  Q_CPagarFiltro.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+  Q_CPagarFiltro.Close;
+  Q_CPagarFiltro.Open;
+end;
+
 procedure TDM_Financeiro.Q_CPagarFiltroAfterPost(DataSet: TDataSet);
 begin
   Q_CPagarFiltro.ApplyUpdates;
@@ -232,6 +242,14 @@ begin
   else
     Text := 'Pago';
   end;
+
+procedure TDM_Financeiro.Q_CReceberFiltroAfterDelete(DataSet: TDataSet);
+begin
+  Q_CReceberFiltro.ApplyUpdates;
+  Trans_Financeiro.CommitRetaining;
+  Q_CReceberFiltro.Close;
+  Q_CReceberFiltro.Open;
+end;
 
 procedure TDM_Financeiro.Q_CReceberFiltroAfterPost(DataSet: TDataSet);
 begin

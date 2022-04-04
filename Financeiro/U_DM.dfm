@@ -515,6 +515,7 @@ object DM_Financeiro: TDM_Financeiro
   object Q_CPagarFiltro: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
+    AfterDelete = Q_CPagarFiltroAfterDelete
     AfterPost = Q_CPagarFiltroAfterPost
     BufferChunks = 1000
     CachedUpdates = True
@@ -587,6 +588,7 @@ object DM_Financeiro: TDM_Financeiro
   object Q_CReceberFiltro: TIBQuery
     Database = DB_Financeiro
     Transaction = Trans_Financeiro
+    AfterDelete = Q_CReceberFiltroAfterDelete
     AfterPost = Q_CReceberFiltroAfterPost
     BufferChunks = 1000
     CachedUpdates = True

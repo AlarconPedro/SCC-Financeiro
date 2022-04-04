@@ -104,20 +104,28 @@ uses U_DM, U_CadastroContas, U_Principal;
 
 procedure TFrm_ListarContas.btnEstornarPagarClick(Sender: TObject);
 begin
-if not DM_Financeiro.Q_CPagarFiltro.IsEmpty then
+if (not DM_Financeiro.Q_CPagarFiltro.IsEmpty) and (DM_Financeiro.Q_CPagarFiltroSTATUS.AsInteger <> 0) then
   begin
-    DM_Financeiro.Q_CPagarFiltro.Edit;
-    DM_Financeiro.Q_CPagarFiltroSTATUS.AsInteger := 0;
-    DM_Financeiro.Q_CPagarFiltro.Post;
-    AtualizaValor;
-    AtualizaBotao;
-  end;
+    if (Application.MessageBox(PChar('Deseja realmente estornar está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+      begin
+        DM_Financeiro.Q_CPagarFiltro.Edit;
+        DM_Financeiro.Q_CPagarFiltroSTATUS.AsInteger := 0;
+        DM_Financeiro.Q_CPagarFiltro.Post;
+        AtualizaBotao;
+        ShowMessage('Conta estornada com sucesso !');
+        AtualizaValor;
+      end;
+  end else
+       ShowMessage('Não existe contas disponíveis para estorno !');
 end;
 
 procedure TFrm_ListarContas.btnExcluirPagarClick(Sender: TObject);
 begin
    if (Application.MessageBox(PChar('Deseja realmente excluir está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
-      DM_Financeiro.Q_CPagarFiltro.Delete;
+     begin
+        DM_Financeiro.Q_CPagarFiltro.Delete;
+        AtualizaValor;
+     end;
 
    AtualizaValor;
    AtualizaBotao;
@@ -126,7 +134,10 @@ end;
 procedure TFrm_ListarContas.btnExcluirReceberClick(Sender: TObject);
 begin
   if (Application.MessageBox(PChar('Deseja realmente excluir está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+    begin
       DM_Financeiro.Q_CReceberFiltro.Delete;
+      AtualizaValor;
+    end;
 
    AtualizaValor;
    AtualizaBotao;
@@ -198,14 +209,16 @@ end;
 
 procedure TFrm_ListarContas.btnPagarClick(Sender: TObject);
 begin
-  if not DM_Financeiro.Q_CPagarFiltro.IsEmpty then
+  if (not DM_Financeiro.Q_CPagarFiltro.IsEmpty) and (DM_Financeiro.Q_CPagarFiltroSTATUS.AsInteger <> 1) then
     begin
       DM_Financeiro.Q_CPagarFiltro.Edit;
       DM_Financeiro.Q_CPagarFiltroSTATUS.Value := 1;
       DM_Financeiro.Q_CPagarFiltro.Post;
-      AtualizaValor;
       AtualizaBotao;
-    end;
+      ShowMessage('Conta paga com Sucesso !');
+      AtualizaValor;
+    end else
+      ShowMessage('Não existe contas disponíveis para pagamento !');
 end;
 
 procedure TFrm_ListarContas.btnSairPagarClick(Sender: TObject);
@@ -222,26 +235,33 @@ end;
 
 procedure TFrm_ListarContas.btnReceberClick(Sender: TObject);
 begin
-  if not DM_Financeiro.Q_CReceberFiltro.IsEmpty then
+  if (not DM_Financeiro.Q_CReceberFiltro.IsEmpty) and (DM_Financeiro.Q_CReceberFiltroSTATUS.AsInteger <> 1) then
     begin
       DM_Financeiro.Q_CReceberFiltro.Edit;
       DM_Financeiro.Q_CReceberFiltroSTATUS.Value := 1;
       DM_Financeiro.Q_CReceberFiltro.Post;
       AtualizaValor;
       AtualizaBotao;
-    end;
+      ShowMessage('Conta recebida com sucesso !');
+    end else
+      ShowMessage('Não existe contas disponíveis para recebimento !');
 end;
 
 procedure TFrm_ListarContas.btnEstornarClick(Sender: TObject);
 begin
-  if not DM_Financeiro.Q_CReceberFiltro.IsEmpty then
+  if (not DM_Financeiro.Q_CReceberFiltro.IsEmpty) and (DM_Financeiro.Q_CReceberFiltroSTATUS.AsInteger <> 0) then
     begin
-      DM_Financeiro.Q_CReceberFiltro.Edit;
-      DM_Financeiro.Q_CReceberFiltroSTATUS.Value := 0;
-      DM_Financeiro.Q_CReceberFiltro.Post;
-      AtualizaValor;
-      AtualizaBotao;
-    end;
+      if (Application.MessageBox(PChar('Deseja realmente estornar está conta ?'), 'SCC', MB_YESNO + mb_DefButton1 + MB_ICONQUESTION + mb_TaskModal) = IDYES) then
+        begin
+          DM_Financeiro.Q_CReceberFiltro.Edit;
+          DM_Financeiro.Q_CReceberFiltroSTATUS.Value := 0;
+          DM_Financeiro.Q_CReceberFiltro.Post;
+          AtualizaValor;
+          AtualizaBotao;
+          ShowMessage('Conta estornada com sucesso !');
+        end;
+    end else
+      ShowMessage('Não existe contas disponíveis para estorno !');
 end;
 
 procedure TFrm_ListarContas.btnSairReceberClick(Sender: TObject);

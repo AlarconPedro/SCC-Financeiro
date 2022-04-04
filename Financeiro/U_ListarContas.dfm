@@ -180,8 +180,6 @@ object Frm_ListarContas: TFrm_ListarContas
     TabOrder = 0
     TabStop = False
     OnTabChanging = navbarListarContasTabChanging
-    ExplicitLeft = -1
-    ExplicitTop = 3
     object navContasPagar: TdxRibbonTab
       Active = True
       Caption = 'Contas a Pagar'
@@ -258,6 +256,8 @@ object Frm_ListarContas: TFrm_ListarContas
     ShowHint = False
     ParentShowHint = False
     PopupMenu = itensContas
+    ExplicitLeft = 5
+    ExplicitTop = 415
   end
   object pnl_Pagar: TPanel
     Left = 0
