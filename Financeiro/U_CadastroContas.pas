@@ -151,19 +151,19 @@ end;
 
 procedure TFrm_CadastroContas.btnSalvarContasClick(Sender: TObject);
 begin
-  if (edtDescricaoPagar.EditText.IsEmpty) then
+  if (edtDescricaoPagar.EditText.IsEmpty) or (edtDescricaoReceber.EditText.IsEmpty) then
   begin
     ShowMessage('É Necessário adicionar uma descrição para a conta !');
     Abort
   end;
 
-  if (edtVencimentoPagar.EditText.IsEmpty) then
+  if (edtVencimentoPagar.EditText.IsEmpty) or (edtVencimentoReceber.EditText.IsEmpty)then
   begin
     ShowMessage('É Necessário adicionar uma data de vencimento para a conta !');
     Abort
   end;
 
-  if (edtValorPagar.EditText.IsEmpty) then
+  if (edtValorPagar.EditText.IsEmpty) or (edtValorReceber.EditText.IsEmpty)then
   begin
     ShowMessage('É Necessário adicionar um valor para a conta !');
     Abort

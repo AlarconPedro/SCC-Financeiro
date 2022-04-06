@@ -3,7 +3,7 @@
         <ProjectGuid>{2542802C-CF99-4CD1-AB42-41125B59F1B2}</ProjectGuid>
         <MainSource>Financeiro.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>1153</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
