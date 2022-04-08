@@ -374,7 +374,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         Enabled = False
         TabOrder = 4
       end
-      object DBLookupComboBox1: TDBLookupComboBox
+      object edtCatPagar: TDBLookupComboBox
         Left = 340
         Top = 51
         Width = 133
@@ -451,7 +451,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end
         item
           Expanded = False
-          FieldName = 'PARCELAS'
+          FieldName = 'PARCELA'
           Visible = True
         end>
     end
@@ -465,6 +465,10 @@ object Frm_CadastroContas: TFrm_CadastroContas
     BevelOuter = bvNone
     TabOrder = 2
     Visible = False
+    ExplicitLeft = 48
+    ExplicitTop = 131
+    ExplicitWidth = 596
+    ExplicitHeight = 267
     object GroupBox2: TGroupBox
       Left = 0
       Top = 0
@@ -479,7 +483,8 @@ object Frm_CadastroContas: TFrm_CadastroContas
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      object Label5: TLabel
+      ExplicitTop = 47
+      object lbDescricaoReceber: TLabel
         Left = 6
         Top = 29
         Width = 50
@@ -563,7 +568,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         ListSource = ds_Categorias
         TabOrder = 3
       end
-      object DBRadioGroup1: TDBRadioGroup
+      object rg_FPagReceber: TDBRadioGroup
         Left = 477
         Top = 12
         Width = 142
@@ -622,13 +627,13 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end
         item
           Expanded = False
-          FieldName = 'VENCIMENTO'
+          FieldName = 'DATA_RECEBER'
           Width = 88
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'PARCELAS'
+          FieldName = 'PARCELA'
           Visible = True
         end>
     end

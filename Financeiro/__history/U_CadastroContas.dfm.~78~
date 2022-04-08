@@ -374,7 +374,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         Enabled = False
         TabOrder = 4
       end
-      object DBLookupComboBox1: TDBLookupComboBox
+      object edtCatPagar: TDBLookupComboBox
         Left = 340
         Top = 51
         Width = 133
@@ -479,7 +479,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      object Label5: TLabel
+      object lbDescricaoReceber: TLabel
         Left = 6
         Top = 29
         Width = 50
@@ -563,7 +563,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         ListSource = ds_Categorias
         TabOrder = 3
       end
-      object DBRadioGroup1: TDBRadioGroup
+      object rg_FPagReceber: TDBRadioGroup
         Left = 477
         Top = 12
         Width = 142
@@ -2105,7 +2105,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     AutoEdit = False
     DataSet = DM_Financeiro.Q_ContasReceber
     OnStateChange = ds_ContasReceberStateChange
-    Left = 504
+    Left = 496
     Top = 349
   end
 end
