@@ -151,19 +151,29 @@ end;
 
 procedure TFrm_CadastroContas.btnSalvarContasClick(Sender: TObject);
 begin
-  if (edtDescricaoPagar.EditText.IsEmpty) then
+  if (edtDescricaoPagar.EditText.IsEmpty and pnlContasPagar.Visible) then
   begin
     ShowMessage('É Necessário adicionar uma descrição para a conta !');
     Abort
   end;
 
-  if (edtVencimentoPagar.EditText.IsEmpty) then
+  if (edtDescricaoReceber.EditText.IsEmpty and pnlContasReceber.Visible) then
+  begin
+    ShowMessage('É Necessário adicionar uma descrição para a conta !');
+    Abort
+  end;
+
+  if (edtVencimentoPagar.EditText.IsEmpty and pnlContasPagar.Visible) then
   begin
     ShowMessage('É Necessário adicionar uma data de vencimento para a conta !');
     Abort
   end;
 
-  if (edtValorPagar.EditText.IsEmpty) then
+  if (edtVencimentoReceber.EditText.IsEmpty and pnlContasReceber.Visible) then
+    ShowMessage('É Necessário adicionar uma data de vencimento para a conta !');
+    Abort
+
+  if (edtValorPagar.EditText.IsEmpty) or (edtValorReceber.EditText.IsEmpty)then
   begin
     ShowMessage('É Necessário adicionar um valor para a conta !');
     Abort
@@ -222,10 +232,10 @@ end;
 procedure TFrm_CadastroContas.btnNovaContaClick(Sender: TObject);
 begin
   if pnlContasReceber.Visible then
-   begin
-     DM_Financeiro.Q_ContasReceber.Append;
-     edtDescricaoPagar.SetFocus;
-   end;
+     begin
+       DM_Financeiro.Q_ContasReceber.Append;
+       edtDescricaoReceber.SetFocus;
+     end;
 
   if pnlContasPagar.Visible then
     begin

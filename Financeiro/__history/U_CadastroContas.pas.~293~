@@ -146,7 +146,6 @@ end;
 
 procedure TFrm_CadastroContas.btnSairContasClick(Sender: TObject);
 begin
-  Frm_Principal.btnListarContas.Enabled := true;
   Close;
 end;
 
@@ -158,13 +157,19 @@ begin
     Abort
   end;
 
-  if (edtVencimentoPagar.EditText.IsEmpty) then
+  if (DM_Financeiro.Q_ContasPagarDESCRICAO.AsString = Null) then
+  begin
+    ShowMessage('É Necessário adicionar uma descrição para a conta !');
+    Abort
+  end;
+
+  if (edtVencimentoPagar.EditText.IsEmpty) or (edtVencimentoReceber.EditText.IsEmpty)then
   begin
     ShowMessage('É Necessário adicionar uma data de vencimento para a conta !');
     Abort
   end;
 
-  if (edtValorPagar.EditText.IsEmpty) then
+  if (edtValorPagar.EditText.IsEmpty) or (edtValorReceber.EditText.IsEmpty)then
   begin
     ShowMessage('É Necessário adicionar um valor para a conta !');
     Abort
@@ -223,10 +228,10 @@ end;
 procedure TFrm_CadastroContas.btnNovaContaClick(Sender: TObject);
 begin
   if pnlContasReceber.Visible then
-   begin
-     DM_Financeiro.Q_ContasReceber.Append;
-     edtDescricaoReceber.SetFocus;
-   end;
+     begin
+       DM_Financeiro.Q_ContasReceber.Append;
+       edtDescricaoReceber.SetFocus;
+     end;
 
   if pnlContasPagar.Visible then
     begin
