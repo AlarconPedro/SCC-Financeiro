@@ -4,8 +4,8 @@ object Frm_CadastroContas: TFrm_CadastroContas
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro de Contas'
-  ClientHeight = 421
-  ClientWidth = 644
+  ClientHeight = 451
+  ClientWidth = 654
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -245,14 +245,13 @@ object Frm_CadastroContas: TFrm_CadastroContas
     0000FFFF0000FFFF0000FFFF0000FFFFFFFFFFFF0000FFFFFFFFFFFF0000}
   OldCreateOrder = False
   Position = poScreenCenter
-  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object navContasBar: TdxRibbon
     Left = 0
     Top = 0
-    Width = 644
+    Width = 654
     Height = 125
     Cursor = crHandPoint
     BarManager = navContasCadastro
@@ -283,8 +282,8 @@ object Frm_CadastroContas: TFrm_CadastroContas
   object pnlContasPagar: TPanel
     Left = 0
     Top = 125
-    Width = 644
-    Height = 273
+    Width = 654
+    Height = 303
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -292,7 +291,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
     object GroupBox1: TGroupBox
       Left = 0
       Top = 0
-      Width = 644
+      Width = 654
       Height = 81
       Align = alTop
       Caption = 'Dados Contas a Pagar'
@@ -387,34 +386,12 @@ object Frm_CadastroContas: TFrm_CadastroContas
         ListSource = ds_Categorias
         TabOrder = 3
       end
-      object rg_FPagamentoPagar: TDBRadioGroup
-        Left = 477
-        Top = 12
-        Width = 142
-        Height = 33
-        Margins.Left = 0
-        Margins.Top = 0
-        Margins.Right = 0
-        Margins.Bottom = 0
-        Caption = 'Forma de Pagamento:'
-        Columns = 2
-        DataField = 'F_PAGAMENTO'
-        DataSource = ds_ContasPagar
-        Items.Strings = (
-          'A vista'
-          'Parcelado')
-        TabOrder = 5
-        Values.Strings = (
-          '0'
-          '1')
-        OnChange = rg_FPagamentoPagarChange
-      end
     end
     object gridContasPagar: TDBGrid
       Left = 0
       Top = 81
-      Width = 644
-      Height = 192
+      Width = 654
+      Height = 222
       Align = alClient
       DataSource = ds_ContasPagar
       FixedColor = clWhite
@@ -452,7 +429,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end
         item
           Expanded = False
-          FieldName = 'PARCELAS'
+          FieldName = 'PARCELA'
           Visible = True
         end>
     end
@@ -460,142 +437,17 @@ object Frm_CadastroContas: TFrm_CadastroContas
   object pnlContasReceber: TPanel
     Left = 0
     Top = 125
-    Width = 644
-    Height = 273
+    Width = 654
+    Height = 303
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
     Visible = False
-    ExplicitLeft = 104
-    ExplicitTop = 224
-    ExplicitWidth = 540
-    ExplicitHeight = 174
-    object GroupBox2: TGroupBox
-      Left = 0
-      Top = 0
-      Width = 644
-      Height = 81
-      Align = alTop
-      Caption = 'Dados Contas a Receber'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object lbDescricaoReceber: TLabel
-        Left = 6
-        Top = 29
-        Width = 50
-        Height = 13
-        Caption = 'Descri'#231#227'o:'
-      end
-      object TLabel
-        Left = 6
-        Top = 54
-        Width = 59
-        Height = 13
-        Caption = 'Vencimento:'
-      end
-      object Label6: TLabel
-        Left = 308
-        Top = 28
-        Width = 31
-        Height = 13
-        Caption = 'Valor: '
-      end
-      object Label7: TLabel
-        Left = 480
-        Top = 57
-        Width = 44
-        Height = 13
-        Caption = 'Parcelas:'
-      end
-      object Label8: TLabel
-        Left = 287
-        Top = 54
-        Width = 54
-        Height = 13
-        Caption = 'Categoria: '
-      end
-      object edtDescricaoReceber: TDBEdit
-        Left = 58
-        Top = 24
-        Width = 214
-        Height = 21
-        DataField = 'DESCRICAO'
-        DataSource = ds_ContasReceber
-        TabOrder = 0
-      end
-      object edtVencimentoReceber: TDBEdit
-        Left = 67
-        Top = 51
-        Width = 203
-        Height = 21
-        DataField = 'DATA_RECEBER'
-        DataSource = ds_ContasReceber
-        TabOrder = 1
-      end
-      object edtValorReceber: TDBEdit
-        Left = 340
-        Top = 24
-        Width = 133
-        Height = 21
-        DataField = 'VALOR'
-        DataSource = ds_ContasReceber
-        TabOrder = 2
-      end
-      object edtParcelasReceber: TDBEdit
-        Left = 530
-        Top = 54
-        Width = 89
-        Height = 21
-        DataField = 'PARCELA'
-        DataSource = ds_ContasReceber
-        Enabled = False
-        TabOrder = 4
-      end
-      object edtCatReceber: TDBLookupComboBox
-        Left = 340
-        Top = 51
-        Width = 133
-        Height = 21
-        DataField = 'CAT_CODIGO'
-        DataSource = ds_ContasReceber
-        KeyField = 'CAT_CODIGO'
-        ListField = 'NOME'
-        ListSource = ds_Categorias
-        TabOrder = 3
-      end
-      object rg_FPagReceber: TDBRadioGroup
-        Left = 477
-        Top = 12
-        Width = 142
-        Height = 33
-        Margins.Left = 0
-        Margins.Top = 0
-        Margins.Right = 0
-        Margins.Bottom = 0
-        Caption = 'Forma de Pagamento:'
-        Columns = 2
-        DataField = 'F_PAGAMENTO'
-        DataSource = ds_ContasReceber
-        Items.Strings = (
-          'A vista'
-          'Parcelado')
-        TabOrder = 5
-        Values.Strings = (
-          '0'
-          '1')
-        OnChange = rg_FPagamentoPagarChange
-      end
-    end
     object dgContasReceber: TDBGrid
       Left = 0
-      Top = 81
-      Width = 644
-      Height = 192
+      Top = 89
+      Width = 654
+      Height = 214
       Align = alClient
       DataSource = ds_ContasReceber
       FixedColor = clWhite
@@ -606,7 +458,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
       Font.Style = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
@@ -616,33 +468,233 @@ object Frm_CadastroContas: TFrm_CadastroContas
         item
           Expanded = False
           FieldName = 'DESCRICAO'
-          Width = 382
+          Width = 312
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'VALOR'
-          Width = 68
+          Width = 108
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'VENCIMENTO'
-          Width = 88
+          FieldName = 'DATA_RECEBER'
+          Width = 110
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'PARCELAS'
+          FieldName = 'PARCELA'
+          Width = 75
           Visible = True
         end>
+    end
+    object PContasReceber: TPanel
+      Left = 0
+      Top = 0
+      Width = 654
+      Height = 89
+      Align = alTop
+      TabOrder = 1
+      object GBAVistaReceber: TGroupBox
+        Left = 99
+        Top = 3
+        Width = 540
+        Height = 78
+        Align = alCustom
+        Caption = 'Dados Contas a Receber'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        object Label5: TLabel
+          Left = 7
+          Top = 21
+          Width = 50
+          Height = 13
+          Caption = 'Descri'#231#227'o:'
+        end
+        object TLabel
+          Left = 197
+          Top = 51
+          Width = 59
+          Height = 13
+          Caption = 'Vencimento:'
+        end
+        object Label9: TLabel
+          Left = 357
+          Top = 51
+          Width = 31
+          Height = 13
+          Caption = 'Valor: '
+        end
+        object Label11: TLabel
+          Left = 7
+          Top = 51
+          Width = 54
+          Height = 13
+          Caption = 'Categoria: '
+        end
+        object DBEdit1: TDBEdit
+          Left = 60
+          Top = 18
+          Width = 439
+          Height = 21
+          DataField = 'DESCRICAO'
+          DataSource = ds_ContasReceber
+          TabOrder = 0
+        end
+        object DBEdit2: TDBEdit
+          Left = 258
+          Top = 48
+          Width = 95
+          Height = 21
+          DataField = 'DATA_RECEBER'
+          DataSource = ds_ContasReceber
+          TabOrder = 1
+        end
+        object DBEdit3: TDBEdit
+          Left = 387
+          Top = 48
+          Width = 112
+          Height = 21
+          DataField = 'VALOR'
+          DataSource = ds_ContasReceber
+          TabOrder = 2
+        end
+        object DBLookupComboBox1: TDBLookupComboBox
+          Left = 60
+          Top = 48
+          Width = 133
+          Height = 21
+          DataField = 'CAT_CODIGO'
+          DataSource = ds_ContasReceber
+          KeyField = 'CAT_CODIGO'
+          ListField = 'NOME'
+          ListSource = ds_Categorias
+          TabOrder = 3
+        end
+      end
+      object GBParceladoReceber: TGroupBox
+        Left = 100
+        Top = 3
+        Width = 540
+        Height = 79
+        Align = alCustom
+        Caption = 'Dados Contas a Receber'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        object lbDescricaoReceber: TLabel
+          Left = 9
+          Top = 22
+          Width = 50
+          Height = 13
+          Caption = 'Descri'#231#227'o:'
+        end
+        object TLabel
+          Left = 319
+          Top = 55
+          Width = 73
+          Height = 13
+          Caption = 'Venc. 1'#170' Parc.:'
+        end
+        object Label6: TLabel
+          Left = 112
+          Top = 55
+          Width = 84
+          Height = 13
+          Caption = 'Valor da Parcela: '
+        end
+        object Label7: TLabel
+          Left = 9
+          Top = 55
+          Width = 44
+          Height = 13
+          Caption = 'Parcelas:'
+        end
+        object Label8: TLabel
+          Left = 319
+          Top = 22
+          Width = 54
+          Height = 13
+          Caption = 'Categoria: '
+        end
+        object edtCatReceber: TDBLookupComboBox
+          Left = 372
+          Top = 19
+          Width = 133
+          Height = 21
+          DataField = 'CAT_CODIGO'
+          DataSource = ds_ContasReceber
+          KeyField = 'CAT_CODIGO'
+          ListField = 'NOME'
+          ListSource = ds_Categorias
+          TabOrder = 0
+        end
+        object edtValorParcelaRec: TMaskEdit
+          Left = 195
+          Top = 52
+          Width = 121
+          Height = 21
+          TabOrder = 1
+          Text = 'edtValorParcelaRec'
+        end
+        object edtDescRecParcelado: TEdit
+          Left = 59
+          Top = 19
+          Width = 257
+          Height = 21
+          TabOrder = 2
+        end
+        object spParcelas: TSpinEdit
+          Left = 59
+          Top = 52
+          Width = 49
+          Height = 22
+          MaxValue = 0
+          MinValue = 1
+          TabOrder = 3
+          Value = 1
+        end
+        object edtVenc1Parcela: TDateTimePicker
+          Left = 397
+          Top = 50
+          Width = 108
+          Height = 21
+          Date = 44659.000000000000000000
+          Time = 0.666692800929013200
+          TabOrder = 4
+        end
+      end
+      object RGFormaPagtoReceber: TRadioGroup
+        Left = 6
+        Top = 3
+        Width = 90
+        Height = 78
+        Caption = 'Forma Pagto:'
+        ItemIndex = 0
+        Items.Strings = (
+          #192' Vista'
+          'Parcelado')
+        TabOrder = 2
+        OnClick = RGFormaPagtoReceberClick
+      end
     end
   end
   object totalBar: TdxRibbonStatusBar
     AlignWithMargins = True
     Left = 0
-    Top = 398
-    Width = 644
+    Top = 428
+    Width = 654
     Height = 23
     Margins.Left = 0
     Margins.Top = 0
@@ -2098,19 +2150,19 @@ object Frm_CadastroContas: TFrm_CadastroContas
   object ds_ContasPagar: TDataSource
     DataSet = DM_Financeiro.Q_ContasPagar
     OnStateChange = ds_ContasPagarStateChange
-    Left = 584
+    Left = 594
     Top = 349
   end
   object ds_Categorias: TDataSource
     DataSet = DM_Financeiro.Q_Categorias
-    Left = 584
+    Left = 594
     Top = 301
   end
   object ds_ContasReceber: TDataSource
     AutoEdit = False
     DataSet = DM_Financeiro.Q_ContasReceber
     OnStateChange = ds_ContasReceberStateChange
-    Left = 496
+    Left = 506
     Top = 349
   end
 end

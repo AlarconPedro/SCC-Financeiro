@@ -256,8 +256,6 @@ object Frm_ListarContas: TFrm_ListarContas
     ShowHint = False
     ParentShowHint = False
     PopupMenu = itensContas
-    ExplicitLeft = 5
-    ExplicitTop = 415
   end
   object pnl_Pagar: TPanel
     Left = 0

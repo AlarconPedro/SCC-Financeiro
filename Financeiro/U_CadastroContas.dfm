@@ -260,7 +260,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 730
     object NavBarContas: TdxRibbonTab
       Active = True
       Caption = ' Cadastro de Contas'
@@ -289,8 +288,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
     BevelOuter = bvNone
     TabOrder = 1
     Visible = False
-    ExplicitWidth = 730
-    ExplicitHeight = 273
     object GroupBox1: TGroupBox
       Left = 0
       Top = 0
@@ -305,7 +302,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 730
       object Label1: TLabel
         Left = 6
         Top = 29
@@ -390,28 +386,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
         ListSource = ds_Categorias
         TabOrder = 3
       end
-      object rg_FPagamentoPagar: TDBRadioGroup
-        Left = 477
-        Top = 12
-        Width = 142
-        Height = 33
-        Margins.Left = 0
-        Margins.Top = 0
-        Margins.Right = 0
-        Margins.Bottom = 0
-        Caption = 'Forma de Pagamento:'
-        Columns = 2
-        DataField = 'F_PAGAMENTO'
-        DataSource = ds_ContasPagar
-        Items.Strings = (
-          'A vista'
-          'Parcelado')
-        TabOrder = 5
-        Values.Strings = (
-          '0'
-          '1')
-        OnChange = rg_FPagamentoPagarChange
-      end
     end
     object gridContasPagar: TDBGrid
       Left = 0
@@ -469,8 +443,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
     BevelOuter = bvNone
     TabOrder = 2
     Visible = False
-    ExplicitWidth = 730
-    ExplicitHeight = 273
     object dgContasReceber: TDBGrid
       Left = 0
       Top = 89
@@ -525,10 +497,8 @@ object Frm_CadastroContas: TFrm_CadastroContas
       Height = 89
       Align = alTop
       TabOrder = 1
-      ExplicitTop = 6
-      ExplicitWidth = 843
-      object GBAVista: TGroupBox
-        Left = 94
+      object GBAVistaReceber: TGroupBox
+        Left = 99
         Top = 3
         Width = 540
         Height = 78
@@ -540,7 +510,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
         object Label5: TLabel
           Left = 7
           Top = 21
@@ -609,33 +579,11 @@ object Frm_CadastroContas: TFrm_CadastroContas
           TabOrder = 3
         end
       end
-      object rg_FPagReceber: TDBRadioGroup
-        Left = 6
-        Top = 3
-        Width = 91
-        Height = 78
-        Margins.Left = 0
-        Margins.Top = 0
-        Margins.Right = 0
-        Margins.Bottom = 0
-        Align = alCustom
-        Caption = 'Forma de Pagto:'
-        DataField = 'F_PAGAMENTO'
-        DataSource = ds_ContasReceber
-        Items.Strings = (
-          'A vista'
-          'Parcelado')
-        TabOrder = 0
-        Values.Strings = (
-          '0'
-          '1')
-        OnChange = rg_FPagamentoPagarChange
-      end
-      object GBParcelado: TGroupBox
-        Left = 100
+      object GBParceladoReceber: TGroupBox
+        Left = 99
         Top = 3
         Width = 540
-        Height = 79
+        Height = 78
         Align = alCustom
         Caption = 'Dados Contas a Receber'
         Font.Charset = DEFAULT_CHARSET
@@ -644,7 +592,8 @@ object Frm_CadastroContas: TFrm_CadastroContas
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
+        Visible = False
         object lbDescricaoReceber: TLabel
           Left = 9
           Top = 22
@@ -654,21 +603,21 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end
         object TLabel
           Left = 319
-          Top = 55
+          Top = 51
           Width = 73
           Height = 13
           Caption = 'Venc. 1'#170' Parc.:'
         end
         object Label6: TLabel
           Left = 112
-          Top = 55
+          Top = 51
           Width = 84
           Height = 13
           Caption = 'Valor da Parcela: '
         end
         object Label7: TLabel
           Left = 9
-          Top = 55
+          Top = 51
           Width = 44
           Height = 13
           Caption = 'Parcelas:'
@@ -694,7 +643,7 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end
         object edtValorParcelaRec: TMaskEdit
           Left = 195
-          Top = 52
+          Top = 48
           Width = 121
           Height = 21
           TabOrder = 1
@@ -709,23 +658,36 @@ object Frm_CadastroContas: TFrm_CadastroContas
         end
         object spParcelas: TSpinEdit
           Left = 59
-          Top = 52
+          Top = 48
           Width = 49
           Height = 22
-          MaxValue = 0
+          MaxValue = 24
           MinValue = 1
           TabOrder = 3
-          Value = 0
+          Value = 1
         end
         object edtVenc1Parcela: TDateTimePicker
           Left = 397
-          Top = 50
+          Top = 46
           Width = 108
           Height = 21
           Date = 44659.000000000000000000
           Time = 0.666692800929013200
           TabOrder = 4
         end
+      end
+      object RGFormaPagtoReceber: TRadioGroup
+        Left = 6
+        Top = 3
+        Width = 90
+        Height = 78
+        Caption = 'Forma Pagto:'
+        ItemIndex = 0
+        Items.Strings = (
+          #192' Vista'
+          'Parcelado')
+        TabOrder = 2
+        OnClick = RGFormaPagtoReceberClick
       end
     end
   end
@@ -770,8 +732,6 @@ object Frm_CadastroContas: TFrm_CadastroContas
     ShowHint = False
     ParentShowHint = False
     PopupMenu = navItens
-    ExplicitTop = 398
-    ExplicitWidth = 730
   end
   object navContasCadastro: TdxBarManager
     Font.Charset = DEFAULT_CHARSET

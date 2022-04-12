@@ -40,21 +40,19 @@ type
     ds_Categorias: TDataSource;
     edtCatPagar: TDBLookupComboBox;
     Label2: TLabel;
-    rg_FPagamentoPagar: TDBRadioGroup;
     pnlContasReceber: TPanel;
     dgContasReceber: TDBGrid;
     ds_ContasReceber: TDataSource;
     totalBar: TdxRibbonStatusBar;
     btnNovaConta: TdxBarLargeButton;
     PContasReceber: TPanel;
-    rg_FPagReceber: TDBRadioGroup;
-    GBParcelado: TGroupBox;
+    GBParceladoReceber: TGroupBox;
     lbDescricaoReceber: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     edtCatReceber: TDBLookupComboBox;
-    GBAVista: TGroupBox;
+    GBAVistaReceber: TGroupBox;
     Label5: TLabel;
     Label9: TLabel;
     Label11: TLabel;
@@ -66,18 +64,19 @@ type
     edtDescRecParcelado: TEdit;
     spParcelas: TSpinEdit;
     edtVenc1Parcela: TDateTimePicker;
+    RGFormaPagtoReceber: TRadioGroup;
     procedure btnSairContasClick(Sender: TObject);
     procedure btnSalvarContasClick(Sender: TObject);
     procedure btnCancelarContasClick(Sender: TObject);
     procedure btnEditContasClick(Sender: TObject);
     procedure btnDeleteContasClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure rg_FPagamentoPagarChange(Sender: TObject);
     procedure ds_ContasPagarStateChange(Sender: TObject);
     procedure btnCReceberCadClick(Sender: TObject);
     procedure ds_ContasReceberStateChange(Sender: TObject);
     procedure btnCPagarCadClick(Sender: TObject);
     procedure btnNovaContaClick(Sender: TObject);
+    procedure RGFormaPagtoReceberClick(Sender: TObject);
   private
     procedure AtualizaValor;
     { Private declarations }
@@ -171,7 +170,7 @@ begin
     Abort
   end;
 
-  if (edtDescRecParcelado.Text = '') and (GBParcelado.Visible) then
+  if (edtDescRecParcelado.Text = '') and (GBParceladoReceber.Visible) then
   begin
     ShowMessage('É Necessário adicionar uma descrição para a conta !');
     Abort
@@ -183,7 +182,7 @@ begin
     Abort
   end;
 
-  if (edtVenc1Parcela.DateTime = Null ) and (GBParcelado.Visible) then
+  if (edtVenc1Parcela.DateTime = Null ) and (GBParceladoReceber.Visible) then
   begin
     ShowMessage('É Necessário adicionar uma data de vencimento para a conta !');
     Abort
@@ -195,7 +194,7 @@ begin
     Abort
   end;
 
-  if (edtValorParcelaRec.Text = '') and (GBParcelado.Visible) then
+  if (edtValorParcelaRec.Text = '') and (GBParceladoReceber.Visible) then
   begin
     ShowMessage('É Necessário adicionar um valor para a conta !');
     Abort
@@ -258,7 +257,6 @@ begin
     edtVencimentoPagar.Enabled := (State <> dsBrowse);
     edtValorPagar.Enabled := (State <> dsBrowse);
     edtCatPagar.Enabled := (State <> dsBrowse);
-    rg_FPagamentoPagar.Enabled := (State <> dsBrowse);
    end;
 end;
 
@@ -277,7 +275,7 @@ begin
 //    edtVencimentoReceber.Enabled := (State <> dsBrowse);
 //    edtValorReceber.Enabled := (State <> dsBrowse);
     edtCatReceber.Enabled := (State <> dsBrowse);
-    rg_FPagReceber.Enabled := (State <> dsBrowse);
+    RGFormaPagtoReceber.Visible := (State = dsBrowse);
    end;
 end;
 
@@ -315,24 +313,10 @@ begin
  AtualizaValor;
 end;
 
-procedure TFrm_CadastroContas.rg_FPagamentoPagarChange(Sender: TObject);
+procedure TFrm_CadastroContas.RGFormaPagtoReceberClick(Sender: TObject);
 begin
-  if(rg_FPagamentoPagar.Value = '1') then
-    begin
-        edtParcelasPagar.Enabled := true;
-    end;
-
-  if(rg_FPagReceber.Value = '1') then
-  begin
-    GBParcelado.Visible = true
-    GBAVista.Visible = false;
-  end;
-    else
-    begin
-      GBAVista.Visible = true;
-      GBParcelado.Visible = false;
-    end;
-
+  GBParceladoReceber.Visible := RGFormaPagtoReceber.ItemIndex = 1;
+  GBAVistaReceber.Visible := RGFormaPagtoReceber.ItemIndex = 0;
 end;
 
 procedure TFrm_CadastroContas.AtualizaValor;
